@@ -1,5 +1,7 @@
 # Team-7-TCSS-450
-Android Studio client code base
+Android Studio client code base.
+
+Link to backend code: in progress...
 
 All project links below
 
