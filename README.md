@@ -1,9 +1,9 @@
 # Team-7-TCSS-450
 Android Studio client code base.
 
-Link to backend code: in progress...
+All project links below:
 
-All project links below
+Link to backend code: in progress ...
 
 Link to GitHub StoryBoard: https://github.com/yousifazami/Team-7-TCSS-450/projects/1
 
