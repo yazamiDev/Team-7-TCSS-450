@@ -4,6 +4,10 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    viewBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "edu.uw.team7project"
         minSdkVersion 24
@@ -31,4 +35,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.navigation:navigation-fragment:2.2.2'
+    implementation 'androidx.navigation:navigation-ui:2.2.2'
+    apply plugin: "androidx.navigation.safeargs"
+    implementation 'com.android.volley:volley:1.1.1'
+
 }
