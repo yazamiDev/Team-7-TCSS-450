@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/auth_graph.xml">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_graph.xml"
+    app:startDestination="@id/signInFragment">
 
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="edu.uw.team7project.ui.auth.signin.SignInFragment"
+        android:label="@string/title_app_name"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="edu.uw.team7project.ui.auth.register.RegisterFragment"
+        android:label="@string/title_register"
+        tools:layout="@layout/fragment_register" />
 </navigation>

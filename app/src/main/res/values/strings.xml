@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Team7Project</string>
-
+    <string name="text_app_name">Team 7 Project</string>
     <string name="hint_first">First Name</string>
     <string name="hint_nickname">Nickname</string>
     <string name="hint_last">Last Name</string>
@@ -9,4 +8,7 @@
     <string name="hint_password_again">Retype Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Register</string>
+    <string name="text_register">Not a member?</string>
+    <string name="title_app_name">App Name</string>
+    <string name="title_register">Register</string>
 </resources>
