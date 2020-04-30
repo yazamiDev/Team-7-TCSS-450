@@ -1,5 +1,5 @@
 <resources>
-    <string name="text_app_name">Team 7 Project</string>
+    <string name="text_app_welcome">Welcome to team 7 Project!</string>
     <string name="hint_first">First Name</string>
     <string name="hint_nickname">Nickname</string>
     <string name="hint_last">Last Name</string>
@@ -8,7 +8,15 @@
     <string name="hint_password_again">Retype Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Register</string>
+    <string name="action_verify">Verify you email</string>
+    <string name="action_remain_log_in">Keep me signed in</string>
     <string name="text_register">Not a member?</string>
     <string name="title_app_name">App Name</string>
     <string name="title_register">Register</string>
+    <string name="text_verify">Verify your email</string>
+    <string name="text_verify_warning">If you did not register with this account, you can
+    ignore this email.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
