@@ -39,7 +39,7 @@ public class VerifyFragment extends Fragment {
         VerifyFragmentArgs args = VerifyFragmentArgs.fromBundle(getArguments());
 
         FragmentVerifyBinding binding = FragmentVerifyBinding.bind(getView());
-        binding.editPersonalGreeting.setText("Hello " + args.getFirstName().trim() + "! Use the " +
+        binding.editPersonalGreeting.setText("Hello " + args.getFirstName() + "! Use the " +
                 "link below to verify your email and start enjoying app name");
 
         binding.buttonVerify.setOnClickListener(button -> Navigation.findNavController(getView())

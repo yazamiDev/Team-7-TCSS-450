@@ -40,6 +40,6 @@ public class RegisterFragment extends Fragment {
 
         binding.buttonRegister2.setOnClickListener(button -> Navigation.findNavController(getView())
        .navigate(RegisterFragmentDirections
-               .actionRegisterFragmentToVerifyFragment(binding.editFirst.getText().toString())));
+               .actionRegisterFragmentToVerifyFragment(binding.editNick.getText().toString())));
     }
 }
