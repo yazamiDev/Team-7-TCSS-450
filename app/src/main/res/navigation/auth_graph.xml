@@ -37,6 +37,18 @@
         <argument
             android:name="firstName"
             app:argType="string" />
+        <argument
+            android:name="lastName"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="nickname"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"

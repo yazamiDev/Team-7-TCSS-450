@@ -4,6 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * An activity representing the authentication process for the application.
+ *
+ * @author Trevor Nichols
+ */
 public class AuthActivity extends AppCompatActivity {
 
     @Override

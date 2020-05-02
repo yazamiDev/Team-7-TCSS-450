@@ -16,10 +16,15 @@ import edu.uw.team7project.databinding.FragmentVerifyBinding;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * A fragment representing the verification process when a user registers.
+ *
+ * @author Trevor Nichols
  */
 public class VerifyFragment extends Fragment {
 
+    /**
+     * An empty constructor.
+     */
     public VerifyFragment() {
         // Required empty public constructor
     }
@@ -39,8 +44,9 @@ public class VerifyFragment extends Fragment {
         VerifyFragmentArgs args = VerifyFragmentArgs.fromBundle(getArguments());
 
         FragmentVerifyBinding binding = FragmentVerifyBinding.bind(getView());
-        binding.editPersonalGreeting.setText("Hello " + args.getFirstName() + "! Use the " +
-                "link below to verify your email and start enjoying app name");
+        binding.editPersonalGreeting.setText("Hello " + args.getFirstName() + " " +
+                args.getLastName() + "! Please confirm your email at " + args.getEmail() +
+                " so you can start enjoying appName");
 
         binding.buttonVerify.setOnClickListener(button -> Navigation.findNavController(getView())
                 .navigate(VerifyFragmentDirections.actionVerifyFragmentToSignInFragment()));

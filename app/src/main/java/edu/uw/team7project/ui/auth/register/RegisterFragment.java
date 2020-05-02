@@ -15,12 +15,17 @@ import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentRegisterBinding;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A fragment representing the registration process for the application.
+ *
+ * @author Trevor Nichols
  */
 public class RegisterFragment extends Fragment {
 
     private FragmentRegisterBinding binding;
 
+    /**
+     * An empty constructor.
+     */
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -40,6 +45,10 @@ public class RegisterFragment extends Fragment {
 
         binding.buttonRegister2.setOnClickListener(button -> Navigation.findNavController(getView())
        .navigate(RegisterFragmentDirections
-               .actionRegisterFragmentToVerifyFragment(binding.editNick.getText().toString())));
+               .actionRegisterFragmentToVerifyFragment(binding.editFirst.getText().toString(),
+                       binding.editLast.getText().toString(),
+                       binding.editEmail.getText().toString(),
+                       binding.editNick.getText().toString(),
+                       binding.editPassword1.getText().toString())));
     }
 }
