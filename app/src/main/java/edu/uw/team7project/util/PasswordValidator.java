@@ -16,19 +16,6 @@ import java.util.function.Predicate;
 public interface PasswordValidator
         extends Function<String, Optional<PasswordValidator.ValidationResult>> {
 
-    /**
-     * Returns a validator that when applied will validate the length of the String as greater
-     * than 6.
-     *
-     * When a String s is applied to the returning validator, it will evaluate to an Optional
-     * containing ValidationResult.SUCCESS when s.length() > 6, otherwise
-     * ValidationResult.PWD_INVALID_LENGTH.
-     *
-     * @return a validator that validates the length of the String as > 6
-     */
-    static PasswordValidator checkPwdLength() {
-        return checkPwdLength(6);
-    }
 
     /**
      * Returns a validator that when applied will validate the length of the String as greater
@@ -41,10 +28,27 @@ public interface PasswordValidator
      * @param length the length of the String needed for validation
      * @return a validator that validates the length of the String as > 6
      */
-    static PasswordValidator checkPwdLength(int length) {
+    static PasswordValidator checkPwdMinLength(int length) {
         return password ->
                 Optional.of(password.length() > length ?
-                        ValidationResult.SUCCESS : ValidationResult.PWD_INVALID_LENGTH);
+                        ValidationResult.SUCCESS : ValidationResult.PWD_INVALID_LENGTH_MIN);
+    }
+
+    /**
+     * Returns a validator that when applied will validate the length of the String less than
+     * or equal to length.
+     *
+     * When a String s is applied to the returning validator, it will evaluate to an Optional
+     * containing ValidationResult.SUCCESS when s.length() > length, otherwise
+     * ValidationResult.PWD_INVALID_LENGTH.
+     *
+     * @param length the length of the String needed for validation
+     * @return a validator that validates the length of the String as <= length
+     */
+    static PasswordValidator checkPwdMaxLength(int length) {
+        return password ->
+                Optional.of(password.length() <= length ?
+                        ValidationResult.SUCCESS : ValidationResult.PWD_INVALID_LENGTH_MAX);
     }
 
     /**
@@ -268,7 +272,8 @@ public interface PasswordValidator
      */
     enum ValidationResult {
         SUCCESS,
-        PWD_INVALID_LENGTH,
+        PWD_INVALID_LENGTH_MIN,
+        PWD_INVALID_LENGTH_MAX,
         PWD_MISSING_DIGIT,
         PWD_MISSING_UPPER,
         PWD_MISSING_LOWER,

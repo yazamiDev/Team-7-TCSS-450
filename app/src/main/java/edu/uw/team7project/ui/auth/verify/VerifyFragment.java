@@ -48,7 +48,14 @@ public class VerifyFragment extends Fragment {
                 args.getLastName() + "! Please confirm your email at " + args.getEmail() +
                 " so you can start enjoying appName");
 
-        binding.buttonVerify.setOnClickListener(button -> Navigation.findNavController(getView())
-                .navigate(VerifyFragmentDirections.actionVerifyFragmentToSignInFragment()));
+        binding.buttonVerify.setOnClickListener(button -> navigateToLogin(args));
+    }
+
+    private void navigateToLogin(VerifyFragmentArgs args) {
+        VerifyFragmentDirections.ActionVerifyFragmentToSignInFragment directions =
+                VerifyFragmentDirections.actionVerifyFragmentToSignInFragment();
+        directions.setEmail(args.getEmail());
+        directions.setPassword(args.getPassword());
+        Navigation.findNavController((getView())).navigate(directions);
     }
 }
