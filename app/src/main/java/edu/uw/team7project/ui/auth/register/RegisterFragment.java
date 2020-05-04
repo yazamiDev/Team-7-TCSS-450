@@ -42,15 +42,15 @@ public class RegisterFragment extends Fragment {
             .and(checkPwdUpperCase()))
             .and(checkPwdMaxLength(32));
 
-    private PasswordValidator mFNameValidator = checkPwdMinLength(1)
+    private PasswordValidator mFNameValidator = checkPwdMinLength(0)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdMaxLength(32));
 
-    private PasswordValidator mLNameValidator = checkPwdMinLength(1)
+    private PasswordValidator mLNameValidator = checkPwdMinLength(0)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdMaxLength(32));
 
-    private PasswordValidator mNicknameValidator = checkPwdMinLength(1)
+    private PasswordValidator mNicknameValidator = checkPwdMinLength(0)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdMaxLength(16));
 
@@ -91,10 +91,16 @@ public class RegisterFragment extends Fragment {
                 this::observeResponse);
     }
 
+    /**
+     * Handles the registration of a new user.
+     */
     private void handleRegister() {
         validateFirstName();
     }
 
+    /**
+     * Validates the user input for first name.
+     */
     private void validateFirstName() {
         mFNameValidator.processResult(
                 mFNameValidator.apply(binding.editFirst.getText().toString().trim()),
@@ -102,6 +108,9 @@ public class RegisterFragment extends Fragment {
                 this::handleFirstNameError);
     }
 
+    /**
+     * Validates the user input for last name.
+     */
     private void validateLastName() {
         mLNameValidator.processResult(
                 mLNameValidator.apply(binding.editLast.getText().toString().trim()),
@@ -109,6 +118,9 @@ public class RegisterFragment extends Fragment {
                 this::handleLastNameError);
     }
 
+    /**
+     * Validates the user input for nickname.
+     */
     private void validateNickname() {
         mNicknameValidator.processResult(
                 mNicknameValidator.apply(binding.editNick.getText().toString().trim()),
@@ -116,12 +128,18 @@ public class RegisterFragment extends Fragment {
                 this::handleNicknameError);
     }
 
+    /**
+     * Validates the user input for email.
+     */
     private void validateEmail(){
         mEMailValidator.processResult(mEMailValidator.apply(binding.editEmail.getText().toString().trim()),
                 this::validatePassword,
                 result -> binding.editEmail.setError("Please enter a valid email address."));
     }
 
+    /**
+     * Validates the user input for password.
+     */
     private void validatePassword() {
         mPasswordValidator.processResult(
                 mPasswordValidator.apply(binding.editPassword1.getText().toString()),
@@ -129,6 +147,9 @@ public class RegisterFragment extends Fragment {
                 this::handlePasswordError);
     }
 
+    /**
+     * Connects registration with a webservice endpoint using user input.
+     */
     private void verifyAuthWithServer() {
         mRegisterModel.connect(
                 binding.editFirst.getText().toString(),
@@ -165,6 +186,11 @@ public class RegisterFragment extends Fragment {
         }
     }
 
+    /**
+     * Handles errors with user input for first name.
+     *
+     * @param result The result of first name input,
+     */
     private void handleFirstNameError(ValidationResult result) {
         String msg = "Error";
         switch (result){
@@ -183,16 +209,23 @@ public class RegisterFragment extends Fragment {
         binding.editFirst.setError(msg);
     }
 
+    /**
+     * Navigates to the verify fragment upon proper registration.
+     */
     private void navigateToVerify(){
         Navigation.findNavController(getView())
         .navigate(RegisterFragmentDirections
                 .actionRegisterFragmentToVerifyFragment(binding.editFirst.getText().toString(),
                         binding.editLast.getText().toString(),
                         binding.editEmail.getText().toString(),
-                        binding.editNick.getText().toString(),
                         binding.editPassword1.getText().toString()));
     }
 
+    /**
+     * Handles errors with user input for last name.
+     *
+     * @param result The result of last name input,
+     */
     private void handleLastNameError(ValidationResult result) {
         String msg = "Error";
         switch (result){
@@ -211,6 +244,11 @@ public class RegisterFragment extends Fragment {
         binding.editLast.setError(msg);
     }
 
+    /**
+     * Handles errors with user input for nickname.
+     *
+     * @param result The result of nickname input,
+     */
     private void handleNicknameError(ValidationResult result){
         String msg = "Error";
         switch (result){
@@ -229,6 +267,11 @@ public class RegisterFragment extends Fragment {
         binding.editNick.setError(msg);
     }
 
+    /**
+     * Handles errors with user input for password.
+     *
+     * @param result The result of password input,
+     */
     private void handlePasswordError(ValidationResult result){
         String msg = "Error";
         switch (result){

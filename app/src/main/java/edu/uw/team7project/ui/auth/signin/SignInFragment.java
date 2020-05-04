@@ -34,7 +34,7 @@ public class SignInFragment extends Fragment {
             .and(checkPwdSpecialChar("."))
             .and(checkPwdMaxLength(32));
 
-    private PasswordValidator mPasswordValidator =checkPwdMinLength(1)
+    private PasswordValidator mPasswordValidator =checkPwdMinLength(0)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdMaxLength(32));
 

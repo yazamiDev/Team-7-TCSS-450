@@ -25,12 +25,23 @@ public class RegisterViewModel extends AndroidViewModel {
 
     private MutableLiveData<JSONObject> mResponse;
 
+    /**
+     * Constructor for the RegisterView Model.
+     *
+     * @param application an application.
+     */
     public RegisterViewModel(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
     }
 
+    /**
+     * Adds a response observer.
+     *
+     * @param owner
+     * @param observer
+     */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
@@ -60,6 +71,15 @@ public class RegisterViewModel extends AndroidViewModel {
         }
     }
 
+    /**
+     * Connects registration with an endpoint for storage of a newly registered user.
+     *
+     * @param first registered fist name
+     * @param last registered last name
+     * @param email registered email
+     * @param username registered username
+     * @param password registered password
+     */
     public void connect(final String first,
                         final String last,
                         final String email,
