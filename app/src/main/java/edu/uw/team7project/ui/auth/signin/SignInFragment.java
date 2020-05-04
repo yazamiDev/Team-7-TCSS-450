@@ -76,12 +76,18 @@ public class SignInFragment extends Fragment {
         binding.editPassword.setText(args.getPassword().equals("default") ? "" : args.getPassword());
     }
 
+    /**
+     * Handle the sign in processs for login.
+     */
     private void handleSignIn() {
         mEMailValidator.processResult(mEMailValidator.apply(binding.editEmail.getText().toString().trim()),
                 this::validatePassword,
                 result -> binding.editEmail.setError("Please enter a valid email address."));
     }
 
+    /**
+     * Validates the login password.
+     */
     private void validatePassword() {
         mPasswordValidator.processResult(
                 mPasswordValidator.apply(binding.editPassword.getText().toString()),
@@ -89,18 +95,32 @@ public class SignInFragment extends Fragment {
                 result -> binding.editPassword.setError("Please enter a valid Password."));
     }
 
+    /**
+     * Verify the authentication with server.
+     */
     private void verifyAuthWithServer() {
         mSignInModel.connect(
                 binding.editEmail.getText().toString(),
                 binding.editPassword.getText().toString());
     }
 
+    /**
+     * naviagtes to home on successful login.
+     *
+     * @param email the users email.
+     * @param jwt the users jwt.
+     */
     private void navigateToHome(String email, String jwt){
         //Update this to pass proper arguments to main activity.
         Navigation.findNavController(getView())
                 .navigate(SignInFragmentDirections.actionSignInFragmentToMainActivity(email, jwt));
     }
 
+    /**
+     * Oberserves the response from the server.
+     *
+     * @param response the response.
+     */
     private void observeResponse(final JSONObject response) {
         if (response.length() > 0) {
             if (response.has("code")) {

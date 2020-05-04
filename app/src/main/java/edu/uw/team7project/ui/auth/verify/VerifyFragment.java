@@ -51,6 +51,11 @@ public class VerifyFragment extends Fragment {
         binding.buttonVerify.setOnClickListener(button -> navigateToLogin(args));
     }
 
+    /**
+     * NAvigation back to login screen.
+     *
+     * @param args args used update login upon verification.
+     */
     private void navigateToLogin(VerifyFragmentArgs args) {
         VerifyFragmentDirections.ActionVerifyFragmentToSignInFragment directions =
                 VerifyFragmentDirections.actionVerifyFragmentToSignInFragment();
