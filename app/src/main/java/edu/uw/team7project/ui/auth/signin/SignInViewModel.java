@@ -43,11 +43,21 @@ public class SignInViewModel extends AndroidViewModel {
         mResponse.setValue(new JSONObject());
     }
 
+    /**
+     * Adds a respinse observer to the Sign in view model.
+     * @param owner
+     * @param observer
+     */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
     }
 
+    /**
+     * Handles errors when conneting to the server.
+     *
+     * @param error the error.
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             try {
@@ -73,9 +83,10 @@ public class SignInViewModel extends AndroidViewModel {
     }
 
     /**
-     * CHANGE INFO HERE
-     * @param email
-     * @param password
+     * Connects to the webservice end point.
+     *
+     * @param email the user email.
+     * @param password the user password.
      */
     public void connect(final String email, final String password) {
         String url = "https://mobile-app-spring-2020.herokuapp.com/auth";
