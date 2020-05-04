@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_gray_24dp"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navigation_messages"
+        android:icon="@drawable/ic_message_gray_24dp"
+        android:title="Messages" />
+
+    <item
+        android:id="@+id/navigation_contacts"
+        android:icon="@drawable/ic_person_gray_24dp"
+        android:title="Contacts" />
+
+    <item
+        android:id="@+id/navigation_weather"
+        android:icon="@drawable/ic_wb_sunny_gray_24dp"
+        android:title="Weather" />
+
+</menu>
