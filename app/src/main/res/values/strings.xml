@@ -1,5 +1,5 @@
 <resources>
-    <string name="text_app_welcome">Welcome to team 7 Project!</string>
+    <string name="text_app_welcome">Welcome to appName</string>
     <string name="hint_first">First Name</string>
     <string name="hint_nickname">Nickname</string>
     <string name="hint_last">Last Name</string>
