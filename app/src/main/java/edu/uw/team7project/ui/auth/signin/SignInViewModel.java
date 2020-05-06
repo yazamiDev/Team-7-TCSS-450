@@ -27,6 +27,8 @@ import edu.uw.team7project.io.RequestQueueSingleton;
 
 /**
  * A ViewModel used to store information related to the sign in Process.
+ *
+ * @author Trevor Nichols
  */
 public class SignInViewModel extends AndroidViewModel {
 
@@ -45,8 +47,8 @@ public class SignInViewModel extends AndroidViewModel {
 
     /**
      * Adds a respinse observer to the Sign in view model.
-     * @param owner
-     * @param observer
+     * @param owner the owner
+     * @param observer the observer
      */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
@@ -54,7 +56,7 @@ public class SignInViewModel extends AndroidViewModel {
     }
 
     /**
-     * Handles errors when conneting to the server.
+     * Handles errors when connecting to the server.
      *
      * @param error the error.
      */

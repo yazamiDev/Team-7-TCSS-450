@@ -52,7 +52,7 @@ public class VerifyFragment extends Fragment {
     }
 
     /**
-     * NAvigation back to login screen.
+     * Navigation back to login screen.
      *
      * @param args args used update login upon verification.
      */

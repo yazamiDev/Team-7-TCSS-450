@@ -22,18 +22,25 @@ import edu.uw.team7project.util.PasswordValidator;
 
 /**
  * A fragment representing the login process.
+ *
+ * @author Trevor Nichols
  */
 public class SignInFragment extends Fragment {
 
+    //Binding for this fragment.
     private FragmentSignInBinding binding;
+
+    //A sign in view model.
     private SignInViewModel mSignInModel;
 
+    //An email validator
     private PasswordValidator mEMailValidator = checkPwdMinLength(6)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"))
             .and(checkPwdSpecialChar("."))
             .and(checkPwdMaxLength(32));
 
+    //A password validator.
     private PasswordValidator mPasswordValidator =checkPwdMinLength(0)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdMaxLength(32));
@@ -77,7 +84,7 @@ public class SignInFragment extends Fragment {
     }
 
     /**
-     * Handle the sign in processs for login.
+     * Handle the sign in process for login.
      */
     private void handleSignIn() {
         mEMailValidator.processResult(mEMailValidator.apply(binding.editEmail.getText().toString().trim()),
@@ -117,7 +124,7 @@ public class SignInFragment extends Fragment {
     }
 
     /**
-     * Oberserves the response from the server.
+     * Observes the response from the server.
      *
      * @param response the response.
      */

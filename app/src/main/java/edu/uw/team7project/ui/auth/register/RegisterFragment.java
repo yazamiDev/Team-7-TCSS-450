@@ -28,10 +28,13 @@ import edu.uw.team7project.util.PasswordValidator;
  */
 public class RegisterFragment extends Fragment {
 
+    //A binding or this fragment.
     private FragmentRegisterBinding binding;
 
+    //A register view model.
     private RegisterViewModel mRegisterModel;
 
+    //Password validator
     private PasswordValidator mPasswordValidator =
             checkClientPredicate(pwd -> pwd.equals(binding.editPassword2.getText().toString()))
             .and(checkPwdMinLength(4))
@@ -42,18 +45,22 @@ public class RegisterFragment extends Fragment {
             .and(checkPwdUpperCase()))
             .and(checkPwdMaxLength(32));
 
+    //First name validator
     private PasswordValidator mFNameValidator = checkPwdMinLength(0)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdMaxLength(32));
 
+    //Last name validator
     private PasswordValidator mLNameValidator = checkPwdMinLength(0)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdMaxLength(32));
 
+    //Nickname validator
     private PasswordValidator mNicknameValidator = checkPwdMinLength(0)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdMaxLength(16));
 
+    //Email validator.
     private PasswordValidator mEMailValidator = checkPwdMinLength(6)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"))

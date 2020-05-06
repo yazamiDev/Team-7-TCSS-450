@@ -21,8 +21,15 @@ import org.json.JSONObject;
 import java.nio.charset.Charset;
 import java.util.Objects;
 
+/**
+ * A register view model for holding information about the registration process.
+ * Allows users to connect to a Webservice endpoint.
+ *
+ * @author Trevor Nichols
+ */
 public class RegisterViewModel extends AndroidViewModel {
 
+    //Mutable live data for registration.
     private MutableLiveData<JSONObject> mResponse;
 
     /**
@@ -39,14 +46,18 @@ public class RegisterViewModel extends AndroidViewModel {
     /**
      * Adds a response observer.
      *
-     * @param owner
-     * @param observer
+     * @param owner the owner
+     * @param observer the observer
      */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
     }
 
+    /**
+     * Handles errors for connecting to a WebService endpoint.
+     * @param error
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             try {
