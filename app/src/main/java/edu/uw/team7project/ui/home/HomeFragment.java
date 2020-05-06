@@ -16,7 +16,9 @@ import edu.uw.team7project.databinding.FragmentHomeBinding;
 import edu.uw.team7project.model.UserInfoViewModel;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Subclass for the home fragment.
+ *
+ * @author Bradlee Laird
  */
 public class HomeFragment extends Fragment {
 
@@ -24,13 +26,19 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+    /**
+     * Inflates the container for the fragment.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
+
+    /**
+     * Creates an instance of the fragment for when the user returns to it.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -38,12 +46,5 @@ public class HomeFragment extends Fragment {
         //Local access to the ViewBinding object. No need to create as Instance Var as it is only
         //used here.
         FragmentHomeBinding binding = FragmentHomeBinding.bind(getView());
-
-
-
-
-        //  binding.textEmail.setText("Welcome Home!");
-
-
     }
 }

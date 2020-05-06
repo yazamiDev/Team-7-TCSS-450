@@ -16,12 +16,15 @@ import edu.uw.team7project.ui.auth.verify.VerifyFragmentArgs;
 /**
  * An activity representing the main process of the application.
  *
- * @author
+ * @author Bradlee Laird
  */
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
-    private VerifyFragmentArgs MainActivityArgs;
 
+    /**
+     * Passes in the id's of the fragments that the main activity fragment will be travelling between,
+     * as well as connects the activity to the navigation controller.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(

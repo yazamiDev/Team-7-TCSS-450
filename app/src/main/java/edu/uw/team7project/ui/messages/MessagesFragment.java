@@ -15,7 +15,9 @@ import edu.uw.team7project.databinding.FragmentHomeBinding;
 import edu.uw.team7project.databinding.FragmentMessagesBinding;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Subclass for the messages fragment.
+ *
+ * @author Bradlee laird
  */
 public class MessagesFragment extends Fragment {
 
@@ -23,7 +25,9 @@ public class MessagesFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+    /**
+     * Inflates the container for the fragment.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -31,6 +35,9 @@ public class MessagesFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_messages, container, false);
     }
 
+    /**
+     * Creates an instance of the fragment for when the user returns to it.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -38,12 +45,6 @@ public class MessagesFragment extends Fragment {
         //Local access to the ViewBinding object. No need to create as Instance Var as it is only
         //used here.
         FragmentMessagesBinding binding = FragmentMessagesBinding.bind(getView());
-
-
-
-
-        //  binding.textEmail.setText("Welcome Home!");
-
 
     }
 }
