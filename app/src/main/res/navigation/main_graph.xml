@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_messages"
-        android:name="edu.uw.team7project.ui.messages.MessagesFragment"
+        android:name="edu.uw.team7project.ui.messages.MessageListFragment"
         android:label="Messages"
-        tools:layout="@layout/fragment_messages" />
+        tools:layout="@layout/fragment_message_list" />
 
     <fragment
         android:id="@+id/navigation_contacts"
