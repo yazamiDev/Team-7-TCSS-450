@@ -5,7 +5,9 @@
     android:id="@+id/layout_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
     tools:context=".ui.auth.signin.SignInFragment">
+
 
     <EditText
         android:id="@+id/edit_email"
@@ -17,9 +19,13 @@
         android:autofillHints=""
         android:drawableStart="@drawable/ic_email_black_18dp"
         android:drawableLeft="@drawable/ic_email_black_18dp"
+        android:drawableTint="?attr/iconTint"
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="@string/hint_email"
+        android:textColor="?attr/textColor"
+        android:textColorHint="?attr/tintColor"
+        android:backgroundTint="?attr/tintColor"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/edit_password"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,9 +55,13 @@
         android:layout_marginEnd="16dp"
         android:drawableStart="@drawable/ic_password_lock_black_18dp"
         android:drawableLeft="@drawable/ic_password_lock_black_18dp"
+        android:drawableTint="?attr/iconTint"
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="@string/hint_password"
+        android:textColor="?attr/textColor"
+        android:textColorHint="?attr/tintColor"
+        android:backgroundTint="?attr/tintColor"
         android:importantForAutofill="no"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,20 +69,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline_fifty_horizontal" />
 
+    <!--    <Switch-->
+<!--        android:id="@+id/mySwitch"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="28dp"-->
+<!--        android:layout_marginBottom="204dp"-->
+<!--        android:text="Night Mode"-->
+<!--        android:textColor="?attr/textColor"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent">-->
+<!--    </Switch>-->
+
+<!--    <Switch-->
+
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="28dp"-->
+<!--        android:layout_marginBottom="204dp"-->
+<!--        android:text="Night Mode"-->
+<!--        android:textColor="?attr/textColor"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"></Switch>-->
+
     <Button
         android:id="@+id/button_sign_in"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/button_round"
+        android:background="?attr/buttonColor"
         android:text="@string/action_sign_in"
+        android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox_sign_in" />
+        app:layout_constraintTop_toBottomOf="@+id/forgot_password" />
 
     <TextView
         android:id="@+id/text_display_register"
@@ -80,6 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:text="@string/text_register"
+        android:textColor="?attr/textColor"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_fifty_vertical" />
@@ -91,6 +125,7 @@
         android:layout_height="wrap_content"
         android:text="@string/action_register"
         android:textSize="12sp"
+        android:textColor="?attr/buttonColor"
         app:layout_constraintBaseline_toBaselineOf="@+id/text_display_register"
         app:layout_constraintStart_toEndOf="@+id/text_display_register" />
 
@@ -112,20 +147,22 @@
         android:layout_marginBottom="64dp"
         android:text="@string/text_app_welcome"
         android:textSize="24sp"
+        android:textColor="?attr/textColor"
         app:layout_constraintBottom_toTopOf="@+id/edit_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <CheckBox
-        android:id="@+id/checkBox_sign_in"
-        android:layout_width="0dp"
+    <Button
+        android:id="@+id/forgot_password"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/action_remain_log_in"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_fifty_vertical"
-        app:layout_constraintHorizontal_bias="0.551"
+        android:layout_marginTop="16dp"
+        android:text="@string/action_forgot_password"
+        android:textColor="?attr/buttonColor"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_password" />
 
