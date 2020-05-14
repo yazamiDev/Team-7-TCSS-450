@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import edu.uw.team7project.util.SharedPref;
+
 
 /**
  * An activity representing the authentication process for the application.
@@ -19,38 +21,40 @@ public class AuthActivity extends AppCompatActivity {
 
     private Switch myswitch;
 
+    SharedPref sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_auth);
 
-        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES) {
+        sharedPref = new SharedPref(this);
+
+        if(sharedPref.loadNightModeState()==true) {
             setTheme(R.style.DarkTheme);
         }
         else setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
         myswitch = (Switch)findViewById(R.id.mySwitch);
-        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES) {
+        if(sharedPref.loadNightModeState()==true) {
             myswitch.setChecked(true);
         }
         myswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                    recreate();
+                    sharedPref.setNightModeState(true);
+                    recreate();
                 }
                 else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                    recreate();
+                    sharedPref.setNightModeState(false);
+                    recreate();
                 }
             }
         });
 
 
     }
-//
+
 //    public void restartApp() {
 //        Intent i = new Intent(getApplicationContext(), AuthActivity.class);
 //        startActivity(i);
