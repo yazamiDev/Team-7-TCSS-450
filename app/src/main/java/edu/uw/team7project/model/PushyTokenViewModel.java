@@ -110,8 +110,7 @@ public class PushyTokenViewModel extends AndroidViewModel {
         }
 
         //Find out what the base_url is??
-        String url = getApplication().getResources().getString(R.string.base_url) +
-                "auth";
+        String url = ;
 
         JSONObject body = new JSONObject();
         try {
