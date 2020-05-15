@@ -12,6 +12,9 @@ import androidx.core.app.NotificationCompat;
 
 import org.json.JSONException;
 
+import edu.uw.team7project.AuthActivity;
+import edu.uw.team7project.R;
+import edu.uw.team7project.ui.messages.ChatMessage;
 import me.pushy.sdk.Pushy;
 
 import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
