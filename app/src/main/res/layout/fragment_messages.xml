@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
     tools:context=".ui.messages.MessagesFragment">
 
     <TextView
@@ -14,6 +15,7 @@
         android:includeFontPadding="false"
         android:paddingTop="60dp"
         android:text="Messages"
+        android:textColor="?attr/textColor"
         android:textSize="32dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />

@@ -1,9 +1,7 @@
 package edu.uw.team7project;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -18,9 +16,7 @@ import edu.uw.team7project.util.SharedPref;
  * @author Trevor Nichols
  */
 public class AuthActivity extends AppCompatActivity {
-
-    private Switch myswitch;
-
+    private Switch mSwitch;
     SharedPref sharedPref;
 
     @Override
@@ -30,15 +26,17 @@ public class AuthActivity extends AppCompatActivity {
 
         if(sharedPref.loadNightModeState()==true) {
             setTheme(R.style.DarkTheme);
-        }
-        else setTheme(R.style.AppTheme);
+        } else setTheme(R.style.AppTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
-        myswitch = (Switch)findViewById(R.id.mySwitch);
+        mSwitch = (Switch)findViewById(R.id.mySwitch);
+
         if(sharedPref.loadNightModeState()==true) {
-            myswitch.setChecked(true);
+            mSwitch.setChecked(true);
         }
-        myswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
