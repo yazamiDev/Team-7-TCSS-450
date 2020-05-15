@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class MessageListViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<>> mMessageList;
+    private MutableLiveData<List<MessagePost>> mMessageList;
 
     public MessageListViewModel(@NonNull Application application){
         super(application);
@@ -31,7 +31,7 @@ public class MessageListViewModel extends AndroidViewModel {
     }
 
     public void addMessageListObserver(@NonNull LifecycleOwner owner,
-                                       @NonNull Observer<? super List<>> observer) {
+                                       @NonNull Observer<? super List<MessagePost>> observer) {
         mMessageList.observe(owner, observer);
     }
 
@@ -84,10 +84,9 @@ public class MessageListViewModel extends AndroidViewModel {
 //        mBlogList.setValue(mBlogList.getValue());
 //    }
 
-    public void connectGet() {
+    public void connectGet(int memberID, String jwt) {
         //need a endpoint
-        String url =
-                "";
+        String url ="https://mobile-app-spring-2020.herokuapp.com/chats/" + memberID ;
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,

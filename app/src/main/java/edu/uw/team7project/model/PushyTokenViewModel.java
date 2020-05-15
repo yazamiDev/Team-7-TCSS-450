@@ -110,7 +110,7 @@ public class PushyTokenViewModel extends AndroidViewModel {
         }
 
         //Find out what the base_url is??
-        String url = ;
+        String url = "https://mobile-app-spring-2020.herokuapp.com/auth" ;
 
         JSONObject body = new JSONObject();
         try {
