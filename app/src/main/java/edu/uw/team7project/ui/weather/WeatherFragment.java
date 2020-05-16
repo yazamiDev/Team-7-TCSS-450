@@ -38,7 +38,7 @@ public class WeatherFragment extends Fragment {
 
         mUserModel = provider.get(UserInfoViewModel.class);
         mWeatherModel =  provider.get(WeatherViewModel.class);
-        mWeatherModel.connectGet(HARD_CODED_CITY, mUserModel.getJwt());
+        mWeatherModel.connectGetCurrent(HARD_CODED_CITY, mUserModel.getJwt());
     }
 
     /**

@@ -12,10 +12,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import edu.uw.team7project.ui.messages.MessagePost;
 
 public class WeatherViewModel extends AndroidViewModel {
 
@@ -23,14 +27,14 @@ public class WeatherViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public void connectGet ( String city, String jwt){
+    public void connectGetCurrent( String city, String jwt){
         //need a endpoint
         String url = "https://mobile-app-spring-2020.herokuapp.com/weather/" + city;
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
                 null, //no body for this get request
-                this::handleResult,
+                this::handleCurrentResult,
                 this::handleError) {
             @Override
             public Map<String, String> getHeaders() {
@@ -49,8 +53,18 @@ public class WeatherViewModel extends AndroidViewModel {
                 .add(request);
     }
 
-    private void handleResult(JSONObject jsonObject) {
+    private void handleCurrentResult(JSONObject jsonObject) {
+        try {
+            JSONArray weather = jsonObject.getJSONArray("weather");
+            JSONObject currWeather = weather.getJSONObject(0);
+            // = currWeather.getString("description");
+            JSONObject main = jsonObject.getJSONObject("main");
+            // = main.getString("temp");
 
+        } catch (JSONException e) {
+            Log.e("JSON PARSE ERROR", "Found in handle Success ChatViewModel");
+            Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
+        }
     }
 
     private void handleError(final VolleyError error) {
