@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentContactsBinding;
-import edu.uw.team7project.databinding.FragmentMessagesBinding;
 
 /**
  * Subclass for the contacts fragment.

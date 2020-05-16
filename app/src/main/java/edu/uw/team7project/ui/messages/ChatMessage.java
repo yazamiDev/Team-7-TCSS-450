@@ -28,6 +28,7 @@ public class ChatMessage implements Serializable {
      * @throws JSONException when cmAsString cannot be parsed into a ChatMessage.
      */
     public static ChatMessage createFromJsonString(final String cmAsJson) throws JSONException {
+        //used inside of the PushReceiver class
         final JSONObject msg = new JSONObject(cmAsJson);
         return new ChatMessage(msg.getInt("messageid"),
                 msg.getString("message"),

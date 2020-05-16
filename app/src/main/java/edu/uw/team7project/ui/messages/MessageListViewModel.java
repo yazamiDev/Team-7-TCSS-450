@@ -15,6 +15,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,17 +26,20 @@ import java.util.Map;
 
 public class MessageListViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<MessagePost>> mMessageList;
+    private MutableLiveData<Map<Integer, MessagePost>> mMessageList;
 
     public MessageListViewModel(@NonNull Application application){
         super(application);
-        mMessageList = new MutableLiveData<>();
-        mMessageList.setValue(new ArrayList<>());
+        mMessageList = new MutableLiveData<>(new HashMap<Integer, MessagePost>());
     }
 
     public void addMessageListObserver(@NonNull LifecycleOwner owner,
-                                       @NonNull Observer<? super List<MessagePost>> observer) {
+                                       @NonNull Observer<? super Map<Integer, MessagePost>> observer) {
         mMessageList.observe(owner, observer);
+    }
+
+    public Map<Integer, MessagePost> getMessageMap(){
+        return mMessageList.getValue();
     }
 
     private void handleError(final VolleyError error) {
@@ -42,51 +49,30 @@ public class MessageListViewModel extends AndroidViewModel {
     /**
      * Parse a json object to get all the chatrooms?
      */
-//    private void handleResult(final JSONObject result) {
-//        IntFunction<String> getString =
-//                getApplication().getResources()::getString;
-//        try {
-//            JSONObject root = result;
-//            if (root.has(getString.apply(R.string.keys_json_blogs_response))) {
-//                JSONObject response =
-//                        root.getJSONObject(getString.apply(
-//                                R.string.keys_json_blogs_response));
-//                if (response.has(getString.apply(R.string.keys_json_blogs_data))) {
-//                    JSONArray data = response.getJSONArray(
-//                            getString.apply(R.string.keys_json_blogs_data));
-//                    for(int i = 0; i < data.length(); i++) {
-//                        JSONObject jsonBlog = data.getJSONObject(i);
-//                        mBlogList.getValue().add(new BlogPost.Builder(
-//                                jsonBlog.getString(
-//                                        getString.apply(
-//                                                R.string.keys_json_blogs_pubdate)),
-//                                jsonBlog.getString(
-//                                        getString.apply(
-//                                                R.string.keys_json_blogs_title)))
-//                                .addTeaser(jsonBlog.getString(
-//                                        getString.apply(
-//                                                R.string.keys_json_blogs_teaser)))
-//                                .addUrl(jsonBlog.getString(
-//                                        getString.apply(
-//                                                R.string.keys_json_blogs_url)))
-//                                .build());
-//                    }
-//                } else {
-//                    Log.e("ERROR!", "No data array");
-//                }
-//            } else {
-//                Log.e("ERROR!", "No response");
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//            Log.e("ERROR!", e.getMessage());
-//        }
-//        mBlogList.setValue(mBlogList.getValue());
-//    }
+    private void handleResult(final JSONObject result) {
+        Map<Integer, MessagePost> map = getMessageMap();
+        try {
+            JSONArray messages = result.getJSONArray("rows");
+            for (int i = 0; i < result.length(); i++) {
+                JSONObject message = messages.getJSONObject(i);
+                MessagePost post = new MessagePost(message.getString("name"));
+                int key = message.getInt("chatID");
 
-    public void connectGet(int memberID, String jwt) {
+                if (!map.containsKey(key)) {
+                    map.put(key, post);
+                }
+            }
+        } catch (JSONException e) {
+            Log.e("JSON PARSE ERROR", "Found in handle Success ChatViewModel");
+            Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
+        }
+        mMessageList.setValue(map);
+    }
+
+
+    public void connectGet ( int memberID, String jwt){
         //need a endpoint
-        String url ="https://mobile-app-spring-2020.herokuapp.com/chats/" + memberID ;
+        String url = "https://mobile-app-spring-2020.herokuapp.com/chats/" + memberID;
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
@@ -109,5 +95,6 @@ public class MessageListViewModel extends AndroidViewModel {
         Volley.newRequestQueue(getApplication().getApplicationContext())
                 .add(request);
     }
-
 }
+
+

@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 
+import com.auth0.android.jwt.JWT;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -50,8 +51,15 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
 
+        JWT jwt = new JWT(args.getJwt());
+        int memberID = jwt.getClaim("memberid").asInt();
+        String username = jwt.getClaim("username").asString();
+        String firstName = jwt.getClaim("firstName").asString();
+        String lastName = jwt.getClaim("lastName").asString();
+
         new ViewModelProvider(this,
-                new UserInfoViewModel.UserInfoViewModelFactory(args.getEmail(), args.getJwt())
+                new UserInfoViewModel.UserInfoViewModelFactory(args.getEmail(), firstName,
+                        lastName, username, memberID, args.getJwt())
         ).get(UserInfoViewModel.class);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);

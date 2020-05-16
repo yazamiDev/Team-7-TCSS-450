@@ -77,7 +77,7 @@ public class PushReceiver extends BroadcastReceiver {
             //https://developer.android.com/guide/topics/ui/notifiers/notifications
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                     .setAutoCancel(true)
-                    .setSmallIcon(R.drawable.ic_chat_notification)
+                    .setSmallIcon(R.drawable.ic_message_notification)
                     .setContentTitle("Message from: " + message.getSender())
                     .setContentText(message.getMessage())
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)

@@ -35,8 +35,9 @@ public class MessageListFragment extends Fragment {
         mModel = new ViewModelProvider(getActivity()).get(MessageListViewModel.class);
         UserInfoViewModel model = new ViewModelProvider(getActivity())
                 .get(UserInfoViewModel.class);
-        //connect here but what arguments to pass?
 
+        //connect here but what arguments to pass?
+        mModel.connectGet(model.getMemberID(), model.getJwt());
     }
 
     /**
@@ -60,6 +61,7 @@ public class MessageListFragment extends Fragment {
         //used here.
         FragmentMessageListBinding binding = FragmentMessageListBinding.bind(getView());
 
+        //may need to change this to be similar to chatfragment on view created.
         //add observer for getting messages
         mModel.addMessageListObserver(getViewLifecycleOwner(), messageList -> {
             if (!messageList.isEmpty()) {
