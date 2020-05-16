@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentHomeBinding;
 import edu.uw.team7project.model.UserInfoViewModel;
+import edu.uw.team7project.ui.auth.register.RegisterViewModel;
 
 /**
  * Subclass for the home fragment.
@@ -24,6 +25,11 @@ public class HomeFragment extends Fragment {
 
     public HomeFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     /**
