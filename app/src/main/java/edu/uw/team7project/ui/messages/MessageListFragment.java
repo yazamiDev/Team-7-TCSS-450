@@ -71,6 +71,5 @@ public class MessageListFragment extends Fragment {
                 binding.layoutWait.setVisibility(View.GONE);
             }
         });
-
     }
 }
