@@ -23,9 +23,9 @@
 
     <fragment
         android:id="@+id/navigation_contacts"
-        android:name="edu.uw.team7project.ui.contacts.ContactsFragment"
+        android:name="edu.uw.team7project.ui.contacts.ContactListFragment"
         android:label="Contacts"
-        tools:layout="@layout/fragment_contacts" />
+        tools:layout="@layout/fragment_contact_list" />
 
     <fragment
         android:id="@+id/navigation_weather"
