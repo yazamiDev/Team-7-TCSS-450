@@ -61,5 +61,24 @@ public class WeatherFragment extends Fragment {
         //Local access to the ViewBinding object. No need to create as Instance Var as it is only
         //used here.
         FragmentWeatherBinding binding = FragmentWeatherBinding.bind(getView());
+
+        Weather currWeather = mWeatherModel.getCurrentWeather();
+
+        mWeatherModel.addMessageListObserver(getViewLifecycleOwner(), weather -> {
+            String location = "Location: " + HARD_CODED_CITY;
+            binding.textLocation.setText(location);
+
+            String currTemp = "Current Temp: " + currWeather.getTemp();
+            binding.textCurrentTemp.setText(currTemp);
+
+            String minTemp = "Minimum Temp: " + currWeather.getMinTemp();
+            binding.textMinTemp.setText(minTemp);
+
+            String maxTemp = "MaximumTemp: " + currWeather.getMaxTemp();
+            binding.textMaxTemp.setText(maxTemp);
+
+            String humidity = "Humidity: " + weather.getHumidity();
+            binding.textHumidity.setText(humidity);
+        });
     }
 }

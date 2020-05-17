@@ -26,21 +26,18 @@ import java.util.Map;
 
 public class MessageListViewModel extends AndroidViewModel {
 
-    private MutableLiveData<Map<Integer, MessagePost>> mMessageList;
+    private MutableLiveData<List<MessagePost>> mMessageList;
 
     public MessageListViewModel(@NonNull Application application){
         super(application);
-        mMessageList = new MutableLiveData<>(new HashMap<Integer, MessagePost>());
+        mMessageList = new MutableLiveData<>(new ArrayList<>());
     }
 
     public void addMessageListObserver(@NonNull LifecycleOwner owner,
-                                       @NonNull Observer<? super Map<Integer, MessagePost>> observer) {
+                                       @NonNull Observer<? super List<MessagePost>> observer) {
         mMessageList.observe(owner, observer);
     }
 
-    public Map<Integer, MessagePost> getMessageMap(){
-        return mMessageList.getValue();
-    }
 
     private void handleError(final VolleyError error) {
         Log.e("CONNECTION ERROR", error.getLocalizedMessage());
@@ -50,25 +47,21 @@ public class MessageListViewModel extends AndroidViewModel {
      * Parse a json object to get all the chatrooms?
      */
     private void handleResult(final JSONObject result) {
-        Map<Integer, MessagePost> map = getMessageMap();
         try {
             JSONArray messages = result.getJSONArray("rows");
             for (int i = 0; i < result.length(); i++) {
                 JSONObject message = messages.getJSONObject(i);
-                MessagePost post = new MessagePost(message.getString("name"));
+                String name = message.getString("name");
                 int key = message.getInt("chatID");
-
-                if (!map.containsKey(key)) {
-                    map.put(key, post);
-                }
+                MessagePost post = new MessagePost(name, key);
+                mMessageList.getValue().add(post);
             }
         } catch (JSONException e) {
             Log.e("JSON PARSE ERROR", "Found in handle Success ChatViewModel");
             Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
         }
-        mMessageList.setValue(map);
+        mMessageList.setValue(mMessageList.getValue());
     }
-
 
     public void connectGet ( int memberID, String jwt){
         //need a endpoint

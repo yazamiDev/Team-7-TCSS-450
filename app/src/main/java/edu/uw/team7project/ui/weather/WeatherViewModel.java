@@ -5,6 +5,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -17,14 +20,27 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import edu.uw.team7project.ui.messages.MessagePost;
 
 public class WeatherViewModel extends AndroidViewModel {
 
+    private MutableLiveData<Weather> mWeather;
+
     public WeatherViewModel(@NonNull Application application) {
         super(application);
+        mWeather = new MutableLiveData<>();
+    }
+
+    public void addMessageListObserver(@NonNull LifecycleOwner owner,
+                                       @NonNull Observer<? super Weather> observer) {
+        mWeather.observe(owner, observer);
+    }
+
+    public Weather getCurrentWeather() {
+        return mWeather.getValue();
     }
 
     public void connectGetCurrent( String city, String jwt){
@@ -60,7 +76,12 @@ public class WeatherViewModel extends AndroidViewModel {
             // = currWeather.getString("description");
             JSONObject main = jsonObject.getJSONObject("main");
             // = main.getString("temp");
-
+            mWeather.setValue(new Weather(currWeather.getString("description"),
+                    main.getDouble("temp"),
+                    main.getDouble("temp_min"),
+                    main.getDouble("temp_max"),
+                    main.getDouble("humidity"),
+                    main.getString("icon")));
         } catch (JSONException e) {
             Log.e("JSON PARSE ERROR", "Found in handle Success ChatViewModel");
             Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());

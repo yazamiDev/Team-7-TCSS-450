@@ -17,9 +17,9 @@ import edu.uw.team7project.databinding.FragmentMessageCardBinding;
 public class MessagesRecyclerViewAdapter extends
         RecyclerView.Adapter<MessagesRecyclerViewAdapter.MessageViewHolder> {
 
-    private final Map<Integer, MessagePost> mMessages;
+    private final List<MessagePost> mMessages;
 
-    public MessagesRecyclerViewAdapter(Map<Integer, MessagePost> items) {
+    public MessagesRecyclerViewAdapter(List<MessagePost> items) {
         this.mMessages = items;
     }
 
@@ -32,7 +32,6 @@ public class MessagesRecyclerViewAdapter extends
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
         holder.setMessage(mMessages.get(position));
-        holder.setKey(position);
     }
 
     public int getItemCount() {
@@ -66,10 +65,7 @@ public class MessagesRecyclerViewAdapter extends
 
         void setMessage(final MessagePost message) {
             binding.textMessageName.setText(message.getMessageName());
-        }
-
-        void setKey(int key){
-            mKey = key;
+            mKey = message.getChatID();
         }
 
     }

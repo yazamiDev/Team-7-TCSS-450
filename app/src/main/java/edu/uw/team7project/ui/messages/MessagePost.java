@@ -6,10 +6,16 @@ public class MessagePost implements Serializable {
 
     private final String mMessageName;
 
-    public MessagePost(String messageName){
+    private final int mChatID;
+
+    public MessagePost(String messageName, int chatID){
+
         mMessageName = messageName;
+        mChatID = chatID;
     }
 
     public String getMessageName() { return mMessageName; }
+
+    public int getChatID() { return mChatID; }
 
 }

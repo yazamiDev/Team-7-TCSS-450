@@ -26,6 +26,8 @@ public class UserInfoViewModel extends ViewModel {
      */
     private UserInfoViewModel(String email, String fName, String lName,
                               String username, int memberID, String jwt) {
+
+        //May want to store location information about users?
         mEmail = email;
         mJwt = jwt;
         mFName = fName;
