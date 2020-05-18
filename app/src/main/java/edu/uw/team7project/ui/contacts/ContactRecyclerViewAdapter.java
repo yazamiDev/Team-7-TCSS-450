@@ -60,7 +60,9 @@ public class ContactRecyclerViewAdapter extends
         }
 
         void setContact(final Contact contact) {
-
+            binding.textContactUsername.setText(contact.getContactUsername());
+            String contactName = contact.getContactFirstName() + " " + contact.getContactLastName();
+            binding.textContactName.setText(contactName);
         }
 
     }

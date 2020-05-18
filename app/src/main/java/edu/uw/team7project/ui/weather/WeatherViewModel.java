@@ -27,25 +27,15 @@ import edu.uw.team7project.ui.messages.MessagePost;
 
 public class WeatherViewModel extends AndroidViewModel {
 
-    private MutableLiveData<Weather> mWeather;
+    private Map<String, MutableLiveData<List<Weather>>> mMessages;
 
     public WeatherViewModel(@NonNull Application application) {
         super(application);
-        mWeather = new MutableLiveData<>();
     }
 
-    public void addMessageListObserver(@NonNull LifecycleOwner owner,
-                                       @NonNull Observer<? super Weather> observer) {
-        mWeather.observe(owner, observer);
-    }
-
-    public Weather getCurrentWeather() {
-        return mWeather.getValue();
-    }
 
     public void connectGetCurrent( String city, String jwt){
-        //need a endpoint
-        String url = "https://mobile-app-spring-2020.herokuapp.com/weather/" + city;
+        String url = "https://mobile-app-spring-2020.herokuapp.com/weather?name=" + city;
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
@@ -70,20 +60,15 @@ public class WeatherViewModel extends AndroidViewModel {
     }
 
     private void handleCurrentResult(JSONObject jsonObject) {
+        Log.i("Weather", "Made it to handle result");
         try {
-            JSONArray weather = jsonObject.getJSONArray("weather");
+            JSONObject weatherData = jsonObject.getJSONObject("weatherData");
+            JSONArray weather = weatherData.getJSONArray("weather");
             JSONObject currWeather = weather.getJSONObject(0);
-            // = currWeather.getString("description");
-            JSONObject main = jsonObject.getJSONObject("main");
-            // = main.getString("temp");
-            mWeather.setValue(new Weather(currWeather.getString("description"),
-                    main.getDouble("temp"),
-                    main.getDouble("temp_min"),
-                    main.getDouble("temp_max"),
-                    main.getDouble("humidity"),
-                    main.getString("icon")));
+            JSONObject main = weatherData.getJSONObject("main");
+
         } catch (JSONException e) {
-            Log.e("JSON PARSE ERROR", "Found in handle Success ChatViewModel");
+            Log.e("JSON PARSE ERROR", "Found in handle current weather");
             Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
         }
     }

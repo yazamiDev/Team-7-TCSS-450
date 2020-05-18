@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.navigation.Navigation;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -15,6 +16,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.uw.team7project.ui.auth.verify.VerifyFragmentDirections;
 import edu.uw.team7project.ui.messages.MessagePost;
 
 public class ContactListViewModel extends AndroidViewModel {
@@ -40,7 +44,6 @@ public class ContactListViewModel extends AndroidViewModel {
     }
 
     public void connectGet (String jwt){
-        //need a endpoint
         String url = "https://mobile-app-spring-2020.herokuapp.com/contacts";
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
@@ -66,11 +69,28 @@ public class ContactListViewModel extends AndroidViewModel {
     }
 
     private void handleSuccess(final JSONObject result) {
+        try {
+            JSONArray contacts = result.getJSONArray("contacts");
+            for (int i = 0; i < contacts.length(); i++) {
+                JSONObject contact = contacts.getJSONObject(i);
+                String email= contact.getString("email");
+                String firstName= contact.getString("firstName");
+                String lastName= contact.getString("lastName");
+                String username= contact.getString("userName");
+                int memberID = contact.getInt("memberId");
 
+                Contact entry = new Contact(email, firstName, lastName, username, memberID);
+                mContactList.getValue().add(entry);
+            }
+        } catch (JSONException e) {
+            Log.e("JSON PARSE ERROR", "Found in handle Success ContactViewModel");
+            Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
+        }
+        mContactList.setValue(mContactList.getValue());
     }
 
     private void handleError(final VolleyError error) {
-        Log.e("CONNECTION ERROR", error.getLocalizedMessage());
-        throw new IllegalStateException(error.getMessage());
+        Log.e("CONNECTION ERROR", "Oooops no contacts");
+        //throw new IllegalStateException(error.getMessage());
     }
 }

@@ -67,6 +67,5 @@ public class MessagesRecyclerViewAdapter extends
             binding.textMessageName.setText(message.getMessageName());
             mKey = message.getChatID();
         }
-
     }
 }

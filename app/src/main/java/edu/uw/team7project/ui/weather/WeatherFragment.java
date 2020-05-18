@@ -26,6 +26,7 @@ public class WeatherFragment extends Fragment {
 
     private UserInfoViewModel mUserModel;
     private WeatherViewModel mWeatherModel;
+
     public WeatherFragment() {
         // Required empty public constructor
     }
@@ -38,7 +39,6 @@ public class WeatherFragment extends Fragment {
 
         mUserModel = provider.get(UserInfoViewModel.class);
         mWeatherModel =  provider.get(WeatherViewModel.class);
-        mWeatherModel.connectGetCurrent(HARD_CODED_CITY, mUserModel.getJwt());
     }
 
     /**
@@ -62,23 +62,5 @@ public class WeatherFragment extends Fragment {
         //used here.
         FragmentWeatherBinding binding = FragmentWeatherBinding.bind(getView());
 
-        Weather currWeather = mWeatherModel.getCurrentWeather();
-
-        mWeatherModel.addMessageListObserver(getViewLifecycleOwner(), weather -> {
-            String location = "Location: " + HARD_CODED_CITY;
-            binding.textLocation.setText(location);
-
-            String currTemp = "Current Temp: " + currWeather.getTemp();
-            binding.textCurrentTemp.setText(currTemp);
-
-            String minTemp = "Minimum Temp: " + currWeather.getMinTemp();
-            binding.textMinTemp.setText(minTemp);
-
-            String maxTemp = "MaximumTemp: " + currWeather.getMaxTemp();
-            binding.textMaxTemp.setText(maxTemp);
-
-            String humidity = "Humidity: " + weather.getHumidity();
-            binding.textHumidity.setText(humidity);
-        });
     }
 }

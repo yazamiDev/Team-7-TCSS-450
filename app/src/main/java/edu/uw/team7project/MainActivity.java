@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.auth0.android.jwt.JWT;
 import com.google.android.material.badge.BadgeDrawable;
@@ -46,17 +47,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
 
+        Log.i("MAIN", " hello from main");
         JWT jwt = new JWT(args.getJwt());
         int memberID = jwt.getClaim("memberid").asInt();
         String username = jwt.getClaim("username").asString();
-        String firstName = jwt.getClaim("firstName").asString();
-        String lastName = jwt.getClaim("lastName").asString();
+        String firstName = jwt.getClaim("firstname").asString();
+        String lastName = jwt.getClaim("lastname").asString();
 
+        Log.i("MAIN", " hello " + memberID + username + firstName + lastName);
         new ViewModelProvider(this,
                 new UserInfoViewModel.UserInfoViewModelFactory(args.getEmail(), firstName,
                         lastName, username, memberID, args.getJwt())
@@ -83,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 mNewMessageModel.reset();
             }
         });
+
         mNewMessageModel.addMessageCountObserver(this, count -> {
             BadgeDrawable badge = binding.navView.getOrCreateBadge(R.id.chatFragment);
             badge.setMaxCharacterCount(2);
@@ -99,14 +104,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
+    public boolean onSupportNavigateUp () {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
 
     @Override
-    public void onResume() {
+    public void onResume () {
         super.onResume();
         if (mPushMessageReceiver == null) {
             mPushMessageReceiver = new MainPushMessageReceiver();
@@ -115,9 +120,9 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(mPushMessageReceiver, iFilter);
     }
     @Override
-    public void onPause() {
+    public void onPause () {
         super.onPause();
-        if (mPushMessageReceiver != null){
+        if (mPushMessageReceiver != null) {
             unregisterReceiver(mPushMessageReceiver);
         }
     }
@@ -130,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
         private ChatViewModel mModel =
                 new ViewModelProvider(MainActivity.this)
                         .get(ChatViewModel.class);
+
         @Override
         public void onReceive(Context context, Intent intent) {
             NavController nc =
