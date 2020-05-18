@@ -40,32 +40,33 @@ public class MessageListViewModel extends AndroidViewModel {
 
 
     private void handleError(final VolleyError error) {
-        Log.e("CONNECTION ERROR", error.getLocalizedMessage());
-        throw new IllegalStateException(error.getMessage());
+        Log.e("CONNECTION ERROR", "OOOPS no message lists");
+        //throw new IllegalStateException(error.getMessage());
     }
     /**
      * Parse a json object to get all the chatrooms?
      */
     private void handleResult(final JSONObject result) {
+        ArrayList<MessagePost> temp = new ArrayList<>();
         try {
-            JSONArray messages = result.getJSONArray("rows");
+            JSONArray messages = result.getJSONArray("chats");
             for (int i = 0; i < result.length(); i++) {
                 JSONObject message = messages.getJSONObject(i);
                 String name = message.getString("name");
-                int key = message.getInt("chatID");
+                int key = message.getInt("chat");
                 MessagePost post = new MessagePost(name, key);
-                mMessageList.getValue().add(post);
+                temp.add(post);
             }
         } catch (JSONException e) {
             Log.e("JSON PARSE ERROR", "Found in handle Success ChatViewModel");
             Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
         }
-        mMessageList.setValue(mMessageList.getValue());
+        mMessageList.setValue(temp);
     }
 
-    public void connectGet ( int memberID, String jwt){
+    public void connectGet (String jwt){
         //need a endpoint
-        String url = "https://mobile-app-spring-2020.herokuapp.com/chats/" + memberID;
+        String url = "https://mobile-app-spring-2020.herokuapp.com/contacts/chatlist";
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,

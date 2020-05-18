@@ -69,6 +69,7 @@ public class ContactListViewModel extends AndroidViewModel {
     }
 
     private void handleSuccess(final JSONObject result) {
+        ArrayList<Contact> temp = new ArrayList<>();
         try {
             JSONArray contacts = result.getJSONArray("contacts");
             for (int i = 0; i < contacts.length(); i++) {
@@ -80,13 +81,13 @@ public class ContactListViewModel extends AndroidViewModel {
                 int memberID = contact.getInt("memberId");
 
                 Contact entry = new Contact(email, firstName, lastName, username, memberID);
-                mContactList.getValue().add(entry);
+                temp.add(entry);
             }
         } catch (JSONException e) {
             Log.e("JSON PARSE ERROR", "Found in handle Success ContactViewModel");
             Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
         }
-        mContactList.setValue(mContactList.getValue());
+        mContactList.setValue(temp);
     }
 
     private void handleError(final VolleyError error) {

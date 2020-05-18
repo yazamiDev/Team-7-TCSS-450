@@ -37,7 +37,7 @@ public class MessageListFragment extends Fragment {
                 .get(UserInfoViewModel.class);
 
         //connect here but what arguments to pass?
-        mModel.connectGet(model.getMemberID(), model.getJwt());
+        mModel.connectGet(model.getJwt());
     }
 
     /**
