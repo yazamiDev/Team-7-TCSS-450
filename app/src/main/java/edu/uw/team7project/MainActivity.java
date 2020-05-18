@@ -7,14 +7,18 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import edu.uw.team7project.ui.auth.verify.VerifyFragmentArgs;
+import edu.uw.team7project.ui.settings.SettingsFragment;
 
 /**
  * An activity representing the main process of the application.
@@ -22,6 +26,9 @@ import edu.uw.team7project.ui.auth.verify.VerifyFragmentArgs;
  * @author Bradlee Laird
  */
 public class MainActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -32,14 +39,49 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_settings:
+//                displayToast(getString(R.string.action_settings_message));
+//                return true;
+                Log.d("LOG_TAG", "Clicked");
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_signOut:
+                displayToast(getString(R.string.action_signOut_message));
+                return true;
+
+
+        }
+
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+
+            Log.d("LOG_TAG", "Clicked");
+
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+
+        }
+
+        if (id == R.id.action_signOut) {
             //TODO open a settings fragment
-            Log.d("SETTINGS", "Clicked");
+            Log.d("SIGN OUT", "Clicked");
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
+
+
+
+//    protected void openSettings() {
+//        Intent intent = new Intent(this, SettingsActivity.class);
+//        startActivity(intent);
+//    }
 
     /**
      * Passes in the id's of the fragments that the main activity fragment will be travelling between,
@@ -61,5 +103,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    public void displayToast(String message) {
+        Toast.makeText(getApplicationContext(), message,
+                Toast.LENGTH_SHORT).show();
     }
 }
