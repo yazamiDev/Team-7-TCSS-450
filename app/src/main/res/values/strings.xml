@@ -20,6 +20,7 @@
     <string name="title_messages">Messages</string>
     <string name="title_contacts">Contacts</string>
     <string name="title_weather">Weather</string>
+    <string name="text_current_weather">Current Weather</string>
 
     //test text for settings buttons
     <string name="action_settings_message">You selected Settings</string>

@@ -13,21 +13,34 @@
 
     <fragment
         android:id="@+id/navigation_messages"
-        android:name="edu.uw.team7project.ui.messages.MessagesFragment"
+        android:name="edu.uw.team7project.ui.messages.MessageListFragment"
         android:label="Messages"
-        tools:layout="@layout/fragment_messages" />
+        tools:layout="@layout/fragment_message_list" >
+        <action
+            android:id="@+id/action_navigation_messages_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_contacts"
-        android:name="edu.uw.team7project.ui.contacts.ContactsFragment"
+        android:name="edu.uw.team7project.ui.contacts.ContactListFragment"
         android:label="Contacts"
-        tools:layout="@layout/fragment_contacts" />
+        tools:layout="@layout/fragment_contact_list" />
 
     <fragment
         android:id="@+id/navigation_weather"
         android:name="edu.uw.team7project.ui.weather.WeatherFragment"
         android:label="Weather"
         tools:layout="@layout/fragment_weather" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="edu.uw.team7project.ui.messages.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" >
+        <argument
+            android:name="chatID"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
