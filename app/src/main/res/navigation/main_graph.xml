@@ -18,7 +18,8 @@
         tools:layout="@layout/fragment_message_list" >
         <action
             android:id="@+id/action_navigation_messages_to_chatFragment"
-            app:destination="@id/chatFragment" />
+            app:destination="@id/chatFragment"
+            app:popUpTo="@id/navigation_messages" />
     </fragment>
 
     <fragment

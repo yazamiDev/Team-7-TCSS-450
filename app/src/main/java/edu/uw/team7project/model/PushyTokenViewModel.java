@@ -111,6 +111,8 @@ public class PushyTokenViewModel extends AndroidViewModel {
 
         //Find out what the base_url is??
         String url = "https://mobile-app-spring-2020.herokuapp.com/auth" ;
+        Log.i("PUSHY", jwt);
+        Log.i("PUSHY", mPushyToken.getValue().toString());
 
         JSONObject body = new JSONObject();
         try {
@@ -151,7 +153,7 @@ public class PushyTokenViewModel extends AndroidViewModel {
                         "error:\"" + error.getMessage() +
                         "\"}"));
             } catch (JSONException e) {
-                Log.e("JSON PARSE", "JSON Parse Error in handleError");
+                Log.e("JSON PARSE", "JSON Parse Error in Pushy");
             }
         }
         else {
@@ -162,7 +164,7 @@ public class PushyTokenViewModel extends AndroidViewModel {
                         ", data:" + data +
                         "}"));
             } catch (JSONException e) {
-                Log.e("JSON PARSE", "JSON Parse Error in handleError");
+                Log.e("JSON PARSE", "JSON Parse Error in Pushy");
             }
         }
     }

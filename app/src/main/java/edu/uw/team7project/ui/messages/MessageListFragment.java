@@ -64,12 +64,12 @@ public class MessageListFragment extends Fragment {
         //may need to change this to be similar to chatfragment on view created.
         //add observer for getting messages
         mModel.addMessageListObserver(getViewLifecycleOwner(), messageList -> {
-            if (!messageList.isEmpty()) {
-                binding.listRoot.setAdapter(
-                        new MessagesRecyclerViewAdapter(messageList)
-                );
-                //binding.layoutWait.setVisibility(View.GONE);
-            }
+            //if (!messageList.isEmpty()) {
+            binding.listRoot.setAdapter(
+                    new MessagesRecyclerViewAdapter(messageList)
+            );
+            binding.layoutWait.setVisibility(View.GONE);
+        //}else navigate to a no messages fragment.
         });
     }
 }

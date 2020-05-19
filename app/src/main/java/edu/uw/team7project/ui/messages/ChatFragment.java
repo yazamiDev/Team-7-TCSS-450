@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class ChatFragment extends Fragment {
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         ChatFragmentArgs args = ChatFragmentArgs.fromBundle(getArguments());
         mChatID = args.getChatID();
+        Log.i("CHAT", String.valueOf(mChatID));
         mUserModel = provider.get(UserInfoViewModel.class);
         mChatModel = provider.get(ChatViewModel.class);
         mChatModel.getFirstMessages(mChatID, mUserModel.getJwt());
@@ -89,6 +91,7 @@ public class ChatFragment extends Fragment {
                 });
 
         //Send button was clicked. Send the message via the SendViewModel
+        //Error produced from here
         binding.buttonSend.setOnClickListener(button -> {
             mSendModel.sendMessage(mChatID,
                     mUserModel.getJwt(),
