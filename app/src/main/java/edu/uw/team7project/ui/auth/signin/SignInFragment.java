@@ -1,5 +1,8 @@
 package edu.uw.team7project.ui.auth.signin;
 import static edu.uw.team7project.util.PasswordValidator.*;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.auth0.android.jwt.JWT;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentSignInBinding;
 import edu.uw.team7project.util.PasswordValidator;
 
@@ -44,6 +50,27 @@ public class SignInFragment extends Fragment {
     private PasswordValidator mPasswordValidator =checkPwdMinLength(0)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdMaxLength(32));
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        SharedPreferences prefs =
+                getActivity().getSharedPreferences(
+                        getString(R.string.keys_shared_prefs),
+                        Context.MODE_PRIVATE);
+        if (prefs.contains(getString(R.string.keys_prefs_jwt))) {
+            String token = prefs.getString(getString(R.string.keys_prefs_jwt), "");
+            JWT jwt = new JWT(token);
+            // Check to see if the web token is still valid or not. To make a JWT expire after a
+            // longer or shorter time period, change the expiration time when the JWT is
+            // created on the web service.
+            if(!jwt.isExpired(0)) {
+                String email = jwt.getClaim("email").asString();
+                navigateToHome(email, token);
+                return;
+            }
+        }
+    }
 
     /**
      * An empty constructor.
@@ -118,9 +145,19 @@ public class SignInFragment extends Fragment {
      * @param jwt the users jwt.
      */
     private void navigateToHome(String email, String jwt){
+
+        if (binding.buttonSignIn.isActivated()) {
+            SharedPreferences prefs =
+                    getActivity().getSharedPreferences(
+                            getString(R.string.keys_shared_prefs),
+                            Context.MODE_PRIVATE);
+            prefs.edit().putString(getString(R.string.keys_prefs_jwt), jwt).apply();
+        }
         //Update this to pass proper arguments to main activity.
         Navigation.findNavController(getView())
                 .navigate(SignInFragmentDirections.actionSignInFragmentToMainActivity(email, jwt));
+
+        getActivity().finish();
     }
 
     /**

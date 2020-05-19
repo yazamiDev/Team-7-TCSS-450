@@ -26,6 +26,11 @@
     <string name="action_settings_message">You selected Settings</string>
     <string name="action_signOut_message">You selected Sign Out</string>
 
+    <string name="keys_shared_prefs">My Auth App Shared Prefs</string>
+    <string name="keys_prefs_jwt">Sharded Prefs JWT</string>
+    <string name="action_sign_out">Sign Out</string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
