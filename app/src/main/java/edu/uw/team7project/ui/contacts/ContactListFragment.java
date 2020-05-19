@@ -62,12 +62,12 @@ public class ContactListFragment extends Fragment {
         FragmentContactListBinding binding = FragmentContactListBinding.bind(getView());
 
         mModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
-            if (!contactList.isEmpty()) {
+            //if (!contactList.isEmpty()) {
                 binding.listRoot.setAdapter(
                         new ContactRecyclerViewAdapter(contactList)
                 );
                 binding.layoutWait.setVisibility(View.GONE);
-            }
+            //}
         });
     }
 }

@@ -67,7 +67,7 @@ public class SignInViewModel extends AndroidViewModel {
                         "error:\"" + error.getMessage() +
                         "\"}"));
             } catch (JSONException e) {
-                Log.e("JSON PARSE", "JSON Parse Error in handleError");
+                Log.e("JSON PARSE", "JSON Parse Error in SIVM");
             }
         }
         else {
@@ -79,7 +79,7 @@ public class SignInViewModel extends AndroidViewModel {
                         ", data:\"" + data +
                         "\"}"));
             } catch (JSONException e) {
-                Log.e("JSON PARSE", "JSON Parse Error in handleError");
+                Log.e("JSON PARSE", "JSON Parse Error in SIVM");
             }
         }
     }
@@ -92,12 +92,15 @@ public class SignInViewModel extends AndroidViewModel {
      */
     public void connect(final String email, final String password) {
         String url = "https://mobile-app-spring-2020.herokuapp.com/auth";
+
+        Log.i("SIVM", email + " " + password);
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
                 null, //no body for this get request
                 mResponse::setValue,
                 this::handleError) {
+
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
@@ -110,6 +113,7 @@ public class SignInViewModel extends AndroidViewModel {
                 return headers;
             }
         };
+
         request.setRetryPolicy(new DefaultRetryPolicy(
                 10_000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -117,5 +121,6 @@ public class SignInViewModel extends AndroidViewModel {
         //Instantiate the RequestQueue and add the request to the queue
         RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
                 .addToRequestQueue(request);
+
     }
 }
