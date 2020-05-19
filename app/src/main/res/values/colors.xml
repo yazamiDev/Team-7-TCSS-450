@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#1565c0</color>
     <color name="colorPrimaryAlpha">#226200EE</color>
     <color name="colorAccent">#4caf50</color>
+
+    <color name="primaryLightColor">#7953d2</color>
+    <color name="secondaryTextColorFade">#222222</color>
+    <color name="secondaryLightColor">#ead6a9</color>
 </resources>

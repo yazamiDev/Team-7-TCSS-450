@@ -86,7 +86,7 @@
 
     <Button
         android:id="@+id/button_register_1"
-        style="@style/Widget.AppCompat.Button.Borderless"
+        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
         android:layout_width="88dp"
         android:layout_height="wrap_content"
         android:text="@string/action_register"
