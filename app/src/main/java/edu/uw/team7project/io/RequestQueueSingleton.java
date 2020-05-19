@@ -10,6 +10,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+/**
+ * A Class for requesting a queue using the singleton design pattern.
+ */
 public class RequestQueueSingleton {
     private static RequestQueueSingleton instance;
     private static Context context;
@@ -17,6 +20,10 @@ public class RequestQueueSingleton {
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
 
+    /**
+     * A Contructor for the Request Queue singleton class.
+     * @param context
+     */
     private RequestQueueSingleton(Context context) {
         RequestQueueSingleton.context = context;
         mRequestQueue = getmRequestQueue();
@@ -38,6 +45,12 @@ public class RequestQueueSingleton {
                 });
     }
 
+    /**
+     * A method for getting the instance.
+     *
+     * @param context the contect
+     * @return a Request Queue Singleton
+     */
     public static synchronized RequestQueueSingleton getInstance(Context context) {
         if (instance == null) {
             instance = new RequestQueueSingleton(context);
@@ -45,6 +58,11 @@ public class RequestQueueSingleton {
         return instance;
     }
 
+    /**
+     * Get this request queue.
+     *
+     * @return the request Queue.
+     */
     public RequestQueue getmRequestQueue() {
         if (mRequestQueue == null) {
             // getApplicationContext() is key, it keeps you from leaking the
@@ -54,10 +72,21 @@ public class RequestQueueSingleton {
         return mRequestQueue;
     }
 
+    /**
+     *  Add to the reuquest queue.
+     *
+     * @param req
+     * @param <T>
+     */
     public <T> void addToRequestQueue(Request<T> req) {
         getmRequestQueue().add(req);
     }
 
+    /**
+     * Get the image loader.
+     *
+     * @return an ImageLoader
+     */
     public ImageLoader getmImageLoader() {
         return mImageLoader;
     }

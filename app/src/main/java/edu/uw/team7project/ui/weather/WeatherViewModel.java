@@ -25,15 +25,29 @@ import java.util.Map;
 
 import edu.uw.team7project.ui.messages.MessagePost;
 
+/**
+ * A view model for weather.
+ *
+ * @author Trevor Nichols
+ */
 public class WeatherViewModel extends AndroidViewModel {
 
     private Map<String, MutableLiveData<List<Weather>>> mMessages;
 
+    /**
+     * A constructor for the weather view model.
+     * @param application the application
+     */
     public WeatherViewModel(@NonNull Application application) {
         super(application);
     }
 
-
+    /**
+     * Connects  to the webservice to get current conditions.
+     *
+     * @param city the city
+     * @param jwt a valid jwt
+     */
     public void connectGetCurrent( String city, String jwt){
         String url = "https://mobile-app-spring-2020.herokuapp.com/weather?name=" + city;
         Request request = new JsonObjectRequest(
@@ -59,6 +73,10 @@ public class WeatherViewModel extends AndroidViewModel {
                 .add(request);
     }
 
+    /**
+     * Handles results for current weather.
+     * @param jsonObject a JSONObject
+     */
     private void handleCurrentResult(JSONObject jsonObject) {
         Log.i("Weather", "Made it to handle result");
         try {
@@ -73,6 +91,10 @@ public class WeatherViewModel extends AndroidViewModel {
         }
     }
 
+    /**
+     * Handles errors with the webservice
+     * @param error the error.
+     */
     private void handleError(final VolleyError error) {
         Log.e("CONNECTION ERROR", error.getLocalizedMessage());
         throw new IllegalStateException(error.getMessage());

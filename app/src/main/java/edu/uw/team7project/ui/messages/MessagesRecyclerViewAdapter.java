@@ -14,15 +14,33 @@ import java.util.Map;
 import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentMessageCardBinding;
 
+/**
+ * A message post recycler view class
+ *
+ * @author Trevor Nichols.
+ */
 public class MessagesRecyclerViewAdapter extends
         RecyclerView.Adapter<MessagesRecyclerViewAdapter.MessageViewHolder> {
 
     private final List<MessagePost> mMessages;
 
+    /**
+     * A constructor for the message recycler view.
+     *
+     * @param items a list of message posts.
+     */
     public MessagesRecyclerViewAdapter(List<MessagePost> items) {
         this.mMessages = items;
     }
 
+    /**
+     * Creates a message view holder.
+     *
+     * @param parent the parent
+     * @param viewType the view type.
+     *
+     * @return a message view holder
+     */
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new MessageViewHolder(LayoutInflater
                 .from(parent.getContext())
@@ -34,17 +52,29 @@ public class MessagesRecyclerViewAdapter extends
         holder.setMessage(mMessages.get(position));
     }
 
+    /**
+     * Get the cont of messages.
+     *
+     * @return the number of messages.
+     */
     public int getItemCount() {
         return mMessages.size();
     }
 
-
+    /**
+     * A message view holder class
+     */
     public class MessageViewHolder extends RecyclerView.ViewHolder {
 
         public final View mView;
         public FragmentMessageCardBinding binding;
         public int mKey;
 
+        /**
+         * contructs a message view holder.
+         *
+         * @param view the view.
+         */
         public MessageViewHolder(View view) {
             super(view);
             mView = view;
@@ -56,6 +86,9 @@ public class MessagesRecyclerViewAdapter extends
             });
         }
 
+        /**
+         * navigates to a chat room associated with the message post.
+         */
         private void navigateToChat(){
             MessageListFragmentDirections.ActionNavigationMessagesToChatFragment directions =
                     MessageListFragmentDirections.actionNavigationMessagesToChatFragment(mKey);
@@ -63,6 +96,11 @@ public class MessagesRecyclerViewAdapter extends
             Navigation.findNavController(mView).navigate(directions);
         }
 
+        /**
+         * Sets the message for the view holder.
+         *
+         * @param message the message.
+         */
         void setMessage(final MessagePost message) {
             binding.textMessageName.setText(message.getMessageName());
             mKey = message.getChatID();

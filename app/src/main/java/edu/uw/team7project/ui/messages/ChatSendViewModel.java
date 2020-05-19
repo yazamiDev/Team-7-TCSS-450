@@ -28,17 +28,35 @@ public class ChatSendViewModel extends AndroidViewModel {
 
     private final MutableLiveData<JSONObject> mResponse;
 
+    /**
+     * A chat send view model.
+     *
+     * @param application the apllication.
+     */
     public ChatSendViewModel(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
     }
 
+    /**
+     * Adds a response to the view model.
+     *
+     * @param owner
+     * @param observer
+     */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
     }
 
+    /**
+     * Sends a message to the webservice.
+     *
+     * @param chatId thechat id
+     * @param jwt a valid jwt
+     * @param message a message.
+     */
     public void sendMessage(final int chatId, final String jwt, final String message) {
         String url = "https://mobile-app-spring-2020.herokuapp.com/messages";
 
@@ -75,8 +93,10 @@ public class ChatSendViewModel extends AndroidViewModel {
                 .addToRequestQueue(request);
     }
 
-
-
+    /**
+     * handles errors with connecting the the webservice.
+     * @param error
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             Log.e("NETWORK ERROR", error.getMessage());

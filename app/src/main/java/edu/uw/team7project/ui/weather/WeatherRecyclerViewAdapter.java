@@ -10,11 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentWeatherBinding;
 
+/**
+ * A recycler view for weather.
+ *
+ * @author Trevor Nichols
+ */
 public class WeatherRecyclerViewAdapter extends
         RecyclerView.Adapter<WeatherRecyclerViewAdapter.WeatherViewHolder> {
 
     private Weather mWeather;
 
+    /**
+     * Constructor for weather recycler
+     * @param item
+     */
     public WeatherRecyclerViewAdapter (Weather item){
         this.mWeather = item;
     }
@@ -37,6 +46,9 @@ public class WeatherRecyclerViewAdapter extends
         return 1;
     }
 
+    /**
+     * A view Holder for weather.
+     */
     public class WeatherViewHolder extends RecyclerView.ViewHolder {
 
         public final View mView;
@@ -61,6 +73,10 @@ public class WeatherRecyclerViewAdapter extends
 //            Navigation.findNavController(mView).navigate(directions);
 //        }
 
+        /**
+         * SEts the weather for the view holder.
+         * @param weather the weather
+         */
         void setWeather(final Weather weather) {
             binding.textLocation.setText("Tacoma");
 
