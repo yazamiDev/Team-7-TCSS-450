@@ -44,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
 //                displayToast(getString(R.string.action_settings_message));
 //                return true;
-                Log.d("LOG_TAG", "Clicked");
-                Intent intent = new Intent(this, SettingsActivity.class);
-                startActivity(intent);
+                Log.d("Settings", "Clicked");
+//                Intent intent = new Intent(this, SettingsActivity.class);
+//                startActivity(intent);
+                setContentView(R.layout.fragment_settings);
                 return true;
 
             case R.id.action_signOut:
@@ -54,23 +55,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
 
-        }
-
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-
-            Log.d("LOG_TAG", "Clicked");
-
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-
-        }
-
-        if (id == R.id.action_signOut) {
-            //TODO open a settings fragment
-            Log.d("SIGN OUT", "Clicked");
-            return true;
         }
 
         return super.onOptionsItemSelected(item);

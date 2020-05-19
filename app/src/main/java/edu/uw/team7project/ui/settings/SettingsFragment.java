@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import edu.uw.team7project.MainActivity;
 import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentHomeBinding;
 import edu.uw.team7project.databinding.FragmentSettingsBinding;
@@ -37,9 +38,11 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
+
 
     /**
      * Creates an instance of the fragment for when the user returns to it.
