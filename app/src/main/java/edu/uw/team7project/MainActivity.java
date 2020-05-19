@@ -14,11 +14,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
-<<<<<<< HEAD
 import android.view.Menu;
 import android.view.MenuItem;
-=======
->>>>>>> trevorDevSprint2
+
+
 
 import com.auth0.android.jwt.JWT;
 import com.google.android.material.badge.BadgeDrawable;
@@ -40,7 +39,7 @@ import edu.uw.team7project.ui.messages.ChatViewModel;
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
-<<<<<<< HEAD
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar, menu);
@@ -57,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-=======
+
     private ActivityMainBinding binding;
 
     private MainPushMessageReceiver mPushMessageReceiver;
     private NewMessageCountViewModel mNewMessageModel;
->>>>>>> trevorDevSprint2
+
 
     /**
      * Passes in the id's of the fragments that the main activity fragment will be travelling between,

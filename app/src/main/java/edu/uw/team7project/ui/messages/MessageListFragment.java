@@ -68,7 +68,7 @@ public class MessageListFragment extends Fragment {
                 binding.listRoot.setAdapter(
                         new MessagesRecyclerViewAdapter(messageList)
                 );
-                binding.layoutWait.setVisibility(View.GONE);
+                //binding.layoutWait.setVisibility(View.GONE);
             }
         });
     }
