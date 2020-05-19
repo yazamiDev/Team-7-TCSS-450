@@ -53,4 +53,5 @@ public class HomeFragment extends Fragment {
         //used here.
         FragmentHomeBinding binding = FragmentHomeBinding.bind(getView());
     }
+
 }

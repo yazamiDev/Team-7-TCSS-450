@@ -7,6 +7,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -26,6 +31,33 @@ public class MainActivity extends AppCompatActivity {
     // fields for theme
     private Switch mSwitch;
     SharedPref sharedPref;
+
+//    public boolean showButton(Switch mSwitch) {
+//        if (R.id.mySwitch )
+//        return true;
+//    }
+//
+//    public boolean hideButton(Switch mSwitch) {
+//
+//        return true;
+//    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.toolbar, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == R.id.action_settings) {
+//            //TODO open a settings fragment
+//            Log.d("SETTINGS", "Clicked");
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     /**
      * Passes in the id's of the fragments that the main activity fragment will be travelling between,

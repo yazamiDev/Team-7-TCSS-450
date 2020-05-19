@@ -18,10 +18,22 @@
     <string name="text_verify">Verify your email</string>
     <string name="text_verify_warning">If you did not register with this account, you can
     ignore this email.</string>
+    <string name="text_forgot_password_description">Enter the email address associated with your
+        account.</string>
+    <string name="text_forgot_password"><b>Forgot Password</b></string>
+    <string name="text_email_reset">We will send you a link to your email to reset
+    your password.</string>
     <string name="title_home">Home</string>
     <string name="title_messages">Messages</string>
     <string name="title_contacts">Contacts</string>
     <string name="title_weather">Weather</string>
+    <string name="switch_theme">My theme</string>
+
+    <string name="switch_sign_in">Stay Signed in</string>
+    <string name="keys_shared_prefs">My Auth App Shared Prefs</string>
+    <string name="keys_prefs_jwt">Sharded Prefs JWT</string>
+
+
 
 
     <!-- TODO: Remove or change this placeholder text -->
