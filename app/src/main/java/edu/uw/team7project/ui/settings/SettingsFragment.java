@@ -8,6 +8,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,12 @@ public class SettingsFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         ActionBar actionBar = activity.getSupportActionBar();
         actionBar.setTitle("Settings");
+
+        FragmentSettingsBinding binding = FragmentSettingsBinding.bind(getView());
+        binding.button.setOnClickListener(button -> {
+//            Navigation.findNavController(getView()).navigate(SettingsFragmentDirections.actionNavigationSettingsToNavigationHome());
+            activity.setContentView(R.layout.fragment_home);
+        });
 
         //disables the bottom nav bar while in settings
         BottomNavigationView navView = activity.findViewById(R.id.nav_view);
