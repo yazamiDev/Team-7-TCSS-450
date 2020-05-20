@@ -19,12 +19,23 @@ import java.util.List;
 import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentChatMessageBinding;
 
-
+/**
+ * A recycler view for chat messages.
+ *
+ * @author Trevor Nichols
+ * @author Yousif Azami
+ */
 public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerViewAdapter.MessageViewHolder>{
 
     private final List<ChatMessage> mMessages;
     private final String mUsername;
 
+    /**
+     * A constructor for the  chat recyler view.
+     *
+     * @param messages the messages.
+     * @param username the username.
+     */
     public ChatRecyclerViewAdapter(List<ChatMessage> messages, String username) {
         this.mMessages = messages;
         mUsername = username;
@@ -49,16 +60,29 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
         return mMessages.size();
     }
 
+    /**
+     * A message view holder for indivudual messages
+     */
     class MessageViewHolder extends RecyclerView.ViewHolder {
         private final View mView;
         private FragmentChatMessageBinding binding;
 
+        /**
+         * A constructor for message view holder.
+         *
+         * @param view the view
+         */
         public MessageViewHolder(@NonNull View view) {
             super(view);
             mView = view;
             binding = FragmentChatMessageBinding.bind(view);
         }
 
+        /**
+         * Sets the message for the view holder.
+         *
+         * @param message the message.
+         */
         void setMessage(final ChatMessage message) {
             final Resources res = mView.getContext().getResources();
             final MaterialCardView card = binding.cardRoot;
@@ -81,8 +105,8 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                         ColorUtils.setAlphaComponent(
                                 res.getColor(R.color.primaryLightColor, null),
                                 16));
-                binding.textMessage.setTextColor(
-                        res.getColor(R.color.secondaryTextColorFade, null));
+//                binding.textMessage.setTextColor(
+//                        res.getColor(R.color.secondaryTextColorFade, null));
 
                 card.setStrokeWidth(standard / 5);
                 card.setStrokeColor(ColorUtils.setAlphaComponent(
@@ -123,8 +147,8 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                         res.getColor(R.color.secondaryLightColor, null),
                         200));
 
-                binding.textMessage.setTextColor(
-                        res.getColor(R.color.secondaryTextColorFade, null));
+//                binding.textMessage.setTextColor(
+//                        res.getColor(R.color.secondaryTextColorFade, null));
 
                 //Round the corners on the right side
                 card.setShapeAppearanceModel(

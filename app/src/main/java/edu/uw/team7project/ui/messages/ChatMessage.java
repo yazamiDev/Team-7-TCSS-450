@@ -32,22 +32,42 @@ public class ChatMessage implements Serializable {
         final JSONObject msg = new JSONObject(cmAsJson);
         return new ChatMessage(msg.getInt("messageid"),
                 msg.getString("message"),
-                msg.getString("username"),
+                msg.getString("email"),
                 msg.getString("timestamp"));
     }
 
+    /**
+     * Get the message.
+     *
+     * @return the message
+     */
     public String getMessage() {
         return mMessage;
     }
 
+    /**
+     * Get the sender.
+     *
+     * @return the sender
+     */
     public String getSender() {
         return mSender;
     }
 
+    /**
+     * Get the time stamp.
+     *
+     * @return the time stamp.
+     */
     public String getTimeStamp() {
         return mTimeStamp;
     }
 
+    /**
+     * Get the message id
+     *
+     * @return the message id
+     */
     public int getMessageId() {
         return mMessageId;
     }

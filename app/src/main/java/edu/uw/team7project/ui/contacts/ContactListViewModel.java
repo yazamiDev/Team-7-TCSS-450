@@ -28,21 +28,40 @@ import java.util.Map;
 import edu.uw.team7project.ui.auth.verify.VerifyFragmentDirections;
 import edu.uw.team7project.ui.messages.MessagePost;
 
+/**
+ * A ViewModel for a list of contacts.
+ */
 public class ContactListViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Contact>> mContactList;
 
 
+    /**
+     * The constructor for the contact list view model.
+     *
+     * @param application the application.
+     */
     public ContactListViewModel(@NonNull Application application) {
         super(application);
         mContactList = new MutableLiveData<>(new ArrayList<>());
     }
 
+    /**
+     * Add an observer to the contact list view model.
+     *
+     * @param owner the owner
+     * @param observer the observer
+     */
     public void addContactListObserver(@NonNull LifecycleOwner owner,
                                        @NonNull Observer<? super List<Contact>> observer){
         mContactList.observe(owner, observer);
     }
 
+    /**
+     * Connects to webservice endpoint to retrieve a list of contacts.
+     *
+     * @param jwt a valid jwt.
+     */
     public void connectGet (String jwt){
         String url = "https://mobile-app-spring-2020.herokuapp.com/contacts";
         Request request = new JsonObjectRequest(
@@ -68,6 +87,11 @@ public class ContactListViewModel extends AndroidViewModel {
                 .add(request);
     }
 
+    /**
+     * Handles a successful connection with the webservice.
+     *
+     * @param result result from webservice.
+     */
     private void handleSuccess(final JSONObject result) {
         ArrayList<Contact> temp = new ArrayList<>();
         try {

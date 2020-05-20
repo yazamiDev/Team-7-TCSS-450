@@ -7,6 +7,15 @@ public class Contact {
     private final String mUserName;
     private final int mMemberID;
 
+    /**
+     * A class that represents a contact.
+     *
+     * @param email the contacts email
+     * @param fName contacts first name
+     * @param lName contacts last name
+     * @param uName contacts username
+     * @param id contacts id
+     */
     public Contact(String email, String fName, String lName, String uName, int id) {
         this.mEmail = email;
         this.mFirstName = fName;
@@ -15,14 +24,39 @@ public class Contact {
         this.mMemberID = id;
     }
 
+    /**
+     * Get the contacts email.
+     *
+     * @return the user email.
+     */
     public String getContactEmail(){ return mEmail; }
 
+    /**
+     * Get the contacts first name.
+     *
+     * @return returns the contacts first name.
+     */
     public String getContactFirstName(){ return mFirstName; }
 
+    /**
+     * Get the contacts last name.
+     *
+     * @return the contacts last name.
+     */
     public String getContactLastName(){ return mLastName; }
 
+    /**
+     * Get the contacts username.
+     *
+     * @return the contacts username.
+     */
     public String getContactUsername(){ return mUserName; }
 
+    /**
+     * Get the contact memberID.
+     *
+     * @return the contact memeberID.
+     */
     public int getContactMemberID(){ return mMemberID; }
 
 }

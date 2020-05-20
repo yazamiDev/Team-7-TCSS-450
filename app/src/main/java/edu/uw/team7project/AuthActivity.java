@@ -11,6 +11,11 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+
+import edu.uw.team7project.util.SharedPref;
+
 
 import edu.uw.team7project.model.PushyTokenViewModel;
 import me.pushy.sdk.Pushy;
@@ -18,15 +23,46 @@ import me.pushy.sdk.Pushy;
 /**
  * An activity representing the authentication process for the application.
  *
+ * @author Yousif Azami
  * @author Trevor Nichols
  */
 public class AuthActivity extends AppCompatActivity {
+    private Switch mSwitch;
+    SharedPref sharedPref;
     private final int READ_WRITE_PERMISSION_CODE = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        sharedPref = new SharedPref(this);
+
+        if(sharedPref.loadNightModeState()==true) {
+            setTheme(R.style.DarkTheme);
+        } else setTheme(R.style.AppTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
+        mSwitch = (Switch)findViewById(R.id.mySwitch);
+
+        if(sharedPref.loadNightModeState()==true) {
+            mSwitch.setChecked(true);
+        }
+
+        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    sharedPref.setNightModeState(true);
+                    recreate();
+                }
+                else {
+                    sharedPref.setNightModeState(false);
+                    recreate();
+                }
+            }
+        });
+
+
 
         //If it is not already running, start the Pushy listening service
         Pushy.listen(this);
@@ -47,6 +83,9 @@ public class AuthActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * initiates the pushy token requests
+     */
     private void initiatePushyTokenRequest() {
         new ViewModelProvider(this).get(PushyTokenViewModel.class).retrieveToken();
     }
@@ -79,4 +118,10 @@ public class AuthActivity extends AppCompatActivity {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
+//    public void restartApp() {
+//        Intent i = new Intent(getApplicationContext(), AuthActivity.class);
+//        startActivity(i);
+//        finish();
+//    }
 }

@@ -19,10 +19,15 @@ public class UserInfoViewModel extends ViewModel {
     private final int mMemberID;
 
     /**
-     * A constructor for the User Info View model which takes a name and a json web token.
+     * A constructor for the User Info View model which takes a email first name, last name,
+     * username, memebrId, and  a json web token
      *
-     * @param email a string representing an email.
-     * @param jwt a string representing a json web token
+     * @param email user email
+     * @param fName user first name
+     * @param lName user last name
+     * @param username users username
+     * @param memberID users memberID
+     * @param jwt users jwt
      */
     private UserInfoViewModel(String email, String fName, String lName,
                               String username, int memberID, String jwt) {
