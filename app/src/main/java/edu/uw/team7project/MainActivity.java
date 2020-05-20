@@ -70,17 +70,23 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_settings:
                 openSettings();
-
                 return true;
 
             case R.id.action_signOut:
 //                displayToast(getString(R.string.action_signOut_message));
                 signOut();
                 return true;
+                
+//            case R.id.action_change_password:
+//                changePassword();
+//                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void changePassword() {
     }
 
 

@@ -1,5 +1,6 @@
 package edu.uw.team7project.ui.settings;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -35,6 +37,9 @@ import edu.uw.team7project.ui.home.HomeFragment;
  * @author Bradlee Laird
  */
 public class SettingsFragment extends Fragment {
+
+    private Object MainActivity;
+    private MenuItem Menu;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -67,9 +72,13 @@ public class SettingsFragment extends Fragment {
 
         FragmentSettingsBinding binding = FragmentSettingsBinding.bind(getView());
 
+        binding.changePassword.setOnClickListener(button -> {
+//            Menu.getActionView();
+//            activity.onOptionsItemSelected(Menu);
+//            activity.setContentView(R.layout.fragment_change_password);
+
+        });
     }
-
-
 
 
 
