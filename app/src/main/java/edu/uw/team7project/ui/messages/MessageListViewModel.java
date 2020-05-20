@@ -28,23 +28,42 @@ public class MessageListViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<MessagePost>> mMessageList;
 
+    /**
+     * A Vie wmodel for message Lists.
+     *
+     * @param application the application
+     *
+     * @author Trevor Nichols
+     */
     public MessageListViewModel(@NonNull Application application){
         super(application);
         mMessageList = new MutableLiveData<>(new ArrayList<>());
     }
 
+    /**
+     * Adds a observer to the message list.
+     *
+     * @param owner the owner
+     * @param observer the observer.
+     */
     public void addMessageListObserver(@NonNull LifecycleOwner owner,
                                        @NonNull Observer<? super List<MessagePost>> observer) {
         mMessageList.observe(owner, observer);
     }
 
 
+    /**
+     * HAndles any errors with connecting to the webservice.
+     *
+     * @param error the error
+     */
     private void handleError(final VolleyError error) {
         Log.e("CONNECTION ERROR", "OOOPS no message lists");
         //throw new IllegalStateException(error.getMessage());
     }
+
     /**
-     * Parse a json object to get all the chatrooms?
+     * Handles results from a call to the webservice.
      */
     private void handleResult(final JSONObject result) {
         ArrayList<MessagePost> temp = new ArrayList<>();
@@ -64,6 +83,11 @@ public class MessageListViewModel extends AndroidViewModel {
         mMessageList.setValue(temp);
     }
 
+    /**
+     * Connects to a webservice to get a list of messaged a memeber is a part of.
+     *
+     * @param jwt a valid jwt
+     */
     public void connectGet (String jwt){
         //need a endpoint
         String url = "https://mobile-app-spring-2020.herokuapp.com/contacts/chatlist";

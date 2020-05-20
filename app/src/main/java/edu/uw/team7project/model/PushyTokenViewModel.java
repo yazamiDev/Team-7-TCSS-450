@@ -32,6 +32,11 @@ public class PushyTokenViewModel extends AndroidViewModel {
     private final MutableLiveData<String> mPushyToken;
     private final MutableLiveData<JSONObject> mResponse;
 
+    /**
+     * A Pushy Token View model.
+     *
+     * @param application the application.
+     */
     public PushyTokenViewModel(@NonNull Application application) {
         super(application);
         mPushyToken = new MutableLiveData<>();
@@ -146,6 +151,11 @@ public class PushyTokenViewModel extends AndroidViewModel {
                 .addToRequestQueue(request);
     }
 
+    /**
+     * Handles error for connecting to pushy end points.
+     *
+     * @param error the error
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             try {

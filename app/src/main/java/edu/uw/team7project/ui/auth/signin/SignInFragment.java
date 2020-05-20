@@ -26,7 +26,6 @@ import org.json.JSONObject;
 import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentSignInBinding;
 import edu.uw.team7project.model.PushyTokenViewModel;
-import edu.uw.team7project.model.UserInfoSignInViewModel;
 import edu.uw.team7project.model.UserInfoViewModel;
 import edu.uw.team7project.util.PasswordValidator;
 
@@ -52,7 +51,7 @@ public class SignInFragment extends Fragment {
 
     private PushyTokenViewModel mPushyTokenViewModel;
 
-    private UserInfoSignInViewModel mUserViewModel;
+    private UserInfoViewModel mUserViewModel;
 
     //An email validator
     private PasswordValidator mEMailValidator = checkPwdMinLength(6)
@@ -231,10 +230,11 @@ public class SignInFragment extends Fragment {
             } else {
                 try {
                     mUserViewModel = new ViewModelProvider(getActivity(),
-                            new UserInfoSignInViewModel.UserInfoSignInViewModelFactory(
+                            new UserInfoViewModel.UserInfoViewModelFactory(
                                     binding.editEmail.getText().toString(),
+                                    "", "", "", 0,
                                     response.getString("token")
-                            )).get(UserInfoSignInViewModel.class);
+                            )).get(UserInfoViewModel.class);
                     sendPushyToken();
                 } catch (JSONException e) {
                     Log.e("JSON Parse Error", e.getMessage());
