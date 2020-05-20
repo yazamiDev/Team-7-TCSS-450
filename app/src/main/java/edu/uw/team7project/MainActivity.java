@@ -16,6 +16,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 
 
@@ -23,6 +27,7 @@ import com.auth0.android.jwt.JWT;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import edu.uw.team7project.util.SharedPref;
 import edu.uw.team7project.databinding.ActivityMainBinding;
 import edu.uw.team7project.model.NewMessageCountViewModel;
 import edu.uw.team7project.model.UserInfoViewModel;
@@ -34,11 +39,15 @@ import edu.uw.team7project.ui.messages.ChatViewModel;
 /**
  * An activity representing the main process of the application.
  *
+ * @author Yousif Azami
  * @author Bradlee Laird
  */
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
+    // fields for theme
+    private Switch mSwitch;
+    SharedPref sharedPref;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,6 +109,35 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        // start of theme implementation
+        sharedPref = new SharedPref(this);
+
+        if(sharedPref.loadNightModeState()==true) {
+            setTheme(R.style.DarkTheme);
+        } else setTheme(R.style.AppTheme);
+
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_auth);
+        mSwitch = (Switch)findViewById(R.id.mySwitch);
+
+        if(sharedPref.loadNightModeState()==true) {
+            mSwitch.setChecked(true);
+        }
+
+        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    sharedPref.setNightModeState(true);
+                    recreate();
+                }
+                else {
+                    sharedPref.setNightModeState(false);
+                    recreate();
+                }
+            }
+        });
+
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
@@ -125,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     public boolean onSupportNavigateUp () {

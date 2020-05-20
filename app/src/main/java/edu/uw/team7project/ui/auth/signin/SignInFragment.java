@@ -1,5 +1,8 @@
 package edu.uw.team7project.ui.auth.signin;
 import static edu.uw.team7project.util.PasswordValidator.*;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,10 +15,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.auth0.android.jwt.JWT;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentSignInBinding;
 import edu.uw.team7project.model.PushyTokenViewModel;
 import edu.uw.team7project.model.UserInfoViewModel;
@@ -25,6 +33,7 @@ import edu.uw.team7project.util.PasswordValidator;
 /**
  * A fragment representing the login process.
  *
+ * @author Yousif Azami
  * @author Trevor Nichols
  */
 public class SignInFragment extends Fragment {
@@ -35,6 +44,10 @@ public class SignInFragment extends Fragment {
     //A sign in view model.
     private SignInViewModel mSignInModel;
 
+    // forgot password button
+    private Button mForgotPasswordButton;
+
+    private TextView mInputEmail;
 
     private PushyTokenViewModel mPushyTokenViewModel;
 
@@ -66,7 +79,17 @@ public class SignInFragment extends Fragment {
         mSignInModel = new ViewModelProvider(getActivity()).get(SignInViewModel.class);
 
         mPushyTokenViewModel = new ViewModelProvider(getActivity())
-                .get(PushyTokenViewModel.class);
+        .get(PushyTokenViewModel.class);
+
+    }
+
+    /**
+     * Opens a dialog to enter a valid email.
+     */
+    private void openDialog() {
+        ForgotPasswordDialog forgotPasswordDialog = new ForgotPasswordDialog();
+        forgotPasswordDialog.show(getActivity().getSupportFragmentManager(), "example dialog");
+
     }
 
     @Override
@@ -101,7 +124,14 @@ public class SignInFragment extends Fragment {
         SignInFragmentArgs args = SignInFragmentArgs.fromBundle(getArguments());
         binding.editEmail.setText(args.getEmail().equals("default") ? "" : args.getEmail());
         binding.editPassword.setText(args.getPassword().equals("default") ? "" : args.getPassword());
+
+        binding.forgotPassword.setOnClickListener(mForgotPasswordButton -> openDialog());
     }
+
+//    @Override
+//    public void applyTexts(String email) {
+//        mInputEmail.setText(email);
+//    }
 
     /**
      * Helper to abstract the request to send the pushy token to the web service
@@ -158,15 +188,28 @@ public class SignInFragment extends Fragment {
     }
 
     /**
-     * naviagtes to home on successful login.
+     * naviagtes to home on successful login and save the JWT to Shared Preferences on
+     * successful sign in.
      *
      * @param email the users email.
      * @param jwt the users jwt.
      */
     private void navigateToHome(String email, String jwt){
+        if (binding.switchSignin.isChecked()) {
+            SharedPreferences prefs =
+                    getActivity().getSharedPreferences(
+                            getString(R.string.keys_shared_prefs),
+                            Context.MODE_PRIVATE);
+            //Store the credentials in SharedPrefs
+            prefs.edit().putString(getString(R.string.keys_prefs_jwt), jwt).apply();
+        }
+
         //Update this to pass proper arguments to main activity.
         Navigation.findNavController(getView())
                 .navigate(SignInFragmentDirections.actionSignInFragmentToMainActivity(email, jwt));
+
+        //Remove THIS activity from the Task list. Pops off the backstack
+        getActivity().finish();
     }
 
     /**
@@ -201,5 +244,31 @@ public class SignInFragment extends Fragment {
             Log.d("JSON Response", "No Response");
         }
 
+    }
+
+    /**
+     * When starting application, get JWT and see if it is valid. If valid then
+     * navigate to home.
+     */
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        SharedPreferences prefs =
+                getActivity().getSharedPreferences(
+                        getString(R.string.keys_shared_prefs),
+                        Context.MODE_PRIVATE);
+        if (prefs.contains(getString(R.string.keys_prefs_jwt))) {
+            String token = prefs.getString(getString(R.string.keys_prefs_jwt), "");
+            JWT jwt = new JWT(token);
+            // Check to see if the web token is still valid or not. To make a JWT expire after a
+            // longer or shorter time period, change the expiration time when the JWT is
+            // created on the web service.
+//            if (!jwt.isExpired(0)) {
+//                String email = jwt.getClaim("email").asString();
+//                navigateToHome(email, token);
+//                return;
+//            }
+        }
     }
 }

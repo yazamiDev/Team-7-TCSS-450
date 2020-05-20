@@ -3,16 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
+    android:background="?attr/backgroundColor"
     app:startDestination="@id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="edu.uw.team7project.ui.home.HomeFragment"
         android:label="Home"
+        android:background="?attr/backgroundColor"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_messages"
+        android:background="?attr/backgroundColor"
         android:name="edu.uw.team7project.ui.messages.MessageListFragment"
         android:label="Messages"
         tools:layout="@layout/fragment_message_list" >
@@ -24,6 +27,7 @@
 
     <fragment
         android:id="@+id/navigation_contacts"
+        android:background="?attr/backgroundColor"
         android:name="edu.uw.team7project.ui.contacts.ContactListFragment"
         android:label="Contacts"
         tools:layout="@layout/fragment_contact_list" />
@@ -31,6 +35,7 @@
     <fragment
         android:id="@+id/navigation_weather"
         android:name="edu.uw.team7project.ui.weather.WeatherFragment"
+        android:background="?attr/backgroundColor"
         android:label="Weather"
         tools:layout="@layout/fragment_weather" />
     <fragment
