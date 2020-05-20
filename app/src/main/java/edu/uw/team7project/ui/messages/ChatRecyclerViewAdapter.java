@@ -23,6 +23,7 @@ import edu.uw.team7project.databinding.FragmentChatMessageBinding;
  * A recycler view for chat messages.
  *
  * @author Trevor Nichols
+ * @author Yousif Azami
  */
 public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerViewAdapter.MessageViewHolder>{
 

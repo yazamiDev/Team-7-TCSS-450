@@ -83,6 +83,9 @@ public class AuthActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * initiates the pushy token requests
+     */
     private void initiatePushyTokenRequest() {
         new ViewModelProvider(this).get(PushyTokenViewModel.class).retrieveToken();
     }
