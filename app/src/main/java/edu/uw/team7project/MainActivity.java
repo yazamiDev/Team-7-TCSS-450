@@ -1,10 +1,14 @@
 package edu.uw.team7project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -19,8 +23,9 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
-
+import android.widget.Toolbar;
 
 
 import com.auth0.android.jwt.JWT;
@@ -32,7 +37,9 @@ import edu.uw.team7project.model.NewMessageCountViewModel;
 import edu.uw.team7project.model.PushyTokenViewModel;
 import edu.uw.team7project.model.UserInfoViewModel;
 import edu.uw.team7project.services.PushReceiver;
+import edu.uw.team7project.ui.auth.register.RegisterFragmentDirections;
 import edu.uw.team7project.ui.auth.verify.VerifyFragmentArgs;
+import edu.uw.team7project.ui.home.HomeFragment;
 import edu.uw.team7project.ui.settings.SettingsFragment;
 import edu.uw.team7project.ui.messages.ChatMessage;
 import edu.uw.team7project.ui.messages.ChatViewModel;
@@ -52,31 +59,34 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar, menu);
+        NavController navController2 = Navigation.findNavController(this, R.id.nav_host_fragment);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
 
             case R.id.action_settings:
-//                displayToast(getString(R.string.action_settings_message));
-//                return true;
-                Log.d("Settings", "Clicked");
-//                Intent intent = new Intent(this, SettingsActivity.class);
-//                startActivity(intent);
-                setContentView(R.layout.fragment_settings);
+                openSettings();
+
                 return true;
 
             case R.id.action_signOut:
-                displayToast(getString(R.string.action_signOut_message));
+//                displayToast(getString(R.string.action_signOut_message));
                 signOut();
                 return true;
 
-
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+
+    public void openSettings() {
+        NavController navController2 = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController2.navigate(R.id.navigation_settings);
     }
 
     private ActivityMainBinding binding;
@@ -98,20 +108,22 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
 
-        Log.i("MAIN", " hello from main");
+        //Log.i("MAIN", " hello from main");
         JWT jwt = new JWT(args.getJwt());
         int memberID = jwt.getClaim("memberid").asInt();
         String username = jwt.getClaim("username").asString();
         String firstName = jwt.getClaim("firstname").asString();
         String lastName = jwt.getClaim("lastname").asString();
 
-        Log.i("MAIN", " hello " + memberID + username + firstName + lastName);
+        //Log.i("MAIN", " hello " + memberID + username + firstName + lastName);
         new ViewModelProvider(this,
                 new UserInfoViewModel.UserInfoViewModelFactory(args.getEmail(), firstName,
                         lastName, username, memberID, args.getJwt())
         ).get(UserInfoViewModel.class);
 
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
+
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -123,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
+        //mSettingModel = new ViewModelProvider(this).get(SettingsFragment.class);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.chatFragment) {
@@ -219,9 +232,9 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-    public void displayToast(String message) {
-        Toast.makeText(getApplicationContext(), message,
-                Toast.LENGTH_SHORT).show();
-    }
+//    public void displayToast(String message) {
+//        Toast.makeText(getApplicationContext(), message,
+//                Toast.LENGTH_SHORT).show();
+//    }
 }
 

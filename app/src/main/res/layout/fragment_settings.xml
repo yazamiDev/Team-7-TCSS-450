@@ -27,11 +27,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/change_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="627dp" />
+        android:text="Change Password"
+        tools:layout_editor_absoluteX="161dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
