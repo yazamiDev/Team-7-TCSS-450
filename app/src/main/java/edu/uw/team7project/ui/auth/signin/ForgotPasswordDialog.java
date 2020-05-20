@@ -61,7 +61,7 @@ public class ForgotPasswordDialog extends DialogFragment {
                         System.out.println(email);
                         mForgotPasswordModel.connect(mEmail.getText().toString());
 
-                        System.out.println("IN HEREEE:::");
+                        System.out.println("IN HERE");
 //                        listener.applyTexts(email);
                     }
                 });

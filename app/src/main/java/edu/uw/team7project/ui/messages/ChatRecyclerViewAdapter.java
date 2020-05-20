@@ -81,8 +81,8 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                         ColorUtils.setAlphaComponent(
                                 res.getColor(R.color.primaryLightColor, null),
                                 16));
-                binding.textMessage.setTextColor(
-                        res.getColor(R.color.secondaryTextColorFade, null));
+//                binding.textMessage.setTextColor(
+//                        res.getColor(R.color.secondaryTextColorFade, null));
 
                 card.setStrokeWidth(standard / 5);
                 card.setStrokeColor(ColorUtils.setAlphaComponent(
@@ -123,8 +123,8 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                         res.getColor(R.color.secondaryLightColor, null),
                         200));
 
-                binding.textMessage.setTextColor(
-                        res.getColor(R.color.secondaryTextColorFade, null));
+//                binding.textMessage.setTextColor(
+//                        res.getColor(R.color.secondaryTextColorFade, null));
 
                 //Round the corners on the right side
                 card.setShapeAppearanceModel(

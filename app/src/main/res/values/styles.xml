@@ -9,26 +9,33 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionMenuTextColor">#fff</item>
         <item name="backgroundColor">#fcfcfc</item>
         <item name="cardBackgroundColor">#ffffff</item>
         <item name="textColor">#404040</item>
         <item name="tintColor">#404040</item>
-        <item name="iconTint">#404040</item>
+        <item name="iconTint">#888888</item>
         <item name="buttonColor">@color/colorAccent</item>
+<!--        <item name="primaryLightColor">#79F0FF</item>-->
+<!--        <item name="secondaryTextColorFade">#222222</item>-->
+<!--        <item name="secondaryLightColor">#7FE1AB</item>-->
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
     <!-- Night Mode. -->
     <style name="DarkTheme" parent="Theme.MaterialComponents">
-        <item name="colorPrimary">#212121</item>
+        <item name="colorPrimary">#1C1C1C</item>
         <item name="colorPrimaryDark">#1C1C1C</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="backgroundColor">#303030</item>
+        <item name="backgroundColor">#191919</item>
         <item name="cardBackgroundColor">#424242</item>
         <item name="textColor">#ffffff</item>
         <item name="tintColor">#ffffff</item>
-        <item name="iconTint">#ffffff</item>
+        <item name="iconTint">#BABABA</item>
         <item name="buttonColor">@color/colorAccent</item>
+<!--        <item name="primaryLightColor">#79F0FF</item>-->
+<!--        <item name="secondaryTextColorFade">#222222</item>-->
+<!--        <item name="secondaryLightColor">#7FE1AB</item>-->
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196f3</color>
-    <color name="colorPrimaryDark">#1565c0</color>
+    <color name="colorPrimary">#26c6da</color>
+    <color name="colorSecondary">#00bfa5</color>
+    <color name="colorPrimaryDark">#00acc1</color>
     <color name="colorPrimaryAlpha">#226200EE</color>
-    <color name="colorAccent">#4caf50</color>
+    <color name="colorAccent">#00acc1</color>
 
-    <color name="primaryLightColor">#7953d2</color>
-    <color name="secondaryTextColorFade">#222222</color>
-    <color name="secondaryLightColor">#ead6a9</color>
+    <color name="primaryLightColor">#79F0FF</color>
+    <color name="secondaryTextColorFade">#fff</color>
+    <color name="secondaryLightColor">#7FE1AB</color>
+    <color name="actionMenuTextColor">#fff</color>
 </resources>
