@@ -38,6 +38,7 @@ public class MessageListFragment extends Fragment {
 
         //connect here but what arguments to pass?
         mModel.connectGet(model.getJwt());
+
     }
 
     /**

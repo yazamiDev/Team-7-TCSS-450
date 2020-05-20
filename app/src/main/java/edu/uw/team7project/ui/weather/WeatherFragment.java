@@ -7,9 +7,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentWeatherBinding;
@@ -39,6 +43,8 @@ public class WeatherFragment extends Fragment {
 
         mUserModel = provider.get(UserInfoViewModel.class);
         mWeatherModel =  provider.get(WeatherViewModel.class);
+        mWeatherModel.connectGetCurrent(HARD_CODED_CITY, mUserModel.getJwt());
+        //mWeatherModel.connectFiveDayWeather(HARD_CODED_CITY, mUserModel.getJwt());
     }
 
     /**
@@ -61,6 +67,13 @@ public class WeatherFragment extends Fragment {
         //Local access to the ViewBinding object. No need to create as Instance Var as it is only
         //used here.
         FragmentWeatherBinding binding = FragmentWeatherBinding.bind(getView());
-
+        mWeatherModel.addWeatherObserver(getViewLifecycleOwner(), weatherList -> {
+            //if (!messageList.isEmpty()) {
+            binding.listRoot.setAdapter(
+                    new WeatherRecyclerViewAdapter(weatherList)
+            );
+            binding.layoutWait.setVisibility(View.GONE);
+            //}else navigate to a no messages fragment.
+        });
     }
 }

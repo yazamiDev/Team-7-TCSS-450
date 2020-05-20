@@ -2,6 +2,8 @@ package edu.uw.team7project.ui.weather;
 
 import android.media.Image;
 
+import androidx.annotation.NonNull;
+
 /**
  * A class representing weather.
  *
@@ -15,6 +17,7 @@ public class Weather {
     private final double mMaxTemp;
     private final double mHumidity;
     private final String mIcon;
+    private final String mDay;
 
     /**
      * A contructor for weather
@@ -26,8 +29,9 @@ public class Weather {
      * @param humidity the humidity
      * @param icon an icon
      */
-    public Weather(String condition, double temp, double minTemp, double maxTemp,
+    public Weather(String day, String condition, double temp, double minTemp, double maxTemp,
                    double humidity, String icon){
+        mDay = day;
         mCondition = condition;
         mTemp = temp;
         mMinTemp = minTemp;
@@ -42,6 +46,13 @@ public class Weather {
      * @return the condition
      */
     public String getCondition(){ return mCondition; }
+
+    /**
+     * Get the current day.
+     *
+     * @return a string representing the day.
+     */
+    public String getDay() { return mDay; }
 
     /**
      * Get the temp
@@ -71,4 +82,15 @@ public class Weather {
      */
     public double getHumidity() { return mHumidity; }
 
+    @NonNull
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append("Condition: " + mCondition + "\n");
+        result.append("Temperature: " + mTemp + "\n");
+        result.append("Min Temp: " + mMinTemp + "\n");
+        result.append("Max Temp: " + mMaxTemp + "\n");
+        result.append("Humidity: " + mHumidity + "\n");
+        return result.toString();
+    }
 }

@@ -7,8 +7,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentWeatherBinding;
+import edu.uw.team7project.databinding.FragmentWeatherCardBinding;
 
 /**
  * A recycler view for weather.
@@ -18,13 +21,13 @@ import edu.uw.team7project.databinding.FragmentWeatherBinding;
 public class WeatherRecyclerViewAdapter extends
         RecyclerView.Adapter<WeatherRecyclerViewAdapter.WeatherViewHolder> {
 
-    private Weather mWeather;
+    private final List<Weather> mWeather;
 
     /**
      * Constructor for weather recycler
      * @param item
      */
-    public WeatherRecyclerViewAdapter (Weather item){
+    public WeatherRecyclerViewAdapter (List<Weather> item){
         this.mWeather = item;
     }
 
@@ -34,12 +37,12 @@ public class WeatherRecyclerViewAdapter extends
     public WeatherViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new WeatherViewHolder(LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.fragment_weather, parent, false));
+                .inflate(R.layout.fragment_weather_card, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull WeatherViewHolder holder, int position) {
-        holder.setWeather(mWeather);
+        holder.setWeather(mWeather.get(position));
     }
 
     public int getItemCount() {
@@ -52,12 +55,12 @@ public class WeatherRecyclerViewAdapter extends
     public class WeatherViewHolder extends RecyclerView.ViewHolder {
 
         public final View mView;
-        public FragmentWeatherBinding binding;
+        public FragmentWeatherCardBinding binding;
 
         public WeatherViewHolder(View view) {
             super(view);
             mView = view;
-            binding = FragmentWeatherBinding.bind(view);
+            binding = FragmentWeatherCardBinding.bind(view);
 
             //may need to change
 //            view.setOnClickListener(v -> {
@@ -78,23 +81,8 @@ public class WeatherRecyclerViewAdapter extends
          * @param weather the weather
          */
         void setWeather(final Weather weather) {
-            binding.textLocation.setText("Tacoma");
-
-            String condition = "condition: " + weather.getCondition();
-            binding.textCurrentWeather.setText(condition);
-
-            String currTemp = "Current Temp: " + weather.getTemp();
-            binding.textCurrentTemp.setText(currTemp);
-
-            String minTemp = "Minimum Temp: " + weather.getMinTemp();
-            binding.textMinTemp.setText(minTemp);
-
-            String maxTemp = "MaximumTemp: " + weather.getMaxTemp();
-            binding.textMaxTemp.setText(maxTemp);
-
-            String humidity = "Humidity: " + weather.getHumidity();
-            binding.textHumidity.setText(humidity);
+            binding.textDate.setText(weather.getDay());
+            binding.textWeatherInfo.setText(weather.toString());
         }
-
     }
 }
