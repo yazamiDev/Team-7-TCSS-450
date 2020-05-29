@@ -80,8 +80,11 @@ public class SignInFragment extends Fragment {
             // Check to see if the web token is still valid or not. To make a JWT expire after a
             // longer or shorter time period, change the expiration time when the JWT is
             // created on the web service.
+
+            System.out.println("Checking Getting JWT::");
             if(!jwt.isExpired(0)) {
                 String email = jwt.getClaim("email").asString();
+
                 navigateToHome(email, token);
                 return;
             }
