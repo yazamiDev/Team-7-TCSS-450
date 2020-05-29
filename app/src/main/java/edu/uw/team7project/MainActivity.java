@@ -277,6 +277,10 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
+
 //    public void displayToast(String message) {
 //        Toast.makeText(getApplicationContext(), message,
 //                Toast.LENGTH_SHORT).show();

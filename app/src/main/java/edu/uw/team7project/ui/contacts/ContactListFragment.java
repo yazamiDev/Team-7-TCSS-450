@@ -24,6 +24,7 @@ import edu.uw.team7project.model.UserInfoViewModel;
 public class ContactListFragment extends Fragment {
 
     private ContactListViewModel mModel;
+
     public ContactListFragment() {
         // Required empty public constructor
     }

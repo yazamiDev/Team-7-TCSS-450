@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +63,10 @@ public class MessageListFragment extends Fragment {
         //used here.
         FragmentMessageListBinding binding = FragmentMessageListBinding.bind(getView());
 
-        //may need to change this to be similar to chatfragment on view created.
+        binding.buttonAddChat.setOnClickListener(button -> Navigation.findNavController(getView())
+            .navigate(MessageListFragmentDirections.actionNavigationMessagesToNewChatFragment()));
+
+        //may need to change this to be similar to chat fragment on view created.
         //add observer for getting messages
         mModel.addMessageListObserver(getViewLifecycleOwner(), messageList -> {
             //if (!messageList.isEmpty()) {
