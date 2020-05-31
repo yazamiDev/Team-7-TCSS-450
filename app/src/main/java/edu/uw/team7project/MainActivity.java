@@ -1,32 +1,23 @@
 package edu.uw.team7project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-import android.widget.Toolbar;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -42,10 +33,6 @@ import edu.uw.team7project.model.NewMessageCountViewModel;
 import edu.uw.team7project.model.PushyTokenViewModel;
 import edu.uw.team7project.model.UserInfoViewModel;
 import edu.uw.team7project.services.PushReceiver;
-import edu.uw.team7project.ui.auth.register.RegisterFragmentDirections;
-import edu.uw.team7project.ui.auth.verify.VerifyFragmentArgs;
-import edu.uw.team7project.ui.home.HomeFragment;
-import edu.uw.team7project.ui.settings.SettingsFragment;
 import edu.uw.team7project.ui.messages.ChatMessage;
 import edu.uw.team7project.ui.messages.ChatViewModel;
 
@@ -281,7 +268,13 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(title);
     }
 
-//    public void displayToast(String message) {
+    @NonNull
+    @Override
+    public FragmentManager getSupportFragmentManager() {
+        return super.getSupportFragmentManager();
+    }
+
+    //    public void displayToast(String message) {
 //        Toast.makeText(getApplicationContext(), message,
 //                Toast.LENGTH_SHORT).show();
 //    }

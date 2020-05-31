@@ -1,14 +1,18 @@
 package edu.uw.team7project.ui.contacts;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import edu.uw.team7project.MainActivity;
 import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentContactRequestCardBinding;
 
@@ -16,14 +20,16 @@ public class ContactRequestRecyclerViewAdapter extends
     RecyclerView.Adapter<ContactRequestRecyclerViewAdapter.ContactRequestViewHolder>{
 
         private final List<Contact> mContactRequests;
+        private final FragmentManager mFragmMan;
 
         /**
          * A constructor for teh contact recycler view.
          *
          * @param items a list of contacts.
          */
-    public ContactRequestRecyclerViewAdapter(List < Contact > items) {
+    public ContactRequestRecyclerViewAdapter(List < Contact > items, FragmentManager fm) {
         this.mContactRequests = items;
+        mFragmMan = fm;
     }
 
         /**
@@ -58,6 +64,7 @@ public class ContactRequestRecyclerViewAdapter extends
 
             public final View mView;
             public FragmentContactRequestCardBinding binding;
+            public Contact mContact;
 
             /**
              * Constructore for teh contact view holder.
@@ -78,8 +85,10 @@ public class ContactRequestRecyclerViewAdapter extends
             /**
              * navigates to a contacts profile.
              */
-            private void navigateToContact() {
-
+            private void openDialog() {
+                String name = mContact.getContactFirstName() + " " + mContact.getContactLastName();
+                AcceptContactDialog dialog = new AcceptContactDialog(name);
+                dialog.show(mFragmMan, "maybe?");
             }
 
             /**
@@ -89,7 +98,8 @@ public class ContactRequestRecyclerViewAdapter extends
              */
             void setContact(final Contact contact) {
                 binding.textUsername.setText(contact.getContactUsername());
-                //binding.buttonAccept.setOnClickListener();
+                mContact = contact;
+                binding.buttonAccept.setOnClickListener( button -> openDialog());
             }
 
         }
