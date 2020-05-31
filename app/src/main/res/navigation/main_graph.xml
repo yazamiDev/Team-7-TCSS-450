@@ -29,13 +29,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_contacts"
-        android:background="?attr/backgroundColor"
-        android:name="edu.uw.team7project.ui.contacts.ContactListFragment"
-        android:label="Contacts"
-        tools:layout="@layout/fragment_contact_list" />
-
-    <fragment
         android:id="@+id/navigation_weather"
         android:name="edu.uw.team7project.ui.weather.WeatherFragment"
         android:background="?attr/backgroundColor"
@@ -68,5 +61,9 @@
             android:id="@+id/action_newChatFragment_to_navigation_messages"
             app:destination="@id/navigation_messages" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_contacts"
+        android:name="edu.uw.team7project.ui.contacts.ContactTabFragment"
+        android:label="@string/title_contacts" />
 
 </navigation>

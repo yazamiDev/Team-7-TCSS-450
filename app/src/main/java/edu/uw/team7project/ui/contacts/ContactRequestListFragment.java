@@ -6,37 +6,29 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
-
 import edu.uw.team7project.R;
-import edu.uw.team7project.databinding.FragmentContactListBinding;
+import edu.uw.team7project.databinding.FragmentContactRequestListBinding;
 import edu.uw.team7project.model.UserInfoViewModel;
 
-/**
- * Subclass for the contacts fragment.
- *
- * @author Bradlee Laird
- */
-public class ContactListFragment extends Fragment {
 
-    private ContactListViewModel mModel;
+public class ContactRequestListFragment extends Fragment {
 
-    public ContactListFragment() {
+    private ContactRequestListViewModel mModel;
+
+    public ContactRequestListFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         mModel = new ViewModelProvider(getActivity()).get(ContactListViewModel.class);
+        mModel = new ViewModelProvider(getActivity()).get(ContactRequestListViewModel.class);
 
         UserInfoViewModel model = new ViewModelProvider(getActivity())
                 .get(UserInfoViewModel.class);
@@ -52,7 +44,7 @@ public class ContactListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact_list, container, false);
+        return inflater.inflate(R.layout.fragment_contact_request_list, container, false);
     }
 
     /**
@@ -64,14 +56,14 @@ public class ContactListFragment extends Fragment {
 
         //Local access to the ViewBinding object. No need to create as Instance Var as it is only
         //used here.
-        FragmentContactListBinding binding = FragmentContactListBinding.bind(getView());
+        FragmentContactRequestListBinding binding = FragmentContactRequestListBinding.bind(getView());
 
-        mModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
+        mModel.addContactRequestListObserver(getViewLifecycleOwner(), contactList -> {
             //if (!contactList.isEmpty()) {
-                binding.listRoot.setAdapter(
-                        new ContactRecyclerViewAdapter(contactList)
-                );
-                binding.layoutWait.setVisibility(View.GONE);
+            binding.listRoot.setAdapter(
+                    new ContactRequestRecyclerViewAdapter(contactList)
+            );
+            //binding.layoutWait.setVisibility(View.GONE);
             //}
         });
     }

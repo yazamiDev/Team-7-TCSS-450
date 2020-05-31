@@ -8,7 +8,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.navigation.Navigation;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -25,14 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.uw.team7project.ui.auth.verify.VerifyFragmentDirections;
-import edu.uw.team7project.ui.messages.MessagePost;
-
-/**
- * A ViewModel for a list of contacts.
- */
-public class ContactListViewModel extends AndroidViewModel {
-
+public class ContactRequestListViewModel extends AndroidViewModel {
     private MutableLiveData<List<Contact>> mContactList;
 
 
@@ -41,7 +33,7 @@ public class ContactListViewModel extends AndroidViewModel {
      *
      * @param application the application.
      */
-    public ContactListViewModel(@NonNull Application application) {
+    public ContactRequestListViewModel(@NonNull Application application) {
         super(application);
         mContactList = new MutableLiveData<>(new ArrayList<>());
     }
@@ -52,7 +44,7 @@ public class ContactListViewModel extends AndroidViewModel {
      * @param owner the owner
      * @param observer the observer
      */
-    public void addContactListObserver(@NonNull LifecycleOwner owner,
+    public void addContactRequestListObserver(@NonNull LifecycleOwner owner,
                                        @NonNull Observer<? super List<Contact>> observer){
         mContactList.observe(owner, observer);
     }
@@ -99,7 +91,7 @@ public class ContactListViewModel extends AndroidViewModel {
             for (int i = 0; i < contacts.length(); i++) {
                 JSONObject contact = contacts.getJSONObject(i);
                 int verified = contact.getInt("verified");
-                if(verified == 1){
+                if(verified == 0){
                     String email= contact.getString("email");
                     String firstName= contact.getString("firstName");
                     String lastName= contact.getString("lastName");
