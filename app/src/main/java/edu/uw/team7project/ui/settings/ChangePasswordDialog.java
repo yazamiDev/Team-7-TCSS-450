@@ -23,7 +23,6 @@ import com.google.android.material.snackbar.Snackbar;
 import org.json.JSONObject;
 
 import edu.uw.team7project.R;
-import edu.uw.team7project.databinding.FragmentSettingsBinding;
 
 import static android.widget.Toast.LENGTH_LONG;
 
@@ -95,7 +94,7 @@ public class ChangePasswordDialog extends DialogFragment {
                                 mNewPass.getText().toString());
 
 
-                        Toast.makeText(getActivity(), "Success" , LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Processing change process request" , LENGTH_LONG).show();
                         System.out.println("IN HERE");
 //                        listener.applyTexts(email);
                     }

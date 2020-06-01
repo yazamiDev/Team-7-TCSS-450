@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
     // fields for theme
-    private Switch mSwitch;
-    SharedPref sharedPref;
+//    private Switch mSwitch;
+   SharedPref sharedPref;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -150,33 +150,33 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         // start of theme implementation
-        sharedPref = new SharedPref(this);
+       sharedPref = new SharedPref(this);
 
-        if(sharedPref.loadNightModeState()==true) {
-            setTheme(R.style.DarkTheme);
-        } else setTheme(R.style.AppTheme);
+       if(sharedPref.loadNightModeState()==true) {
+           setTheme(R.style.DarkTheme);
+       } else setTheme(R.style.AppTheme);
 
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_auth);
-        mSwitch = (Switch)findViewById(R.id.mySwitch);
-
-        if(sharedPref.loadNightModeState()==true) {
-            mSwitch.setChecked(true);
-        }
-
-        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    sharedPref.setNightModeState(true);
-                    recreate();
-                }
-                else {
-                    sharedPref.setNightModeState(false);
-                    recreate();
-                }
-            }
-        });
+////        super.onCreate(savedInstanceState);
+////        setContentView(R.layout.activity_auth);
+//        mSwitch = (Switch)findViewById(R.id.mySwitch);
+//
+//        if(sharedPref.loadNightModeState()==true) {
+//            mSwitch.setChecked(true);
+//        }
+//
+//        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    sharedPref.setNightModeState(true);
+//                    recreate();
+//                }
+//                else {
+//                    sharedPref.setNightModeState(false);
+//                    recreate();
+//                }
+//            }
+//        });
 
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
         //mSettingModel = new ViewModelProvider(this).get(SettingsFragment.class);

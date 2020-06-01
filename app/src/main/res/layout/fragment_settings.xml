@@ -19,6 +19,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/textColor"
+        android:divider="?attr/iconTint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_name" />
+
     <Button
         android:id="@+id/change_password"
         android:layout_width="0dp"
@@ -34,20 +48,37 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <!--    <TextView-->
+<!--        android:id="@+id/text_name"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:drawableStart="@drawable/ic_person_black_18dp"-->
+<!--        android:drawablePadding="8dp"-->
+<!--        android:drawableTint="?attr/textColor"-->
+<!--        android:textColor="?attr/textColor"-->
+<!--        android:textSize="16dp"-->
+<!--        android:text="Testing Example"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/imageView" />-->
+
     <TextView
         android:id="@+id/text_name"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/ic_person_black_18dp"
+        android:layout_marginTop="8dp"
         android:drawablePadding="8dp"
         android:drawableTint="?attr/textColor"
+        android:text="Testing Example"
         android:textColor="?attr/textColor"
-        android:textSize="16dp"
+        android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -73,7 +104,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:drawableStart="@drawable/ic_face_black_18"
         android:drawablePadding="8dp"
@@ -83,7 +114,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_name" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <Switch
         android:id="@+id/mySwitch"
@@ -93,6 +124,9 @@
         android:text="Night Mode"
         android:textColor="?attr/textColor"
         android:textSize="16dp"
+        android:drawableStart="@drawable/ic_theme_grey_24dp"
+        android:drawablePadding="8dp"
+        android:drawableTint="?attr/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"

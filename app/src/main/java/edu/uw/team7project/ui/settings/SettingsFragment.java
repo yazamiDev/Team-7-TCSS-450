@@ -1,5 +1,6 @@
 package edu.uw.team7project.ui.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.auth0.android.jwt.JWT;
 import com.google.android.material.snackbar.Snackbar;
 
+import edu.uw.team7project.MainActivity;
 import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentSettingsBinding;
 import edu.uw.team7project.databinding.FragmentSignInBinding;
@@ -123,12 +125,14 @@ public class SettingsFragment extends Fragment {
                 else {
                     sharedPref.setNightModeState(false);
                     getActivity().recreate();
-//                    recreate();
+//                    restartApp();
                 }
             }
         });
 
     }
+
+
 
     /**
      * Opens a dialog to enter a valid email,
