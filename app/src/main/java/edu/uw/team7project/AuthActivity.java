@@ -27,40 +27,42 @@ import me.pushy.sdk.Pushy;
  * @author Trevor Nichols
  */
 public class AuthActivity extends AppCompatActivity {
-    private Switch mSwitch;
-    SharedPref sharedPref;
+//    private Switch mSwitch;
+//    SharedPref sharedPref;
     private final int READ_WRITE_PERMISSION_CODE = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        sharedPref = new SharedPref(this);
-
-        if(sharedPref.loadNightModeState()==true) {
-            setTheme(R.style.DarkTheme);
-        } else setTheme(R.style.AppTheme);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
-        mSwitch = (Switch)findViewById(R.id.mySwitch);
 
-        if(sharedPref.loadNightModeState()==true) {
-            mSwitch.setChecked(true);
-        }
-
-        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    sharedPref.setNightModeState(true);
-                    recreate();
-                }
-                else {
-                    sharedPref.setNightModeState(false);
-                    recreate();
-                }
-            }
-        });
+//        sharedPref = new SharedPref(this);
+//
+//        if(sharedPref.loadNightModeState()==true) {
+//            setTheme(R.style.DarkTheme);
+//        } else setTheme(R.style.AppTheme);
+//
+////        super.onCreate(savedInstanceState);
+////        setContentView(R.layout.activity_auth);
+//        mSwitch = (Switch)findViewById(R.id.mySwitch);
+//
+//        if(sharedPref.loadNightModeState()==true) {
+//            mSwitch.setChecked(true);
+//        }
+//
+//        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    sharedPref.setNightModeState(true);
+//                    recreate();
+//                }
+//                else {
+//                    sharedPref.setNightModeState(false);
+//                    recreate();
+//                }
+//            }
+//        });
 
 
 

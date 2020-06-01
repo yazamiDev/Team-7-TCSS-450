@@ -22,6 +22,7 @@ public class SharedPref {
      * @param state the state of the theme.
      */
     public void setNightModeState(Boolean state) {
+        System.out.println("Setting night mode state: " + state);
         SharedPreferences.Editor editor = mySharedPref.edit();
         editor.putBoolean("NightMode", state);
         editor.commit();
@@ -34,6 +35,7 @@ public class SharedPref {
      */
     public Boolean loadNightModeState() {
         boolean state = mySharedPref.getBoolean("NightMode", false);
+        System.out.println("loadNightModeState loading night mode state" + state);
         return state;
     }
 

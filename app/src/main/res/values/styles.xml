@@ -16,6 +16,7 @@
         <item name="tintColor">#404040</item>
         <item name="iconTint">#888888</item>
         <item name="buttonColor">@color/colorAccent</item>
+        <item name="rippleColor">#7FE1AB</item>
 <!--        <item name="primaryLightColor">#79F0FF</item>-->
 <!--        <item name="secondaryTextColorFade">#222222</item>-->
 <!--        <item name="secondaryLightColor">#7FE1AB</item>-->
@@ -32,6 +33,7 @@
         <item name="textColor">#ffffff</item>
         <item name="tintColor">#ffffff</item>
         <item name="iconTint">#BABABA</item>
+        <item name="rippleColor">#7FE1AB</item>
         <item name="buttonColor">@color/colorAccent</item>
 <!--        <item name="primaryLightColor">#79F0FF</item>-->
 <!--        <item name="secondaryTextColorFade">#222222</item>-->
