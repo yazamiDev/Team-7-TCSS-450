@@ -75,11 +75,6 @@ public class ContactRequestRecyclerViewAdapter extends
                 super(view);
                 mView = view;
                 binding = FragmentContactRequestCardBinding.bind(view);
-
-                //may need to change
-//                view.setOnClickListener(v -> {
-//                    navigateToContact();
-//                });
             }
 
             /**
@@ -87,7 +82,8 @@ public class ContactRequestRecyclerViewAdapter extends
              */
             private void openDialog() {
                 String name = mContact.getContactFirstName() + " " + mContact.getContactLastName();
-                AcceptContactDialog dialog = new AcceptContactDialog(name);
+                AcceptContactDialog dialog = new AcceptContactDialog(name,
+                        mContact.getContactMemberID());
                 dialog.show(mFragmMan, "maybe?");
             }
 

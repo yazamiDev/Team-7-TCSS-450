@@ -20,7 +20,7 @@ public class NewChatRecyclerViewAdapter extends
         RecyclerView.Adapter<NewChatRecyclerViewAdapter.NewChatViewHolder>{
 
     private final List<Contact> mContacts;
-    private List<Integer> mMemberID;
+    private ArrayList<Integer> mMemberID;
 
     /**
      * A constructor for teh contact recycler view.
@@ -32,7 +32,7 @@ public class NewChatRecyclerViewAdapter extends
         this.mMemberID = new ArrayList<>();
     }
 
-    public List<Integer> getSelectedList(){
+    public ArrayList<Integer> getSelectedList(){
         return mMemberID;
     }
 

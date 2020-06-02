@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.uw.team7project.R;
@@ -90,8 +91,16 @@ public class NewChatFragment extends Fragment {
         }
     }
 
-    private void handleAddContacts(){
-        List<Integer> selectedContacts = mAdapter.getSelectedList();
+    private void handleAddContacts() throws JSONException {
+        ArrayList<Integer> selectedContacts = mAdapter.getSelectedList();
+        int[] temp = new int[selectedContacts.size()];
+
+        for(int i = 0 ; i < selectedContacts.size(); i++){
+            temp[i] = selectedContacts.get(i);
+            System.out.println(temp[i]);
+        }
+        //selectedContacts.add(mUserInfoModel.getMemberID());
+        mChatModel.putMembers(mUserInfoModel.getJwt(), temp, mNewChatID);
     }
 
     /**

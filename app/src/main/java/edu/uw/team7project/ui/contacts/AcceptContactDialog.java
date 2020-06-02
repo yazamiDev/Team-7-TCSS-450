@@ -12,28 +12,41 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.json.JSONObject;
 
 import edu.uw.team7project.R;
+import edu.uw.team7project.model.UserInfoViewModel;
 
 public class AcceptContactDialog extends DialogFragment {
 
     private final String mContactName;
+    private final int mMemberID;
+    private UserInfoViewModel mUserModel;
+    private ContactRequestListViewModel mContactRequestModel;
 
-    public AcceptContactDialog(String name){
+
+    public AcceptContactDialog(String name, int memberID){
+
         this.mContactName = name;
+        this.mMemberID = memberID;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUserModel = new ViewModelProvider(getActivity())
+                .get(UserInfoViewModel.class);
+
+        mContactRequestModel = new ViewModelProvider(getActivity())
+                .get(ContactRequestListViewModel.class);
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        mForgotPasswordModel.addResponseObserver(getViewLifecycleOwner(),
-//                this::observeResponse);
+        mContactRequestModel.addResponseObserver(getViewLifecycleOwner(),
+                this::observeResponse);
     }
 
     @Override
@@ -44,24 +57,19 @@ public class AcceptContactDialog extends DialogFragment {
         TextView name = (TextView)view.findViewById(R.id.textContactName);
         name.setText(mContactName);
         builder.setView(view)
-                .setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Accept", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        mContactRequestModel.sendVerify(mUserModel.getJwt(), mMemberID);
                     }
                 })
-                .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Reject", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-//                        String email = mEmail.getText().toString();
-//                        System.out.println(email);
-//                        mForgotPasswordModel.connect(mEmail.getText().toString());
-//
-//                        System.out.println("IN HERE");
 //                        listener.applyTexts(email);
                     }
                 });
-        //mEmail = view.findViewById(R.id.edit_email);
         return builder.create();
     }
 
