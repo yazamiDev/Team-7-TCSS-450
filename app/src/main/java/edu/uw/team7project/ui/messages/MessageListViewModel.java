@@ -26,7 +26,6 @@ import java.util.Map;
 
 /**
  * A message List view model
- *
  * @author Trevor Nichols
  */
 public class MessageListViewModel extends AndroidViewModel {

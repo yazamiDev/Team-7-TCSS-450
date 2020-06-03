@@ -33,7 +33,7 @@ public class ContactsCollectionAdapter extends FragmentStateAdapter {
             mLable = "Contacts";
         }else if(position == 1){
             fragment = new ContactRequestListFragment();
-            mLable = "Messages";
+            mLable = "Requests";
         }else{
             fragment = new FindContactFragment();
             mLable = "Find";

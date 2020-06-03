@@ -102,13 +102,12 @@ public class NewChatViewModel extends AndroidViewModel {
      * @throws JSONException
      */
     public void putMembers(final String jwt, int[] memberIds, int chatID) throws JSONException {
-        String url = "https://mobile-app-spring-2020.herokuapp.com/chats/"+chatID;
-
+        String url = "https://mobile-app-spring-2020.herokuapp.com/chats/" + chatID;
+        System.out.println("Adding Members");
         JSONObject body = new JSONObject();
         JSONArray members = new JSONArray(memberIds);
         try {
             body.put("members", members);
-            System.out.println(body.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
