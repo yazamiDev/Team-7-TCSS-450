@@ -34,6 +34,7 @@ import edu.uw.team7project.ui.messages.MessagePost;
 public class ContactListViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Contact>> mContactList;
+    private final MutableLiveData<JSONObject> mResponse;
 
 
     /**
@@ -44,6 +45,8 @@ public class ContactListViewModel extends AndroidViewModel {
     public ContactListViewModel(@NonNull Application application) {
         super(application);
         mContactList = new MutableLiveData<>(new ArrayList<>());
+        mResponse = new MutableLiveData<>();
+        mResponse.setValue(new JSONObject());
     }
 
     /**
@@ -75,6 +78,36 @@ public class ContactListViewModel extends AndroidViewModel {
                 Map<String, String> headers = new HashMap<>();
                 // add headers <key,value>
                 headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
+    }
+
+    /**
+     * Connects to webservice endpoint to retrieve a list of contacts.
+     *
+     * @param jwt a valid jwt.
+     */
+    public void deleteContact (String jwt, int memberID){
+        String url = "https://mobile-app-spring-2020.herokuapp.com/contacts/contact/"+memberID;
+        Request request = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null, //no body for this request
+                mResponse::setValue,
+                this::handleError) {
+            @Override
+           public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+               headers.put("Authorization", jwt);
                 return headers;
             }
         };

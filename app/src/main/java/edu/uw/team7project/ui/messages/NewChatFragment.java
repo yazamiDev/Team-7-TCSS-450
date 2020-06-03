@@ -1,5 +1,6 @@
 package edu.uw.team7project.ui.messages;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,8 @@ import edu.uw.team7project.ui.contacts.ContactListViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
+ *
+ * @author Trevor Nichols
  */
 public class NewChatFragment extends Fragment {
 
@@ -75,6 +78,8 @@ public class NewChatFragment extends Fragment {
 
         mChatModel.addResponseObserver(getViewLifecycleOwner(),
                 this::observeResponse);
+        binding.editChatName.setTextColor(Color.BLACK);
+
 
         binding.buttonCancel.setOnClickListener(button -> Navigation.findNavController(getView()).
                 navigate(NewChatFragmentDirections.actionNewChatFragmentToNavigationMessages()));
@@ -82,6 +87,9 @@ public class NewChatFragment extends Fragment {
         binding.buttonCreate.setOnClickListener(button -> handleCreateChatRoom());
     }
 
+    /**
+     * HAndles creating a chat room
+     */
     private void handleCreateChatRoom(){
         String name = binding.editChatName.getText().toString().trim();
         if(name.length() < 1){
@@ -91,16 +99,23 @@ public class NewChatFragment extends Fragment {
         }
     }
 
+    /**
+     * HAndles adding a contact to the chat room
+     * @throws JSONException
+     */
     private void handleAddContacts() throws JSONException {
         ArrayList<Integer> selectedContacts = mAdapter.getSelectedList();
-        int[] temp = new int[selectedContacts.size()];
+        int[] temp = new int[selectedContacts.size() + 1];
 
         for(int i = 0 ; i < selectedContacts.size(); i++){
             temp[i] = selectedContacts.get(i);
-            System.out.println(temp[i]);
         }
-        //selectedContacts.add(mUserInfoModel.getMemberID());
+
+        temp[temp.length - 1] = mUserInfoModel.getMemberID();
         mChatModel.putMembers(mUserInfoModel.getJwt(), temp, mNewChatID);
+        mAdapter.notifyDataSetChanged();
+        Navigation.findNavController(getView())
+                .navigate(NewChatFragmentDirections.actionNewChatFragmentToNavigationMessages());
     }
 
     /**
@@ -114,9 +129,12 @@ public class NewChatFragment extends Fragment {
                 Log.e("CHAT", "Failed to create chat room");
             } else {
                 try {
-                    mNewChatID = response.getInt("chatID");
-                    System.out.println("moving on to populate chat room");
-                    handleAddContacts();
+                    if(response.has("chatID")){
+                        System.out.println("Created a chat room");
+                        mNewChatID = response.getInt("chatID");
+                        System.out.println("moving on to populate chat room");
+                        handleAddContacts();
+                    }
                 } catch (JSONException e) {
                     Log.e("JSON Parse Error", e.getMessage());
                 }

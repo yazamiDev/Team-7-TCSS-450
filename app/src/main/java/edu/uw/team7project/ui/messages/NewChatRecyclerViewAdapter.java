@@ -16,6 +16,11 @@ import edu.uw.team7project.databinding.AddContactCardBinding;
 import edu.uw.team7project.databinding.FragmentNewChatBinding;
 import edu.uw.team7project.ui.contacts.Contact;
 
+/**
+ * A Recycler View for the New chat view model.
+ *
+ * @author Trevor Nichols
+ */
 public class NewChatRecyclerViewAdapter extends
         RecyclerView.Adapter<NewChatRecyclerViewAdapter.NewChatViewHolder>{
 
@@ -23,7 +28,7 @@ public class NewChatRecyclerViewAdapter extends
     private ArrayList<Integer> mMemberID;
 
     /**
-     * A constructor for teh contact recycler view.
+     * A constructor for the new contact recycler view.
      *
      * @param items a list of contacts.
      */
@@ -71,7 +76,7 @@ public class NewChatRecyclerViewAdapter extends
         public int memberID;
 
         /**
-         * Constructore for teh contact view holder.
+         * Constructore for the contact view holder.
          *
          * @param view the view.
          */

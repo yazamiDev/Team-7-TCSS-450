@@ -12,72 +12,74 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.json.JSONObject;
 
 import edu.uw.team7project.R;
+import edu.uw.team7project.databinding.FragmentContactListBinding;
 import edu.uw.team7project.model.UserInfoViewModel;
 
 /**
- * A Dialog for accepting a request.
- *
- * @author Trevor Nichols
+ * Dialog for deleting a existing contact.
  */
-public class AcceptContactDialog extends DialogFragment {
+public class DeleteContactDialog extends DialogFragment {
 
-    private final String mContactName;
-    private final int mMemberID;
     private UserInfoViewModel mUserModel;
-    private ContactRequestListViewModel mContactRequestModel;
-
+    private ContactListViewModel mContactModel;
+    private final int mMemberID;
+    private final FragmentManager mFragMan;
 
     /**
-     * Constructro for the accept dialog
-     *
-     * @param name A String representing a contacts name
-     * @param memberID an integer representing the contact ID
+     * DElete contact dialog contructor given a in and a Fragment manger
+     * @param memberID the int representing member id
+     * @param fm the fragment manager
      */
-    public AcceptContactDialog(String name, int memberID){
-
-        this.mContactName = name;
+    public DeleteContactDialog(int memberID, FragmentManager fm) {
         this.mMemberID = memberID;
+        this.mFragMan = fm;
     }
 
-    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUserModel = new ViewModelProvider(getActivity())
                 .get(UserInfoViewModel.class);
 
-        mContactRequestModel = new ViewModelProvider(getActivity())
-                .get(ContactRequestListViewModel.class);
+        mContactModel = new ViewModelProvider(getActivity())
+                .get(ContactListViewModel.class);
+    }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        FragmentContactListBinding binding = FragmentContactListBinding.bind(getView());
+
+        mContactModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
+            //if (!contactList.isEmpty()) {
+            binding.listRoot.setAdapter(
+                    new ContactRecyclerViewAdapter(contactList, mFragMan)
+            );
+            binding.layoutWait.setVisibility(View.GONE);
+            //}
+        });
     }
 
     /**
-     * The view created for  Accept dialog.
-     *
-     * @param view the view
+     * Created the dialog window
      * @param savedInstanceState the saved instance state.
+     * @return the Dialog.
      */
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mContactRequestModel.addResponseObserver(getViewLifecycleOwner(),
-                this::observeResponse);
-    }
-
-    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.accept_contact_dialog, null);
+        View view = inflater.inflate(R.layout.delete_contact_dialog, null);
         TextView name = (TextView)view.findViewById(R.id.textContactName);
-        name.setText(mContactName);
+//        name.setText(mContactName);
         builder.setView(view)
                 .setNegativeButton("Accept", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        mContactRequestModel.sendVerify(mUserModel.getJwt(), mMemberID);
+                        mContactModel.deleteContact(mUserModel.getJwt(), mMemberID);
                     }
                 })
                 .setPositiveButton("Reject", new DialogInterface.OnClickListener() {

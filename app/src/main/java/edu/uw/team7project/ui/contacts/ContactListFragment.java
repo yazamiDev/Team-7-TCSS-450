@@ -69,7 +69,7 @@ public class ContactListFragment extends Fragment {
         mModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
             //if (!contactList.isEmpty()) {
                 binding.listRoot.setAdapter(
-                        new ContactRecyclerViewAdapter(contactList)
+                        new ContactRecyclerViewAdapter(contactList, getActivity().getSupportFragmentManager())
                 );
                 binding.layoutWait.setVisibility(View.GONE);
             //}

@@ -5,31 +5,40 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import edu.uw.team7project.R;
-import edu.uw.team7project.databinding.FragmentContactCardBinding;
+import edu.uw.team7project.databinding.FindContactCardBinding;
 
-/**
- * A recycler view for the contact list.
- */
-public class ContactRecyclerViewAdapter extends
-        RecyclerView.Adapter<ContactRecyclerViewAdapter.ContactViewHolder> {
-
+public class FindContactRecyclerViewAdapter extends
+        RecyclerView.Adapter<FindContactRecyclerViewAdapter.ContactViewHolder> {
     private final List<Contact> mContacts;
-    private final FragmentManager mFragMan;
+    private final String mJwt;
+    private final FindContactViewModel mVM;
+
 
     /**
      * A constructor for teh contact recycler view.
      *
      * @param items a list of contacts.
      */
-    public ContactRecyclerViewAdapter (List<Contact> items, FragmentManager fm) {
+    public FindContactRecyclerViewAdapter (List<Contact> items, String jwt, FindContactViewModel vm) {
         this.mContacts = items;
-        this.mFragMan = fm;
+        this.mJwt = jwt;
+        this.mVM = vm;
     }
 
     /**
@@ -43,7 +52,7 @@ public class ContactRecyclerViewAdapter extends
     public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ContactViewHolder(LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.fragment_contact_card, parent, false));
+                .inflate(R.layout.find_contact_card, parent, false));
     }
 
     @Override
@@ -63,7 +72,7 @@ public class ContactRecyclerViewAdapter extends
     public class ContactViewHolder extends RecyclerView.ViewHolder {
 
         public final View mView;
-        public FragmentContactCardBinding binding;
+        public FindContactCardBinding binding;
         public Contact mContact;
 
         /**
@@ -74,17 +83,16 @@ public class ContactRecyclerViewAdapter extends
         public ContactViewHolder(View view) {
             super(view);
             mView = view;
-            binding = FragmentContactCardBinding.bind(view);
-
-
+            binding = FindContactCardBinding.bind(view);
         }
 
         /**
-         * navigates to a contacts profile.
+         * Adds a selected user to contact requests
          */
-        private void deleteDialog(){
-            DeleteContactDialog dialog = new DeleteContactDialog(mContact.getContactMemberID(), mFragMan);
-            dialog.show(mFragMan, "maybe?");
+        public void addUser(){
+            binding.buttonAdd.setEnabled(false);
+            binding.buttonAdd.setText("Added");
+            mVM.addContact(mJwt, mContact.getContactMemberID());
         }
 
         /**
@@ -94,11 +102,9 @@ public class ContactRecyclerViewAdapter extends
          */
         void setContact(final Contact contact) {
             mContact = contact;
-            binding.textContactUsername.setText(contact.getContactUsername());
             String contactName = contact.getContactFirstName() + " " + contact.getContactLastName();
             binding.textContactName.setText(contactName);
-            binding.buttonDeleteContact.setOnClickListener(button -> deleteDialog());
+            binding.buttonAdd.setOnClickListener(button -> addUser());
         }
-
     }
 }

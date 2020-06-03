@@ -24,19 +24,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.uw.team7project.io.RequestQueueSingleton;
+/**
+ * A find contact view model
+ *
+ * @author Trevor Nichols
+ */
+public class FindContactViewModel extends AndroidViewModel {
 
-public class ContactRequestListViewModel extends AndroidViewModel {
     private MutableLiveData<List<Contact>> mContactList;
     private final MutableLiveData<JSONObject> mResponse;
 
 
     /**
-     * The constructor for the contact request list view model.
+     * The constructor for the contact list view model.
      *
      * @param application the application.
      */
-    public ContactRequestListViewModel(@NonNull Application application) {
+    public FindContactViewModel(@NonNull Application application) {
         super(application);
         mContactList = new MutableLiveData<>(new ArrayList<>());
         mResponse = new MutableLiveData<>();
@@ -44,19 +48,14 @@ public class ContactRequestListViewModel extends AndroidViewModel {
     }
 
     /**
-     * Add an observer to the contact request list view model.
+     * Add an observer to the find contact view model.
      *
      * @param owner the owner
      * @param observer the observer
      */
-    public void addContactRequestListObserver(@NonNull LifecycleOwner owner,
+    public void addContactListObserver(@NonNull LifecycleOwner owner,
                                        @NonNull Observer<? super List<Contact>> observer){
         mContactList.observe(owner, observer);
-    }
-
-    public void addResponseObserver(@NonNull LifecycleOwner owner,
-                                    @NonNull Observer<? super JSONObject> observer) {
-        mResponse.observe(owner, observer);
     }
 
     /**
@@ -64,13 +63,54 @@ public class ContactRequestListViewModel extends AndroidViewModel {
      *
      * @param jwt a valid jwt.
      */
-    public void connectGet (String jwt){
-        String url = "https://mobile-app-spring-2020.herokuapp.com/contacts";
+    public void connectGet (String jwt, int memberID){
+        String url = "https://mobile-app-spring-2020.herokuapp.com/contacts/getAll/"+memberID;
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
                 null, //no body for this get request
                 this::handleSuccess,
+                this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
+    }
+
+    /**
+     * Connects to webservice endpoint to add a contact.
+     *
+     * @param jwt a valid jwt.
+     */
+    public void addContact (String jwt, int memberID){
+        String url = "https://mobile-app-spring-2020.herokuapp.com/contacts";
+
+
+        JSONObject body = new JSONObject();
+
+        try {
+            body.put("memberId", memberID);
+            body.put("verified", 0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Request request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                body,
+                mResponse::setValue,
                 this::handleError) {
             @Override
             public Map<String, String> getHeaders() {
@@ -97,21 +137,17 @@ public class ContactRequestListViewModel extends AndroidViewModel {
     private void handleSuccess(final JSONObject result) {
         ArrayList<Contact> temp = new ArrayList<>();
         try {
-            JSONArray contacts = result.getJSONArray("contacts");
+            JSONArray contacts = result.getJSONArray("listOfUnFriend");
             for (int i = 0; i < contacts.length(); i++) {
                 JSONObject contact = contacts.getJSONObject(i);
-                int verified = contact.getInt("verified");
-                if(verified == 0){
-                    String email= contact.getString("email");
-                    String firstName= contact.getString("firstName");
-                    String lastName= contact.getString("lastName");
-                    String username= contact.getString("userName");
-                    int memberID = contact.getInt("memberId");
+                JSONObject currUser = contact.getJSONObject("entry");
+                String firstName= currUser.getString("firstname");
+                String lastName= currUser.getString("lastname");
+                int memberID = currUser.getInt("memberid");
 
-                    Contact entry = new Contact(email, firstName, lastName, username, memberID);
-                    temp.add(entry);
-                }
-            }
+                Contact entry = new Contact("", firstName, lastName, "", memberID);
+                temp.add(entry);
+        }
         } catch (JSONException e) {
             Log.e("JSON PARSE ERROR", "Found in handle Success ContactViewModel");
             Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
@@ -120,50 +156,8 @@ public class ContactRequestListViewModel extends AndroidViewModel {
     }
 
     /**
-     * Sends verification of accepted contact request.
-     *
-     * @param jwt A valid jwt
-     * @param memberID the memeber ID
-     */
-    public void sendVerify(final String jwt, int memberID) {
-        String url = "https://mobile-app-spring-2020.herokuapp.com/contacts";
-
-        JSONObject body = new JSONObject();
-        try {
-            body.put("memberId", memberID);
-            body.put("verified", 1);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Request request = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                body, //push token found in the JSONObject body
-                mResponse::setValue, // we get a response but do nothing with it
-                this::handleError) {
-
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                // add headers <key,value>
-                headers.put("Authorization", jwt);
-                return headers;
-            }
-        };
-
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10_000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        //Instantiate the RequestQueue and add the request to the queue
-        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
-                .addToRequestQueue(request);
-    }
-
-    /**
-     * HAndles Errors when connecting to contacts endpoints
-     * @param error the error.
+     * Handles the error
+     * @param error a VolleyError
      */
     private void handleError(final VolleyError error) {
         Log.e("CONNECTION ERROR", "Oooops no contacts");

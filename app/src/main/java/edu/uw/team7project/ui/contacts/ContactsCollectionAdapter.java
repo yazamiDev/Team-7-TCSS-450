@@ -9,6 +9,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import edu.uw.team7project.ui.messages.MessageListFragment;
 import edu.uw.team7project.ui.weather.WeatherFragment;
 
+/**
+ * A fragment state adapter for contacts
+ *
+ * @author Trevor Nichols
+ */
 public class ContactsCollectionAdapter extends FragmentStateAdapter {
 
     private String mLable;
@@ -28,14 +33,18 @@ public class ContactsCollectionAdapter extends FragmentStateAdapter {
             mLable = "Contacts";
         }else if(position == 1){
             fragment = new ContactRequestListFragment();
-            mLable = "Messages";
+            mLable = "Requests";
         }else{
-            fragment = new WeatherFragment();
-            mLable = "Weather";
+            fragment = new FindContactFragment();
+            mLable = "Find";
         }
         return fragment;
     }
 
+    /**
+     * Gets the lable.
+     * @return a string representing the label of the tab.
+     */
     public String getLable(){
         return mLable;
     }

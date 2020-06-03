@@ -24,6 +24,7 @@ import edu.uw.team7project.model.UserInfoViewModel;
 public class MessageListFragment extends Fragment {
 
     private MessageListViewModel mModel;
+    private MessagesRecyclerViewAdapter mAdapter;
 
     public MessageListFragment() {
         // Required empty public constructor
@@ -40,6 +41,12 @@ public class MessageListFragment extends Fragment {
         //connect here but what arguments to pass?
         mModel.connectGet(model.getJwt());
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -70,9 +77,8 @@ public class MessageListFragment extends Fragment {
         //add observer for getting messages
         mModel.addMessageListObserver(getViewLifecycleOwner(), messageList -> {
             //if (!messageList.isEmpty()) {
-            binding.listRoot.setAdapter(
-                    new MessagesRecyclerViewAdapter(messageList)
-            );
+            mAdapter = new MessagesRecyclerViewAdapter(messageList);
+            binding.listRoot.setAdapter(mAdapter);
             binding.layoutWait.setVisibility(View.GONE);
         //}else navigate to a no messages fragment.
         });
