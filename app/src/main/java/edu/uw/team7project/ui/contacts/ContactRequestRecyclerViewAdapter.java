@@ -29,7 +29,7 @@ public class ContactRequestRecyclerViewAdapter extends
          */
     public ContactRequestRecyclerViewAdapter(List < Contact > items, FragmentManager fm) {
         this.mContactRequests = items;
-        mFragmMan = fm;
+        this.mFragmMan = fm;
     }
 
         /**

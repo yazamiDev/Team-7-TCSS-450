@@ -6,43 +6,36 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager2.widget.ViewPager2;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
-
 import edu.uw.team7project.R;
-import edu.uw.team7project.databinding.FragmentContactListBinding;
+import edu.uw.team7project.databinding.FragmentFindContactBinding;
 import edu.uw.team7project.model.UserInfoViewModel;
 
 /**
- * Subclass for the contacts fragment.
- *
- * @author Bradlee Laird
+ * A simple {@link Fragment} subclass.
+ * create an instance of this fragment.
  */
-public class ContactListFragment extends Fragment {
+public class FindContactFragment extends Fragment {
+    private FindContactViewModel mModel;
+    private UserInfoViewModel mUIModel;
 
-    private ContactListViewModel mModel;
-
-    public ContactListFragment() {
+    public FindContactFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         mModel = new ViewModelProvider(getActivity()).get(ContactListViewModel.class);
+        mModel = new ViewModelProvider(getActivity()).get(FindContactViewModel.class);
 
-        UserInfoViewModel model = new ViewModelProvider(getActivity())
+        mUIModel = new ViewModelProvider(getActivity())
                 .get(UserInfoViewModel.class);
 
-        Log.i("CONTACT", model.getJwt());
-        mModel.connectGet(model.getJwt());
+        mModel.connectGet(mUIModel.getJwt(), mUIModel.getMemberID());
     }
 
     /**
@@ -52,7 +45,7 @@ public class ContactListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact_list, container, false);
+        return inflater.inflate(R.layout.fragment_find_contact, container, false);
     }
 
     /**
@@ -64,15 +57,12 @@ public class ContactListFragment extends Fragment {
 
         //Local access to the ViewBinding object. No need to create as Instance Var as it is only
         //used here.
-        FragmentContactListBinding binding = FragmentContactListBinding.bind(getView());
+        FragmentFindContactBinding binding = FragmentFindContactBinding.bind(getView());
 
         mModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
             //if (!contactList.isEmpty()) {
-                binding.listRoot.setAdapter(
-                        new ContactRecyclerViewAdapter(contactList, getActivity().getSupportFragmentManager())
-                );
-                binding.layoutWait.setVisibility(View.GONE);
-            //}
+            binding.listRoot.setAdapter(
+                    new FindContactRecyclerViewAdapter(contactList, mUIModel.getJwt(), mModel));
         });
     }
 }

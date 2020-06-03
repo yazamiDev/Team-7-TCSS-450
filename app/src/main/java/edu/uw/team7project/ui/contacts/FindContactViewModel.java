@@ -8,7 +8,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.navigation.Navigation;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -25,13 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.uw.team7project.ui.auth.verify.VerifyFragmentDirections;
-import edu.uw.team7project.ui.messages.MessagePost;
-
-/**
- * A ViewModel for a list of contacts.
- */
-public class ContactListViewModel extends AndroidViewModel {
+public class FindContactViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Contact>> mContactList;
     private final MutableLiveData<JSONObject> mResponse;
@@ -42,7 +35,7 @@ public class ContactListViewModel extends AndroidViewModel {
      *
      * @param application the application.
      */
-    public ContactListViewModel(@NonNull Application application) {
+    public FindContactViewModel(@NonNull Application application) {
         super(application);
         mContactList = new MutableLiveData<>(new ArrayList<>());
         mResponse = new MutableLiveData<>();
@@ -65,8 +58,8 @@ public class ContactListViewModel extends AndroidViewModel {
      *
      * @param jwt a valid jwt.
      */
-    public void connectGet (String jwt){
-        String url = "https://mobile-app-spring-2020.herokuapp.com/contacts";
+    public void connectGet (String jwt, int memberID){
+        String url = "https://mobile-app-spring-2020.herokuapp.com/contacts/getAll/"+memberID;
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
@@ -95,19 +88,30 @@ public class ContactListViewModel extends AndroidViewModel {
      *
      * @param jwt a valid jwt.
      */
-    public void deleteContact (String jwt, int memberID){
-        String url = "https://mobile-app-spring-2020.herokuapp.com/contacts/contact/"+memberID;
+    public void addContact (String jwt, int memberID){
+        String url = "https://mobile-app-spring-2020.herokuapp.com/contacts";
+
+
+        JSONObject body = new JSONObject();
+
+        try {
+            body.put("memberId", memberID);
+            body.put("verified", 0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         Request request = new JsonObjectRequest(
-                Request.Method.DELETE,
+                Request.Method.POST,
                 url,
-                null, //no body for this request
+                body,
                 mResponse::setValue,
                 this::handleError) {
             @Override
-           public Map<String, String> getHeaders() {
+            public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
                 // add headers <key,value>
-               headers.put("Authorization", jwt);
+                headers.put("Authorization", jwt);
                 return headers;
             }
         };
@@ -128,21 +132,17 @@ public class ContactListViewModel extends AndroidViewModel {
     private void handleSuccess(final JSONObject result) {
         ArrayList<Contact> temp = new ArrayList<>();
         try {
-            JSONArray contacts = result.getJSONArray("contacts");
+            JSONArray contacts = result.getJSONArray("listOfUnFriend");
             for (int i = 0; i < contacts.length(); i++) {
                 JSONObject contact = contacts.getJSONObject(i);
-                int verified = contact.getInt("verified");
-                if(verified == 1){
-                    String email= contact.getString("email");
-                    String firstName= contact.getString("firstName");
-                    String lastName= contact.getString("lastName");
-                    String username= contact.getString("userName");
-                    int memberID = contact.getInt("memberId");
+                JSONObject currUser = contact.getJSONObject("entry");
+                String firstName= currUser.getString("firstname");
+                String lastName= currUser.getString("lastname");
+                int memberID = currUser.getInt("memberid");
 
-                    Contact entry = new Contact(email, firstName, lastName, username, memberID);
-                    temp.add(entry);
-                }
-            }
+                Contact entry = new Contact("", firstName, lastName, "", memberID);
+                temp.add(entry);
+        }
         } catch (JSONException e) {
             Log.e("JSON PARSE ERROR", "Found in handle Success ContactViewModel");
             Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());

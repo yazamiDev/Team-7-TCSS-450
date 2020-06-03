@@ -30,8 +30,8 @@ public class ContactsCollectionAdapter extends FragmentStateAdapter {
             fragment = new ContactRequestListFragment();
             mLable = "Messages";
         }else{
-            fragment = new WeatherFragment();
-            mLable = "Weather";
+            fragment = new FindContactFragment();
+            mLable = "Find";
         }
         return fragment;
     }
