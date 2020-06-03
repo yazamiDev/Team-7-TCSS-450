@@ -33,7 +33,12 @@
         android:name="edu.uw.team7project.ui.weather.WeatherFragment"
         android:background="?attr/backgroundColor"
         android:label="Weather"
-        tools:layout="@layout/fragment_weather" />
+        tools:layout="@layout/fragment_weather" >
+        <action
+            android:id="@+id/action_navigation_weather_to_locationFragment"
+            app:destination="@id/locationFragment"
+            app:popUpTo="@id/navigation_weather" />
+    </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="edu.uw.team7project.ui.messages.ChatFragment"
@@ -65,5 +70,11 @@
         android:id="@+id/navigation_contacts"
         android:name="edu.uw.team7project.ui.contacts.ContactTabFragment"
         android:label="@string/title_contacts" />
+
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="edu.uw.team7project.ui.weather.LocationFragment"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" />
 
 </navigation>

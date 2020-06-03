@@ -58,6 +58,18 @@
 
     <string name="action_sign_out">Sign Out</string>
 
+    <string name="edit_zip_code">zip code</string>
+    <string name="button_get">get</string>
+    <string name="button_save">save weather</string>
+    <string name="button_getSaved">saved</string>
+    <string name="lonLat">Lon/Lat</string>
+    <string name="forecast24hour">24-Hour Forecast</string>
+    <string name="forecast5day">5-Day Forecast</string>
+    <string name="formatString">{0}{1}</string>
+    <string name="title_activity_maps">Map</string>
+
+
+    <string name="label_location">Current location:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

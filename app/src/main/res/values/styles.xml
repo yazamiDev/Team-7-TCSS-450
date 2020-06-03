@@ -41,6 +41,13 @@
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
+    <style name="NewAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/uwPurple</item>
+        <item name="colorPrimaryDark">@color/uwGold</item>
+        <item name="colorAccent">@color/uwMetallicGold</item>
+    </style>
+
     <!-- transition between themes -->
     <style name="WindowAnimationTransition">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
@@ -56,6 +63,15 @@
         <item name="android:minWidth">48dp</item>
         <item name="android:minHeight">48dp</item>
     </style>
-    
+
+    <style name="tempStyle" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">#2E9AFE</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="valData" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">#74DF00</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>

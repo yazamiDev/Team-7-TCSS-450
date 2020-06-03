@@ -10,4 +10,8 @@
     <color name="secondaryTextColorFade">#fff</color>
     <color name="secondaryLightColor">#7FE1AB</color>
     <color name="actionMenuTextColor">#fff</color>
+
+    <color name="uwGold">#B7A57A</color>
+    <color name="uwPurple">#4B2E83</color>
+    <color name="uwMetallicGold">#85754D</color>
 </resources>
