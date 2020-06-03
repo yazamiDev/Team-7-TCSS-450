@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentHomeBinding;
 import edu.uw.team7project.model.UserInfoViewModel;
+import edu.uw.team7project.ui.contacts.ContactRequestListFragment;
+import edu.uw.team7project.ui.weather.WeatherFragment;
 
 /**
  * Subclass for the home fragment.
@@ -49,6 +52,15 @@ public class HomeFragment extends Fragment {
 
         mHomeModel =  provider.get(HomeViewModel.class);
         mHomeModel.connectGetCurrent(HARD_CODED_CITY, mUserModel.getJwt());
+
+        FragmentManager manager = getChildFragmentManager();
+//        WeatherFragment weatherFragment = new WeatherFragment();
+//        manager.beginTransaction().replace(R.id.weather_container, weatherFragment,
+//                weatherFragment.getTag()).commit();
+
+        ContactRequestListFragment contactRequestListFragment = new ContactRequestListFragment();
+        manager.beginTransaction().replace(R.id.contact_request_container, contactRequestListFragment,
+                contactRequestListFragment.getTag()).commit();
 
     }
 

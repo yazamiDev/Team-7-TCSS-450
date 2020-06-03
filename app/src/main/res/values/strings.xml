@@ -47,6 +47,7 @@
     <string name="text_cancel">Cancel</string>
     <string name="text_accept_contact">Accept Request</string>
     <string name="text_accept_contact_prompt">Would you like to accept this contact request?</string>
+    <string name="text_home_contact_request">New Contact Requests</string>
 
     //test text for settings buttons
     <string name="action_settings_message">You selected Settings</string>
