@@ -6,6 +6,8 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_password_again">Confirm Password</string>
+    <string name="hint_current_password">Current Password</string>
+    <string name="hint_new_password">New Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Register</string>
     <string name="action_verify">Back To Sign In</string>
@@ -23,6 +25,10 @@
     <string name="text_forgot_password"><b>Forgot Password</b></string>
     <string name="text_email_reset">We will send you a link to your email to reset
     your password.</string>
+
+    <string name="snackbar_success">testing snackbar</string>
+
+    <string name="text_change_password">Change Password</string>
     <string name="title_home">Home</string>
     <string name="title_messages">Messages</string>
     <string name="title_contacts">Contacts</string>

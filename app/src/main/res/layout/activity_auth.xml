@@ -29,16 +29,16 @@
 <!--        app:layout_constraintEnd_toEndOf="parent">-->
 <!--    </Switch>-->
 
-    <Switch
-        android:id="@+id/mySwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:text="Night Mode"
-        android:textColor="?attr/textColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.023"
-        app:layout_constraintStart_toStartOf="parent"></Switch>
+<!--    <Switch-->
+<!--        android:id="@+id/mySwitch"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="4dp"-->
+<!--        android:text="Night Mode"-->
+<!--        android:textColor="?attr/textColor"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.023"-->
+<!--        app:layout_constraintStart_toStartOf="parent"></Switch>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
