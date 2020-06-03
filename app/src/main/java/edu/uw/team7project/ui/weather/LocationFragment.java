@@ -81,6 +81,8 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
     public void onMapClick(LatLng latLng) {
         Log.d("LAT/LONG", latLng.toString());
 
+        mMap.clear();
+
         Marker marker = mMap.addMarker(new MarkerOptions()
                 .position(latLng)
                 .title("New Marker"));
