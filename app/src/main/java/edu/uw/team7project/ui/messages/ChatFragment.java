@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import edu.uw.team7project.MainActivity;
 import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentChatBinding;
 import edu.uw.team7project.model.UserInfoViewModel;
@@ -42,6 +43,9 @@ public class ChatFragment extends Fragment {
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         ChatFragmentArgs args = ChatFragmentArgs.fromBundle(getArguments());
         mChatID = args.getChatID();
+        String title = args.getName();
+        ((MainActivity) getActivity())
+                .setActionBarTitle(title);
         Log.i("CHAT", String.valueOf(mChatID));
         mUserModel = provider.get(UserInfoViewModel.class);
         mChatModel = provider.get(ChatViewModel.class);
@@ -61,6 +65,7 @@ public class ChatFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         FragmentChatBinding binding = FragmentChatBinding.bind(getView());
+
 
         //SetRefreshing shows the internal Swiper view progress bar. Show this until messages load
         binding.swipeContainer.setRefreshing(true);

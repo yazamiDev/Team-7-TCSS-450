@@ -40,15 +40,19 @@
     <string name="keys_prefs_jwt">Sharded Prefs JWT</string>
 
 
-
     <string name="text_current_weather">Current Weather</string>
+    <string name="text_new_chat">Create a new chat room</string>
+    <string name="text_chat_name">Chat room name:</string>
+    <string name="text_create">Create</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_accept_contact">Accept Request</string>
+    <string name="text_accept_contact_prompt">Would you like to accept this contact request?</string>
 
     //test text for settings buttons
     <string name="action_settings_message">You selected Settings</string>
     <string name="action_signOut_message">You selected Sign Out</string>
 
     <string name="action_sign_out">Sign Out</string>
-
 
 
     <!-- TODO: Remove or change this placeholder text -->
