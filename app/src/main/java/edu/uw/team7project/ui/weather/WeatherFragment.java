@@ -54,6 +54,8 @@ import static android.graphics.Color.BLACK;
  * Subclass for the home fragment.
  *
  * @author Bradlee Laird
+ *
+ * Old code that Trevor threw together for sprint 2.
  */
 //public class WeatherFragment extends Fragment {
 //
@@ -109,6 +111,11 @@ import static android.graphics.Color.BLACK;
 //    }
 //}
 
+/**
+ * Subclass for the home fragment.
+ *
+ * @author Bradlee Laird
+ */
 public class WeatherFragment extends Fragment {
 
     private  WeatherViewModel mWeatherModelCurrent;
@@ -300,7 +307,7 @@ public class WeatherFragment extends Fragment {
         JSONArray jsonHourly = jsonMessage.getJSONArray("hourly");
 
         //The temps
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 24; i++) {
             JSONObject jsonInnerHourly = new JSONObject(jsonHourly.getString(i));
             //get unix time
             unixTime.add(jsonInnerHourly.getString("dt"));
@@ -348,6 +355,10 @@ public class WeatherFragment extends Fragment {
         Date hour18 = new Date(Long.parseLong(unixTime.get(17)) * 1000);
         Date hour19 = new Date(Long.parseLong(unixTime.get(18)) * 1000);
         Date hour20 = new Date(Long.parseLong(unixTime.get(19)) * 1000);
+        Date hour21 = new Date(Long.parseLong(unixTime.get(20)) * 1000);
+        Date hour22 = new Date(Long.parseLong(unixTime.get(21)) * 1000);
+        Date hour23 = new Date(Long.parseLong(unixTime.get(22)) * 1000);
+        Date hour24 = new Date(Long.parseLong(unixTime.get(23)) * 1000);
 
 
         binding.weatherHour1.setText(secondFormat.format(hour1) + hourTemps.get(0) + "°, "
@@ -360,6 +371,45 @@ public class WeatherFragment extends Fragment {
                 + hourDescriptions.get(3));
         binding.weatherHour5.setText(secondFormat.format(hour5) + hourTemps.get(4) + "°, "
                 + hourDescriptions.get(4));
+        binding.weatherHour6.setText(secondFormat.format(hour1) + hourTemps.get(0) + "°, "
+                + hourDescriptions.get(5));
+        binding.weatherHour7.setText(secondFormat.format(hour2) + hourTemps.get(1) + "°, "
+                + hourDescriptions.get(6));
+        binding.weatherHour8.setText(secondFormat.format(hour3) + hourTemps.get(2) + "°, "
+                + hourDescriptions.get(7));
+        binding.weatherHour9.setText(secondFormat.format(hour4) + hourTemps.get(3) + "°, "
+                + hourDescriptions.get(8));
+        binding.weatherHour10.setText(secondFormat.format(hour5) + hourTemps.get(4) + "°, "
+                + hourDescriptions.get(9));
+        binding.weatherHour11.setText(secondFormat.format(hour1) + hourTemps.get(0) + "°, "
+                + hourDescriptions.get(10));
+        binding.weatherHour12.setText(secondFormat.format(hour2) + hourTemps.get(1) + "°, "
+                + hourDescriptions.get(11));
+        binding.weatherHour13.setText(secondFormat.format(hour3) + hourTemps.get(2) + "°, "
+                + hourDescriptions.get(12));
+        binding.weatherHour14.setText(secondFormat.format(hour4) + hourTemps.get(3) + "°, "
+                + hourDescriptions.get(13));
+        binding.weatherHour15.setText(secondFormat.format(hour5) + hourTemps.get(4) + "°, "
+                + hourDescriptions.get(14));
+        binding.weatherHour16.setText(secondFormat.format(hour1) + hourTemps.get(0) + "°, "
+                + hourDescriptions.get(15));
+        binding.weatherHour17.setText(secondFormat.format(hour2) + hourTemps.get(1) + "°, "
+                + hourDescriptions.get(16));
+        binding.weatherHour18.setText(secondFormat.format(hour3) + hourTemps.get(2) + "°, "
+                + hourDescriptions.get(17));
+        binding.weatherHour19.setText(secondFormat.format(hour4) + hourTemps.get(3) + "°, "
+                + hourDescriptions.get(18));
+        binding.weatherHour20.setText(secondFormat.format(hour5) + hourTemps.get(4) + "°, "
+                + hourDescriptions.get(19));
+        binding.weatherHour21.setText(secondFormat.format(hour1) + hourTemps.get(0) + "°, "
+                + hourDescriptions.get(20));
+        binding.weatherHour22.setText(secondFormat.format(hour2) + hourTemps.get(1) + "°, "
+                + hourDescriptions.get(21));
+        binding.weatherHour23.setText(secondFormat.format(hour3) + hourTemps.get(2) + "°, "
+                + hourDescriptions.get(22));
+        binding.weatherHour24.setText(secondFormat.format(hour4) + hourTemps.get(3) + "°, "
+                + hourDescriptions.get(23));
+
 
 
     }
