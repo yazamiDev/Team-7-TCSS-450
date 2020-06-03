@@ -23,14 +23,10 @@
             android:id="@+id/action_navigation_messages_to_chatFragment"
             app:destination="@id/chatFragment"
             app:popUpTo="@id/navigation_messages" />
+        <action
+            android:id="@+id/action_navigation_messages_to_newChatFragment"
+            app:destination="@id/newChatFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/navigation_contacts"
-        android:background="?attr/backgroundColor"
-        android:name="edu.uw.team7project.ui.contacts.ContactListFragment"
-        android:label="Contacts"
-        tools:layout="@layout/fragment_contact_list" />
 
     <fragment
         android:id="@+id/navigation_weather"
@@ -46,6 +42,9 @@
         <argument
             android:name="chatID"
             app:argType="integer" />
+        <argument
+            android:name="name"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -53,5 +52,18 @@
         android:name="edu.uw.team7project.ui.settings.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/newChatFragment"
+        android:name="edu.uw.team7project.ui.messages.NewChatFragment"
+        android:label="Create chat room"
+        tools:layout="@layout/fragment_new_chat">
+        <action
+            android:id="@+id/action_newChatFragment_to_navigation_messages"
+            app:destination="@id/navigation_messages" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_contacts"
+        android:name="edu.uw.team7project.ui.contacts.ContactTabFragment"
+        android:label="@string/title_contacts" />
 
 </navigation>

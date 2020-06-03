@@ -1,4 +1,4 @@
-package edu.uw.team7project.ui.messages;
+package edu.uw.team7project.ui.contacts;
 
 import android.os.Bundle;
 
@@ -6,40 +6,35 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import edu.uw.team7project.R;
-import edu.uw.team7project.databinding.FragmentMessageListBinding;
+import edu.uw.team7project.databinding.FragmentContactRequestListBinding;
 import edu.uw.team7project.model.UserInfoViewModel;
 
-/**
- * Subclass for the messages fragment.
- *
- * @author Bradlee laird
- */
-public class MessageListFragment extends Fragment {
 
-    private MessageListViewModel mModel;
+public class ContactRequestListFragment extends Fragment {
 
-    public MessageListFragment() {
+    private ContactRequestListViewModel mModel;
+
+    public ContactRequestListFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mModel = new ViewModelProvider(getActivity()).get(ContactRequestListViewModel.class);
 
-        mModel = new ViewModelProvider(getActivity()).get(MessageListViewModel.class);
         UserInfoViewModel model = new ViewModelProvider(getActivity())
                 .get(UserInfoViewModel.class);
 
-        //connect here but what arguments to pass?
+        Log.i("CONTACT", model.getJwt());
         mModel.connectGet(model.getJwt());
-
     }
 
     /**
@@ -49,7 +44,7 @@ public class MessageListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message_list, container, false);
+        return inflater.inflate(R.layout.fragment_contact_request_list, container, false);
     }
 
     /**
@@ -61,20 +56,15 @@ public class MessageListFragment extends Fragment {
 
         //Local access to the ViewBinding object. No need to create as Instance Var as it is only
         //used here.
-        FragmentMessageListBinding binding = FragmentMessageListBinding.bind(getView());
+        FragmentContactRequestListBinding binding = FragmentContactRequestListBinding.bind(getView());
 
-        binding.buttonAddChat.setOnClickListener(button -> Navigation.findNavController(getView())
-            .navigate(MessageListFragmentDirections.actionNavigationMessagesToNewChatFragment()));
-
-        //may need to change this to be similar to chat fragment on view created.
-        //add observer for getting messages
-        mModel.addMessageListObserver(getViewLifecycleOwner(), messageList -> {
-            //if (!messageList.isEmpty()) {
+        mModel.addContactRequestListObserver(getViewLifecycleOwner(), contactList -> {
+            //if (!contactList.isEmpty()) {
             binding.listRoot.setAdapter(
-                    new MessagesRecyclerViewAdapter(messageList)
+                    new ContactRequestRecyclerViewAdapter(contactList, getActivity().getSupportFragmentManager())
             );
-            binding.layoutWait.setVisibility(View.GONE);
-        //}else navigate to a no messages fragment.
+            //binding.layoutWait.setVisibility(View.GONE);
+            //}
         });
     }
 }

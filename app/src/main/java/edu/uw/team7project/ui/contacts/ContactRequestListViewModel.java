@@ -8,7 +8,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.navigation.Navigation;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -25,15 +24,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.uw.team7project.ui.auth.verify.VerifyFragmentDirections;
-import edu.uw.team7project.ui.messages.MessagePost;
+import edu.uw.team7project.io.RequestQueueSingleton;
 
-/**
- * A ViewModel for a list of contacts.
- */
-public class ContactListViewModel extends AndroidViewModel {
-
+public class ContactRequestListViewModel extends AndroidViewModel {
     private MutableLiveData<List<Contact>> mContactList;
+    private final MutableLiveData<JSONObject> mResponse;
 
 
     /**
@@ -41,9 +36,11 @@ public class ContactListViewModel extends AndroidViewModel {
      *
      * @param application the application.
      */
-    public ContactListViewModel(@NonNull Application application) {
+    public ContactRequestListViewModel(@NonNull Application application) {
         super(application);
         mContactList = new MutableLiveData<>(new ArrayList<>());
+        mResponse = new MutableLiveData<>();
+        mResponse.setValue(new JSONObject());
     }
 
     /**
@@ -52,9 +49,14 @@ public class ContactListViewModel extends AndroidViewModel {
      * @param owner the owner
      * @param observer the observer
      */
-    public void addContactListObserver(@NonNull LifecycleOwner owner,
+    public void addContactRequestListObserver(@NonNull LifecycleOwner owner,
                                        @NonNull Observer<? super List<Contact>> observer){
         mContactList.observe(owner, observer);
+    }
+
+    public void addResponseObserver(@NonNull LifecycleOwner owner,
+                                    @NonNull Observer<? super JSONObject> observer) {
+        mResponse.observe(owner, observer);
     }
 
     /**
@@ -99,7 +101,7 @@ public class ContactListViewModel extends AndroidViewModel {
             for (int i = 0; i < contacts.length(); i++) {
                 JSONObject contact = contacts.getJSONObject(i);
                 int verified = contact.getInt("verified");
-                if(verified == 1){
+                if(verified == 0){
                     String email= contact.getString("email");
                     String firstName= contact.getString("firstName");
                     String lastName= contact.getString("lastName");
@@ -115,6 +117,42 @@ public class ContactListViewModel extends AndroidViewModel {
             Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
         }
         mContactList.setValue(temp);
+    }
+
+    public void sendVerify(final String jwt, int memberID) {
+        String url = "https://mobile-app-spring-2020.herokuapp.com/contacts";
+
+        JSONObject body = new JSONObject();
+        try {
+            body.put("memberId", memberID);
+            body.put("verified", 1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Request request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                body, //push token found in the JSONObject body
+                mResponse::setValue, // we get a response but do nothing with it
+                this::handleError) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
+                .addToRequestQueue(request);
     }
 
     private void handleError(final VolleyError error) {

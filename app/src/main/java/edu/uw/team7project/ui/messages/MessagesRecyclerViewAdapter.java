@@ -68,7 +68,7 @@ public class MessagesRecyclerViewAdapter extends
 
         public final View mView;
         public FragmentMessageCardBinding binding;
-        public int mKey;
+        public MessagePost mPost;
 
         /**
          * contructs a message view holder.
@@ -91,7 +91,9 @@ public class MessagesRecyclerViewAdapter extends
          */
         private void navigateToChat(){
             MessageListFragmentDirections.ActionNavigationMessagesToChatFragment directions =
-                    MessageListFragmentDirections.actionNavigationMessagesToChatFragment(mKey);
+                    MessageListFragmentDirections.
+                            actionNavigationMessagesToChatFragment(mPost.getChatID(),
+                                    mPost.getMessageName());
 
             Navigation.findNavController(mView).navigate(directions);
         }
@@ -103,7 +105,7 @@ public class MessagesRecyclerViewAdapter extends
          */
         void setMessage(final MessagePost message) {
             binding.textMessageName.setText(message.getMessageName());
-            mKey = message.getChatID();
+            mPost= message;
         }
     }
 }
