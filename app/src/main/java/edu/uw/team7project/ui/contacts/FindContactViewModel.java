@@ -24,6 +24,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A find contact view model
+ *
+ * @author Trevor Nichols
+ */
 public class FindContactViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Contact>> mContactList;
@@ -43,7 +48,7 @@ public class FindContactViewModel extends AndroidViewModel {
     }
 
     /**
-     * Add an observer to the contact list view model.
+     * Add an observer to the find contact view model.
      *
      * @param owner the owner
      * @param observer the observer
@@ -84,7 +89,7 @@ public class FindContactViewModel extends AndroidViewModel {
     }
 
     /**
-     * Connects to webservice endpoint to retrieve a list of contacts.
+     * Connects to webservice endpoint to add a contact.
      *
      * @param jwt a valid jwt.
      */
@@ -150,6 +155,10 @@ public class FindContactViewModel extends AndroidViewModel {
         mContactList.setValue(temp);
     }
 
+    /**
+     * Handles the error
+     * @param error a VolleyError
+     */
     private void handleError(final VolleyError error) {
         Log.e("CONNECTION ERROR", "Oooops no contacts");
         //throw new IllegalStateException(error.getMessage());

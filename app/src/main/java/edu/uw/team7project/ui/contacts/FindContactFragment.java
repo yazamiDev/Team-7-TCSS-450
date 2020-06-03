@@ -16,8 +16,11 @@ import edu.uw.team7project.databinding.FragmentFindContactBinding;
 import edu.uw.team7project.model.UserInfoViewModel;
 
 /**
+ * A Fragment for finding new contacts.
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
+ *
+ * @author Trevor Nichols
  */
 public class FindContactFragment extends Fragment {
     private FindContactViewModel mModel;

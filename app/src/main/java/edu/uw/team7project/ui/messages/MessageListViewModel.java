@@ -24,6 +24,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A message List view model
+ *
+ * @author Trevor Nichols
+ */
 public class MessageListViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<MessagePost>> mMessageList;

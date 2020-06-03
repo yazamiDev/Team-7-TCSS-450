@@ -86,13 +86,13 @@ public class FindContactRecyclerViewAdapter extends
             binding = FindContactCardBinding.bind(view);
         }
 
+        /**
+         * Adds a selected user to contact requests
+         */
         public void addUser(){
             binding.buttonAdd.setEnabled(false);
             binding.buttonAdd.setText("Added");
             mVM.addContact(mJwt, mContact.getContactMemberID());
-        }
-
-        private void handleError(VolleyError volleyError) {
         }
 
         /**

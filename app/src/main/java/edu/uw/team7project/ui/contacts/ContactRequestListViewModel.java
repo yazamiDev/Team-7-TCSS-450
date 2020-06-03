@@ -32,7 +32,7 @@ public class ContactRequestListViewModel extends AndroidViewModel {
 
 
     /**
-     * The constructor for the contact list view model.
+     * The constructor for the contact request list view model.
      *
      * @param application the application.
      */
@@ -44,7 +44,7 @@ public class ContactRequestListViewModel extends AndroidViewModel {
     }
 
     /**
-     * Add an observer to the contact list view model.
+     * Add an observer to the contact request list view model.
      *
      * @param owner the owner
      * @param observer the observer
@@ -119,6 +119,12 @@ public class ContactRequestListViewModel extends AndroidViewModel {
         mContactList.setValue(temp);
     }
 
+    /**
+     * Sends verification of accepted contact request.
+     *
+     * @param jwt A valid jwt
+     * @param memberID the memeber ID
+     */
     public void sendVerify(final String jwt, int memberID) {
         String url = "https://mobile-app-spring-2020.herokuapp.com/contacts";
 
@@ -155,6 +161,10 @@ public class ContactRequestListViewModel extends AndroidViewModel {
                 .addToRequestQueue(request);
     }
 
+    /**
+     * HAndles Errors when connecting to contacts endpoints
+     * @param error the error.
+     */
     private void handleError(final VolleyError error) {
         Log.e("CONNECTION ERROR", "Oooops no contacts");
         //throw new IllegalStateException(error.getMessage());

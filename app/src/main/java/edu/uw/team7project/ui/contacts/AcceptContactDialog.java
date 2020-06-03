@@ -19,6 +19,11 @@ import org.json.JSONObject;
 import edu.uw.team7project.R;
 import edu.uw.team7project.model.UserInfoViewModel;
 
+/**
+ * A Dialog for accepting a request.
+ *
+ * @author Trevor Nichols
+ */
 public class AcceptContactDialog extends DialogFragment {
 
     private final String mContactName;
@@ -27,6 +32,12 @@ public class AcceptContactDialog extends DialogFragment {
     private ContactRequestListViewModel mContactRequestModel;
 
 
+    /**
+     * Constructro for the accept dialog
+     *
+     * @param name A String representing a contacts name
+     * @param memberID an integer representing the contact ID
+     */
     public AcceptContactDialog(String name, int memberID){
 
         this.mContactName = name;
@@ -43,6 +54,12 @@ public class AcceptContactDialog extends DialogFragment {
                 .get(ContactRequestListViewModel.class);
     }
 
+    /**
+     * The view created for  Accept dialog.
+     *
+     * @param view the view
+     * @param savedInstanceState the saved instance state.
+     */
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mContactRequestModel.addResponseObserver(getViewLifecycleOwner(),

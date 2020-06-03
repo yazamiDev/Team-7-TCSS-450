@@ -26,6 +26,8 @@ import edu.uw.team7project.ui.contacts.ContactListViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
+ *
+ * @author Trevor Nichols
  */
 public class NewChatFragment extends Fragment {
 
@@ -82,6 +84,9 @@ public class NewChatFragment extends Fragment {
         binding.buttonCreate.setOnClickListener(button -> handleCreateChatRoom());
     }
 
+    /**
+     * HAndles creating a chat room
+     */
     private void handleCreateChatRoom(){
         String name = binding.editChatName.getText().toString().trim();
         if(name.length() < 1){
@@ -91,6 +96,10 @@ public class NewChatFragment extends Fragment {
         }
     }
 
+    /**
+     * HAndles adding a contact to the chat room
+     * @throws JSONException
+     */
     private void handleAddContacts() throws JSONException {
         ArrayList<Integer> selectedContacts = mAdapter.getSelectedList();
         int[] temp = new int[selectedContacts.size()];

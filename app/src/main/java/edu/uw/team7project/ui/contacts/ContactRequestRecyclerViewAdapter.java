@@ -23,7 +23,7 @@ public class ContactRequestRecyclerViewAdapter extends
         private final FragmentManager mFragmMan;
 
         /**
-         * A constructor for teh contact recycler view.
+         * A constructor for teh contact request recycler view.
          *
          * @param items a list of contacts.
          */
@@ -33,7 +33,7 @@ public class ContactRequestRecyclerViewAdapter extends
     }
 
         /**
-         * Cerates a view holder.
+         * Creates a view holder.
          *
          * @param parent the parent.
          * @param viewType the view type

@@ -17,6 +17,11 @@ import edu.uw.team7project.databinding.FragmentContactRequestListBinding;
 import edu.uw.team7project.model.UserInfoViewModel;
 
 
+/**
+ * A Fragment represeing the contact request view.
+ *
+ * @author Trevor Nichols
+ */
 public class ContactRequestListFragment extends Fragment {
 
     private ContactRequestListViewModel mModel;

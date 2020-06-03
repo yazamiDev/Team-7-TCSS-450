@@ -21,6 +21,9 @@ import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentContactListBinding;
 import edu.uw.team7project.model.UserInfoViewModel;
 
+/**
+ * Dialog for deleting a existing contact.
+ */
 public class DeleteContactDialog extends DialogFragment {
 
     private UserInfoViewModel mUserModel;
@@ -28,6 +31,11 @@ public class DeleteContactDialog extends DialogFragment {
     private final int mMemberID;
     private final FragmentManager mFragMan;
 
+    /**
+     * DElete contact dialog contructor given a in and a Fragment manger
+     * @param memberID the int representing member id
+     * @param fm the fragment manager
+     */
     public DeleteContactDialog(int memberID, FragmentManager fm) {
         this.mMemberID = memberID;
         this.mFragMan = fm;
@@ -56,6 +64,11 @@ public class DeleteContactDialog extends DialogFragment {
         });
     }
 
+    /**
+     * Created the dialog window
+     * @param savedInstanceState the saved instance state.
+     * @return the Dialog.
+     */
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();

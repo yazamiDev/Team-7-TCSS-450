@@ -17,8 +17,11 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import edu.uw.team7project.R;
 
 /**
+ * A contact tab fragment for displaying multiple tabs.
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
+ *
+ * @author Trevor Nichols
  */
 public class ContactTabFragment extends Fragment {
     ContactsCollectionAdapter mCollectionAdapter;

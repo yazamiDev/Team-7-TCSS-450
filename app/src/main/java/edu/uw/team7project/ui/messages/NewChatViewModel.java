@@ -26,6 +26,11 @@ import java.util.Objects;
 
 import edu.uw.team7project.io.RequestQueueSingleton;
 
+/**
+ * A view model for a new chat
+ *
+ * @author Trevor Nichols
+ */
 public class NewChatViewModel extends AndroidViewModel {
 
     private final MutableLiveData<JSONObject> mResponse;
@@ -49,6 +54,11 @@ public class NewChatViewModel extends AndroidViewModel {
     }
 
 
+    /**
+     * A method to connect to a webservice endpoint to create a new chatroom.
+     * @param jwt a valid jwt
+     * @param name the name of the chat room.
+     */
     public void createChat(final String jwt, final String name) {
         String url = "https://mobile-app-spring-2020.herokuapp.com/chats";
 
@@ -84,6 +94,13 @@ public class NewChatViewModel extends AndroidViewModel {
                 .addToRequestQueue(request);
     }
 
+    /**
+     * A method connecting to a webservice endpoint for adding users to a chat room
+     * @param jwt a valid jwt
+     * @param memberIds the users member id
+     * @param chatID a valid chat ID
+     * @throws JSONException
+     */
     public void putMembers(final String jwt, int[] memberIds, int chatID) throws JSONException {
         String url = "https://mobile-app-spring-2020.herokuapp.com/chats/"+chatID;
 
