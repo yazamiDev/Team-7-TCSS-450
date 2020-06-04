@@ -34,7 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:textSize="16dp"
+            android:textSize="14dp"
+            android:textStyle="bold"
             android:textColor="?attr/textColor"
             app:layout_constraintStart_toEndOf="@+id/imageMessageIcon"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +47,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp"
-            android:text="Most recent message will be here."
+            android:text="Most recent message display."
             android:textColor="?attr/textColor"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"

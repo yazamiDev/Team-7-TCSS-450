@@ -9,29 +9,17 @@
     tools:context=".ui.messages.NewChatFragment" >
 
     <TextView
-        android:id="@+id/textNewChatTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/text_new_chat"
-        android:textColor="?attr/textColor"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/textEnterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:paddingBottom="16dp"
         android:text="@string/text_chat_name"
         android:textColor="?attr/textColor"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textNewChatTitle" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:background="?attr/backgroundColor"
@@ -39,6 +27,7 @@
         android:name="edu.uw.team7project.ui.messages.NewChatFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/button_cancel"
@@ -76,18 +65,18 @@
     <EditText
         android:id="@+id/editChatName"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textSize="14sp"
+        android:textSize="16sp"
+        android:textColor="?attr/textColor"
         app:layout_constraintBottom_toTopOf="@+id/listRoot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textEnterName"
-        app:layout_constraintTop_toBottomOf="@+id/textNewChatTitle" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

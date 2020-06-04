@@ -8,7 +8,8 @@
     android:layout_marginTop="20dp"
     android:layout_marginLeft="1dp"
     android:layout_marginRight="1dp"
-    app:cardCornerRadius="5dp">
+    app:cardCornerRadius="5dp"
+    app:cardElevation="3dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_inner"
@@ -23,10 +24,11 @@
             android:layout_width="0dp"
             android:layout_height="21dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="TextView"
             android:textColor="?attr/textColor"
             android:textSize="16dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
