@@ -42,7 +42,7 @@
 
     <string name="text_current_weather">Current Weather</string>
     <string name="text_new_chat">Create a new chat room</string>
-    <string name="text_chat_name">Chat room name:</string>
+    <string name="text_chat_name">Name of Chat Room:</string>
     <string name="text_create">Create</string>
     <string name="text_add_user">Add User</string>
     <string name="text_cancel">Cancel</string>
