@@ -42,7 +42,7 @@ public class ContactTabFragment extends Fragment {
 
         TabLayout tabLayout = view.findViewById(R.id.tabLayout);
         new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> tab.setText(mCollectionAdapter.getLable())
+                (tab, position) -> tab.setText(mCollectionAdapter.getLable(position))
         ).attach();
     }
 }

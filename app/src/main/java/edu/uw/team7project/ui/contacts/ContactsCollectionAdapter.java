@@ -45,8 +45,16 @@ public class ContactsCollectionAdapter extends FragmentStateAdapter {
      * Gets the lable.
      * @return a string representing the label of the tab.
      */
-    public String getLable(){
-        return mLable;
+    public String getLable(int position){
+        String theLabel;
+        if(position  == 0){
+            theLabel = "Contacts";
+        }else if(position == 1){
+            theLabel = "Requests";
+        }else{
+            theLabel = "Finder";
+        }
+        return theLabel;
     }
 
     @Override

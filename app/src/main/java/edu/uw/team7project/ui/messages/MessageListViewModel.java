@@ -73,7 +73,7 @@ public class MessageListViewModel extends AndroidViewModel {
         ArrayList<MessagePost> temp = new ArrayList<>();
         try {
             JSONArray messages = result.getJSONArray("chats");
-            for (int i = 0; i < result.length(); i++) {
+            for (int i = 0; i < messages.length(); i++) {
                 JSONObject message = messages.getJSONObject(i);
                 String name = message.getString("name");
                 int key = message.getInt("chat");

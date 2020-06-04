@@ -76,13 +76,13 @@ public class DeleteContactDialog extends DialogFragment {
         TextView name = (TextView)view.findViewById(R.id.textContactName);
 //        name.setText(mContactName);
         builder.setView(view)
-                .setNegativeButton("Accept", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         mContactModel.deleteContact(mUserModel.getJwt(), mMemberID);
                     }
                 })
-                .setPositiveButton("Reject", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
