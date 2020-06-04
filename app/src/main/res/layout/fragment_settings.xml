@@ -106,7 +106,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/ic_face_black_18"
+        android:drawableStart="@drawable/ic_person_black_18dp"
         android:drawablePadding="8dp"
         android:drawableTint="?attr/textColor"
         android:textColor="?attr/textColor"
