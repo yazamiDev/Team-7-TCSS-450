@@ -299,4 +299,47 @@ public class SignInFragment extends Fragment {
     }
 
 
+    /**
+     * An observer on the HTTP Response from the web server. This observer should be
+     * attached to SignInViewModel.
+     *
+     * @param response the Response from the server
+     */
+    private void observeSignInResponse(final JSONObject response) {
+        if (response.length() > 0) {
+            if (response.has("code")) {
+                try {
+                    binding.editEmail.setError(
+                            "Error Authenticating: " +
+                                    response.getJSONObject("data").getString("message"));
+                } catch (JSONException e) {
+                    Log.e("JSON Parse Error", e.getMessage());
+                }
+            } else {
+                try {
+                    mUserViewModel = new ViewModelProvider(getActivity(),
+                            new UserInfoViewModel.UserInfoViewModelFactory(
+                                    binding.editEmail.getText().toString(),
+                                    "", "", "", 0,
+                                    response.getString("token")
+                            )).get(UserInfoViewModel.class);
+
+                    sendPushyToken();
+
+//                    navigateToSuccess(
+////                            binding.editEmail.getText().toString(),
+////                            response.getString("token")
+////                    );
+                } catch (JSONException e) {
+                    Log.e("JSON Parse Error", e.getMessage());
+                }
+            }
+        } else {
+            Log.d("JSON Response", "No Response");
+        }
+
+    }
+
+
+
 }

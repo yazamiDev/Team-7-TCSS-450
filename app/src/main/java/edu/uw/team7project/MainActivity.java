@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
     private LocationCallback mLocationCallback;
     //The ViewModel that will store the current location
     private LocationViewModel mLocationModel;
+    private MainPushMessageReceiver mPushMessageReceiver;
+    private NewMessageCountViewModel mNewMessageModel;
 
     // fields for theme
 //    private Switch mSwitch;
@@ -125,8 +127,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    private MainPushMessageReceiver mPushMessageReceiver;
-    private NewMessageCountViewModel mNewMessageModel;
 
 
     /**
