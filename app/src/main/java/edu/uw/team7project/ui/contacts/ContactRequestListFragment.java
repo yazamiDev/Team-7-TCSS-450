@@ -42,10 +42,12 @@ public class ContactRequestListFragment extends Fragment {
         mModel.connectGet(model.getJwt());
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+//    @Override
+////    public void onResume() {
+////        super.onResume();
+////        getActivity().recreate();
+////    }
+
 
     /**
      * Inflates the container for the fragment.

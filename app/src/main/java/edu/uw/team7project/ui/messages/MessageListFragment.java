@@ -77,7 +77,7 @@ public class MessageListFragment extends Fragment {
         //add observer for getting messages
         mModel.addMessageListObserver(getViewLifecycleOwner(), messageList -> {
             //if (!messageList.isEmpty()) {
-            mAdapter = new MessagesRecyclerViewAdapter(messageList);
+            mAdapter = new MessagesRecyclerViewAdapter(messageList, getActivity().getSupportFragmentManager());
             binding.listRoot.setAdapter(mAdapter);
             binding.layoutWait.setVisibility(View.GONE);
         //}else navigate to a no messages fragment.

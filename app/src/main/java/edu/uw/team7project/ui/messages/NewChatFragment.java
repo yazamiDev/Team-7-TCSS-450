@@ -105,13 +105,13 @@ public class NewChatFragment extends Fragment {
      */
     private void handleAddContacts() throws JSONException {
         ArrayList<Integer> selectedContacts = mAdapter.getSelectedList();
-        int[] temp = new int[selectedContacts.size() + 1];
+        selectedContacts.add(mUserInfoModel.getMemberID());
+        int[] temp = new int[selectedContacts.size()];
 
         for(int i = 0 ; i < selectedContacts.size(); i++){
             temp[i] = selectedContacts.get(i);
         }
 
-        temp[temp.length - 1] = mUserInfoModel.getMemberID();
         mChatModel.putMembers(mUserInfoModel.getJwt(), temp, mNewChatID);
         mAdapter.notifyDataSetChanged();
         Navigation.findNavController(getView())
