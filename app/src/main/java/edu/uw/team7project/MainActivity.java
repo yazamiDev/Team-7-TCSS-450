@@ -3,6 +3,7 @@ package edu.uw.team7project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private AppBarConfiguration mAppBarConfiguration;
+    Fragment f=getSupportFragmentManager().findFragmentById(R.id.chatFragment);
 
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
@@ -210,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mNewMessageModel.addMessageCountObserver(this, count -> {
-            BadgeDrawable badge = binding.navView.getOrCreateBadge(R.id.chatFragment);
+            BadgeDrawable badge = binding.navView.getOrCreateBadge(R.id.navigation_messages);
             badge.setMaxCharacterCount(2);
             if (count > 0) {
                 //new messages! update and show the notification badge.
@@ -222,6 +224,8 @@ public class MainActivity extends AppCompatActivity {
                 badge.setVisible(false);
             }
         });
+
+
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -357,6 +361,15 @@ public class MainActivity extends AppCompatActivity {
             unregisterReceiver(mPushMessageReceiver);
         }
     }
+
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//        getSupportFragmentManager().beginTransaction()
+//                .detach(f)
+//                .commit();
+//
+//        super.onSaveInstanceState(outState);
+//    }
 
     /**
      * Requests location updates from the FusedLocationApi.
