@@ -27,6 +27,9 @@ import java.util.Objects;
 
 import edu.uw.team7project.io.RequestQueueSingleton;
 
+/**
+ * A chat view model
+ */
 public class ChatViewModel extends AndroidViewModel {
     /**
      * A Map of Lists of Chat Messages.

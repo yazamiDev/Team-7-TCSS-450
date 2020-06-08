@@ -39,5 +39,5 @@ Guest account 2: Email: johns3@uw.edu
 
 IN NEED OF HELP:
 
-Point of contact for questions or help: "INSERT EMAIL HERE"
+Point of contact for questions or help: trevorn3@uw.edu
 
