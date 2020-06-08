@@ -1,6 +1,7 @@
 package edu.uw.team7project.model;
 
 import android.location.Location;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
@@ -29,6 +30,9 @@ public class LocationViewModel extends ViewModel {
     }
 
     public Location getCurrentLocation() {
+
+        Log.i("User Location Lat/Long", String.valueOf(new Location(mLocation.getValue())));
+
         return new Location(mLocation.getValue());
     }
 

@@ -1295,9 +1295,9 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/weather_pressureLabel"
             android:layout_below="@+id/weather_conditionIcon"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="-5dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="-2dp"
+            android:layout_marginBottom="-2dp"
             android:layout_toEndOf="@+id/weather_temperature" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -81,6 +81,7 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
     public void onMapClick(LatLng latLng) {
         Log.d("LAT/LONG", latLng.toString());
 
+//        new WeatherViewModel();
         mMap.clear();
 
         Marker marker = mMap.addMarker(new MarkerOptions()
@@ -91,5 +92,10 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
                 CameraUpdateFactory.newLatLngZoom(
                         latLng, mMap.getCameraPosition().zoom));
 
+
+        WeatherViewModel update_forecast;
+        update_forecast = new ViewModelProvider(this).get(WeatherViewModel.class);
+        update_forecast.connectToWeatherCurrent(latLng.toString());
+        update_forecast.connectToWeatherMultiple(latLng.toString());
     }
 }

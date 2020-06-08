@@ -37,7 +37,7 @@ public class WeatherRecyclerViewAdapter extends
     public WeatherViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new WeatherViewHolder(LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.fragment_weather_card, parent, false));
+                .inflate(R.layout.fragment_weather, parent, false));
     }
 
     @Override
@@ -55,12 +55,13 @@ public class WeatherRecyclerViewAdapter extends
     public class WeatherViewHolder extends RecyclerView.ViewHolder {
 
         public final View mView;
-        public FragmentWeatherCardBinding binding;
+        public FragmentWeatherBinding binding;
 
         public WeatherViewHolder(View view) {
             super(view);
             mView = view;
-            binding = FragmentWeatherCardBinding.bind(view);
+//            binding = FragmentWeatherCardBinding.bind(view);
+            binding = FragmentWeatherBinding.bind(view);
 
             //may need to change
 //            view.setOnClickListener(v -> {
@@ -81,8 +82,10 @@ public class WeatherRecyclerViewAdapter extends
          * @param weather the weather
          */
         void setWeather(final Weather weather) {
-            binding.textDate.setText(weather.getDay());
-            binding.textWeatherInfo.setText(weather.toString());
+//            binding.textDate.setText(weather.getDay());
+//            binding.textWeatherInfo.setText(weather.toString());
+//            binding.weatherCityCountry.setText(weather.getCity());
+            binding.weatherCityCountry.setText(weather.getCity());
         }
     }
 }
