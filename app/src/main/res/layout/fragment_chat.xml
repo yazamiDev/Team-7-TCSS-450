@@ -15,12 +15,23 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_send"
-        app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintStart_toEndOf="@+id/button_add_members" />
+
+    <ImageButton
+        android:id="@+id/button_add_members"
+        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_add_contact_blue_36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/button_send"
@@ -57,7 +68,8 @@
             android:orientation="vertical"
             app:layoutManager="LinearLayoutManager"
             tools:context="edu.uw.team7project.ui.messages.ChatFragment"
-            tools:listitem="@layout/fragment_chat_message"/>
+            tools:listitem="@layout/fragment_chat_message" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

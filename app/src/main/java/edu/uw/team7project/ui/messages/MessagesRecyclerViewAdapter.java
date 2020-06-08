@@ -109,6 +109,7 @@ public class MessagesRecyclerViewAdapter extends
         void setMessage(final MessagePost message) {
             binding.textMessageName.setText(message.getMessageName());
             mPost= message;
+            binding.buttonDelete.setText("Delete");
             binding.buttonDelete.setOnClickListener(button -> handleDelete());
         }
 

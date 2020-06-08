@@ -22,7 +22,8 @@
         <action
             android:id="@+id/action_navigation_messages_to_chatFragment"
             app:destination="@id/chatFragment"
-            app:popUpTo="@id/navigation_messages" />
+            app:popUpTo="@id/navigation_messages"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_navigation_messages_to_newChatFragment"
             app:destination="@id/newChatFragment" />
@@ -50,6 +51,11 @@
         <argument
             android:name="name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_chatFragment_to_addContactToChatFragment"
+            app:destination="@id/addContactToChatFragment"
+            app:popUpTo="@id/chatFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -76,5 +82,22 @@
         android:name="edu.uw.team7project.ui.weather.LocationFragment"
         android:label="fragment_location"
         tools:layout="@layout/fragment_location" />
+    <fragment
+        android:id="@+id/addContactToChatFragment"
+        android:name="edu.uw.team7project.ui.messages.AddContactToChatFragment"
+        android:label="Add chat memebers"
+        tools:layout="@layout/fragment_add_contact_to_chat" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_addContactToChatFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:popUpTo="@id/chatFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="chatID"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>
