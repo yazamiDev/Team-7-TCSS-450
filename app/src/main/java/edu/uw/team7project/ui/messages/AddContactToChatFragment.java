@@ -18,39 +18,42 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import edu.uw.team7project.MainActivity;
 import edu.uw.team7project.R;
+import edu.uw.team7project.databinding.FragmentAddContactToChatBinding;
 import edu.uw.team7project.databinding.FragmentNewChatBinding;
 import edu.uw.team7project.model.UserInfoViewModel;
 import edu.uw.team7project.ui.contacts.ContactListViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- *
- * @author Trevor Nichols
- */
-public class NewChatFragment extends Fragment {
 
+public class AddContactToChatFragment extends Fragment {
     private ContactListViewModel mContactModel;
     private NewChatRecyclerViewAdapter mAdapter;
     private NewChatViewModel mChatModel;
     private UserInfoViewModel mUserInfoModel;
-    private FragmentNewChatBinding binding;
-    private int mNewChatID;
+    private FragmentAddContactToChatBinding binding;
+    private int mChatID;
+    private String mTitle;
 
-    public NewChatFragment() {
-        // Required empty public constructor
+    public AddContactToChatFragment(){
+
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ViewModelProvider provider = new ViewModelProvider(getActivity());
+        AddContactToChatFragmentArgs args = AddContactToChatFragmentArgs.fromBundle(getArguments());
+        mChatID = args.getChatID();
+        mTitle = args.getName();
 
-        mContactModel = new ViewModelProvider(getActivity()).get(ContactListViewModel.class);
-        mChatModel = new ViewModelProvider(getActivity()).get(NewChatViewModel.class);
-        mUserInfoModel = new ViewModelProvider(getActivity()).get(UserInfoViewModel.class);
+        ((MainActivity) getActivity())
+                .setActionBarTitle(" Add members to " + mTitle);
 
+        mContactModel = provider.get(ContactListViewModel.class);
+        mUserInfoModel = provider.get(UserInfoViewModel.class);
+        mChatModel = provider.get(NewChatViewModel.class);
         mContactModel.connectGet(mUserInfoModel.getJwt());
     }
 
@@ -58,7 +61,7 @@ public class NewChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_chat, container, false);
+        return inflater.inflate(R.layout.fragment_add_contact_to_chat, container, false);
     }
 
     @Override
@@ -66,7 +69,7 @@ public class NewChatFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //Local access to the ViewBinding object. No need to create as Instance Var as it is only
         //used here.
-        binding = FragmentNewChatBinding.bind(getView());
+        binding = FragmentAddContactToChatBinding.bind(getView());
 
         mContactModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
             //if (!contactList.isEmpty()) {
@@ -78,25 +81,20 @@ public class NewChatFragment extends Fragment {
 
         mChatModel.addResponseObserver(getViewLifecycleOwner(),
                 this::observeResponse);
-        binding.editChatName.setTextColor(Color.BLACK);
 
 
-        binding.buttonCancel.setOnClickListener(button -> Navigation.findNavController(getView()).
-                navigate(NewChatFragmentDirections.actionNewChatFragmentToNavigationMessages()));
+        binding.buttonCancel.setOnClickListener(button -> Navigation.findNavController(getView())
+                .navigate(AddContactToChatFragmentDirections
+                        .actionAddContactToChatFragmentToChatFragment(mChatID, mTitle)));
 
-        binding.buttonCreate.setOnClickListener(button -> handleCreateChatRoom());
-    }
-
-    /**
-     * HAndles creating a chat room
-     */
-    private void handleCreateChatRoom(){
-        String name = binding.editChatName.getText().toString().trim();
-        if(name.length() < 1){
-            binding.editChatName.setError("Please enter a valid chat room name");
-        }else{
-            mChatModel.createChat(mUserInfoModel.getJwt(), name);
-        }
+        binding.buttonAdd.setText("Add");
+        binding.buttonAdd.setOnClickListener(button -> {
+            try {
+                handleAddContacts();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     /**
@@ -105,17 +103,17 @@ public class NewChatFragment extends Fragment {
      */
     private void handleAddContacts() throws JSONException {
         ArrayList<Integer> selectedContacts = mAdapter.getSelectedList();
-        selectedContacts.add(mUserInfoModel.getMemberID());
         int[] temp = new int[selectedContacts.size()];
 
         for(int i = 0 ; i < selectedContacts.size(); i++){
             temp[i] = selectedContacts.get(i);
         }
 
-        mChatModel.putMembers(mUserInfoModel.getJwt(), temp, mNewChatID);
+        mChatModel.putMembers(mUserInfoModel.getJwt(), temp, mChatID);
         mAdapter.notifyDataSetChanged();
         Navigation.findNavController(getView())
-                .navigate(NewChatFragmentDirections.actionNewChatFragmentToNavigationMessages());
+                .navigate(AddContactToChatFragmentDirections
+                        .actionAddContactToChatFragmentToChatFragment(mChatID, mTitle));
     }
 
     /**
@@ -131,7 +129,6 @@ public class NewChatFragment extends Fragment {
                 try {
                     if(response.has("chatID")){
                         System.out.println("Created a chat room");
-                        mNewChatID = response.getInt("chatID");
                         System.out.println("moving on to populate chat room");
                         handleAddContacts();
                     }

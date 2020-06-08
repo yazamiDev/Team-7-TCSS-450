@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -29,6 +30,7 @@ public class ChatFragment extends Fragment {
     private UserInfoViewModel mUserModel;
     private ChatSendViewModel mSendModel;
     private int mChatID;
+    private String mTitle;
 
     /**
      * an empty constructor.
@@ -43,9 +45,9 @@ public class ChatFragment extends Fragment {
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         ChatFragmentArgs args = ChatFragmentArgs.fromBundle(getArguments());
         mChatID = args.getChatID();
-        String title = args.getName();
+        mTitle = args.getName();
         ((MainActivity) getActivity())
-                .setActionBarTitle(title);
+                .setActionBarTitle(mTitle);
         Log.i("CHAT", String.valueOf(mChatID));
         mUserModel = provider.get(UserInfoViewModel.class);
         mChatModel = provider.get(ChatViewModel.class);
@@ -104,6 +106,12 @@ public class ChatFragment extends Fragment {
             mSendModel.sendMessage(mChatID,
                     mUserModel.getJwt(),
                     binding.editMessage.getText().toString());
+        });
+
+        binding.buttonAddMembers.setOnClickListener(button-> {
+            Navigation.findNavController(getView())
+                    .navigate(ChatFragmentDirections
+                            .actionChatFragmentToAddContactToChatFragment(mTitle, mChatID));
         });
 
         //when we get the response back from the server, clear the edittext

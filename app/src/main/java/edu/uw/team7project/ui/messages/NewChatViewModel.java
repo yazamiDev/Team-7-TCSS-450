@@ -111,6 +111,7 @@ public class NewChatViewModel extends AndroidViewModel {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        System.out.println(body.toString());
 
         Request request = new JsonObjectRequest(
                 Request.Method.PUT,

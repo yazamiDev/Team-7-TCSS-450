@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,14 +24,16 @@ public class MessagesRecyclerViewAdapter extends
         RecyclerView.Adapter<MessagesRecyclerViewAdapter.MessageViewHolder> {
 
     private final List<MessagePost> mMessages;
+    private final FragmentManager mFragMan;
 
     /**
      * A constructor for the message recycler view.
      *
      * @param items a list of message posts.
      */
-    public MessagesRecyclerViewAdapter(List<MessagePost> items) {
+    public MessagesRecyclerViewAdapter(List<MessagePost> items, FragmentManager fm) {
         this.mMessages = items;
+        mFragMan = fm;
     }
 
     /**
@@ -106,6 +109,18 @@ public class MessagesRecyclerViewAdapter extends
         void setMessage(final MessagePost message) {
             binding.textMessageName.setText(message.getMessageName());
             mPost= message;
+            binding.buttonDelete.setText("Delete");
+            binding.buttonDelete.setOnClickListener(button -> handleDelete());
+        }
+
+        public void handleDelete(){
+            DeleteChatDialog dialog = new DeleteChatDialog(mPost.getChatID(), mFragMan, this);
+            dialog.show(mFragMan, "maybe?");
+        }
+
+        public void deleteRequest(){
+            mMessages.remove(mPost);
+            notifyDataSetChanged();
         }
     }
 }

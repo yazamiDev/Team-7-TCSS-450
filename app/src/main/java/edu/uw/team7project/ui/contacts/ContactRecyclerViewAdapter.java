@@ -83,7 +83,8 @@ public class ContactRecyclerViewAdapter extends
          * navigates to a contacts profile.
          */
         private void deleteDialog(){
-            DeleteContactDialog dialog = new DeleteContactDialog(mContact.getContactMemberID(), mFragMan);
+            DeleteContactDialog dialog = new DeleteContactDialog(mContact.getContactMemberID(),
+                    mFragMan, this);
             dialog.show(mFragMan, "maybe?");
         }
 
@@ -98,6 +99,11 @@ public class ContactRecyclerViewAdapter extends
             String contactName = contact.getContactFirstName() + " " + contact.getContactLastName();
             binding.textContactName.setText(contactName);
             binding.buttonDeleteContact.setOnClickListener(button -> deleteDialog());
+        }
+
+        public void deleteContact(){
+            mContacts.remove(mContact);
+            notifyDataSetChanged();
         }
 
     }

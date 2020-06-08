@@ -1,6 +1,7 @@
 package edu.uw.team7project.ui.contacts;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ public class AcceptContactDialog extends DialogFragment {
     private final int mMemberID;
     private UserInfoViewModel mUserModel;
     private ContactRequestListViewModel mContactRequestModel;
+    private final ContactRequestRecyclerViewAdapter.ContactRequestViewHolder mUpdater;
 
 
     /**
@@ -38,10 +40,12 @@ public class AcceptContactDialog extends DialogFragment {
      * @param name A String representing a contacts name
      * @param memberID an integer representing the contact ID
      */
-    public AcceptContactDialog(String name, int memberID){
+    public AcceptContactDialog(String name, int memberID,
+                               ContactRequestRecyclerViewAdapter.ContactRequestViewHolder testing){
 
         this.mContactName = name;
         this.mMemberID = memberID;
+        mUpdater = testing;
     }
 
     @Override
@@ -78,13 +82,12 @@ public class AcceptContactDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         mContactRequestModel.sendVerify(mUserModel.getJwt(), mMemberID);
+                        mUpdater.deleteRequest();
                     }
                 })
                 .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
-//                        listener.applyTexts(email);
                     }
                 });
         return builder.create();

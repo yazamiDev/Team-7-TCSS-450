@@ -1,11 +1,13 @@
 package edu.uw.team7project.ui.contacts;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +19,7 @@ import edu.uw.team7project.R;
 import edu.uw.team7project.databinding.FragmentContactRequestCardBinding;
 
 public class ContactRequestRecyclerViewAdapter extends
-    RecyclerView.Adapter<ContactRequestRecyclerViewAdapter.ContactRequestViewHolder>{
+    RecyclerView.Adapter<ContactRequestRecyclerViewAdapter.ContactRequestViewHolder> {
 
         private final List<Contact> mContactRequests;
         private final FragmentManager mFragmMan;
@@ -83,7 +85,7 @@ public class ContactRequestRecyclerViewAdapter extends
             private void openDialog() {
                 String name = mContact.getContactFirstName() + " " + mContact.getContactLastName();
                 AcceptContactDialog dialog = new AcceptContactDialog(name,
-                        mContact.getContactMemberID());
+                        mContact.getContactMemberID(), this);
                 dialog.show(mFragmMan, "maybe?");
             }
 
@@ -96,6 +98,11 @@ public class ContactRequestRecyclerViewAdapter extends
                 binding.textUsername.setText(contact.getContactUsername());
                 mContact = contact;
                 binding.buttonAccept.setOnClickListener( button -> openDialog());
+            }
+
+            public void deleteRequest(){
+                mContactRequests.remove(mContact);
+                notifyDataSetChanged();
             }
 
         }

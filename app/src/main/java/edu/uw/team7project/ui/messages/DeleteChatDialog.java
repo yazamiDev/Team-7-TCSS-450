@@ -1,4 +1,4 @@
-package edu.uw.team7project.ui.contacts;
+package edu.uw.team7project.ui.messages;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -18,79 +18,76 @@ import androidx.lifecycle.ViewModelProvider;
 import org.json.JSONObject;
 
 import edu.uw.team7project.R;
-import edu.uw.team7project.databinding.FragmentContactListBinding;
+import edu.uw.team7project.databinding.FragmentMessageListBinding;
 import edu.uw.team7project.model.UserInfoViewModel;
 
-/**
- * Dialog for deleting a existing contact.
- */
-public class DeleteContactDialog extends DialogFragment {
-
+public class DeleteChatDialog extends DialogFragment {
     private UserInfoViewModel mUserModel;
-    private ContactListViewModel mContactModel;
-    private final int mMemberID;
+    private MessageListViewModel mMessageModel;
+    private final MessagesRecyclerViewAdapter.MessageViewHolder mUpdater;
     private final FragmentManager mFragMan;
-    private final ContactRecyclerViewAdapter.ContactViewHolder mUpdater;
+    private final int mChatID;
+
 
     /**
-     * DElete contact dialog contructor given a in and a Fragment manger
-     * @param memberID the int representing member id
-     * @param fm the fragment manager
+     * Constructro for the accept dialog
+     *
+     * @param name A String representing a contacts name
+     * @param memberID an integer representing the contact ID
      */
-    public DeleteContactDialog(int memberID, FragmentManager fm,
-                               ContactRecyclerViewAdapter.ContactViewHolder updater) {
-        this.mMemberID = memberID;
-        this.mFragMan = fm;
+    public DeleteChatDialog(int chatID, FragmentManager fm,  MessagesRecyclerViewAdapter.MessageViewHolder updater){
+        mChatID = chatID;
         mUpdater = updater;
+        mFragMan = fm;
     }
 
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUserModel = new ViewModelProvider(getActivity())
                 .get(UserInfoViewModel.class);
 
-        mContactModel = new ViewModelProvider(getActivity())
-                .get(ContactListViewModel.class);
+        mMessageModel = new ViewModelProvider(getActivity()).get(MessageListViewModel.class);
     }
 
+    /**
+     * The view created for  Accept dialog.
+     *
+     * @param view the view
+     * @param savedInstanceState the saved instance state.
+     */
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        FragmentContactListBinding binding = FragmentContactListBinding.bind(getView());
+        super.onViewCreated(view, savedInstanceState);
+        FragmentMessageListBinding binding = FragmentMessageListBinding.bind(getView());
 
-        mContactModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
+        mMessageModel.addMessageListObserver(getViewLifecycleOwner(), messageList -> {
             //if (!contactList.isEmpty()) {
             binding.listRoot.setAdapter(
-                    new ContactRecyclerViewAdapter(contactList, mFragMan)
+                    new MessagesRecyclerViewAdapter(messageList, mFragMan)
             );
             binding.layoutWait.setVisibility(View.GONE);
             //}
         });
     }
 
-    /**
-     * Created the dialog window
-     * @param savedInstanceState the saved instance state.
-     * @return the Dialog.
-     */
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.delete_contact_dialog, null);
-        TextView name = (TextView)view.findViewById(R.id.textContactName);
-//        name.setText(mContactName);
+        View view = inflater.inflate(R.layout.delete_chat_dialog, null);
         builder.setView(view)
                 .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        mContactModel.deleteContact(mUserModel.getJwt(), mMemberID);
-                        mUpdater.deleteContact();
+                        mMessageModel.connectDelete(mUserModel.getJwt(), mChatID,
+                                mUserModel.getEmail());
+                        mUpdater.deleteRequest();
                     }
                 })
                 .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
-//                        listener.applyTexts(email);
                     }
                 });
         return builder.create();
