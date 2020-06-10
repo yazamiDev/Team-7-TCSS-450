@@ -55,13 +55,13 @@ public class WeatherRecyclerViewAdapter extends
     public class WeatherViewHolder extends RecyclerView.ViewHolder {
 
         public final View mView;
-        public FragmentWeatherBinding binding;
+        public FragmentWeatherCardBinding binding;
 
         public WeatherViewHolder(View view) {
             super(view);
             mView = view;
-//            binding = FragmentWeatherCardBinding.bind(view);
-            binding = FragmentWeatherBinding.bind(view);
+            binding = FragmentWeatherCardBinding.bind(view);
+//            binding = FragmentWeatherBinding.bind(view);
 
             //may need to change
 //            view.setOnClickListener(v -> {
@@ -82,10 +82,11 @@ public class WeatherRecyclerViewAdapter extends
          * @param weather the weather
          */
         void setWeather(final Weather weather) {
-//            binding.textDate.setText(weather.getDay());
-//            binding.textWeatherInfo.setText(weather.toString());
+            binding.textDate.setText(weather.getDay());
+            binding.textWeatherInfo.setText(weather.toString());
+
 //            binding.weatherCityCountry.setText(weather.getCity());
-            binding.weatherCityCountry.setText(weather.getCity());
+//            binding.weatherCityCountry.setText(weather.getCity());
         }
     }
 }

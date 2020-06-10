@@ -93,9 +93,9 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
                         latLng, mMap.getCameraPosition().zoom));
 
 
-        WeatherViewModel update_forecast;
-        update_forecast = new ViewModelProvider(this).get(WeatherViewModel.class);
-        update_forecast.connectToWeatherCurrent(latLng.toString());
-        update_forecast.connectToWeatherMultiple(latLng.toString());
+//        WeatherViewModel update_forecast;
+//        update_forecast = new ViewModelProvider(this).get(WeatherViewModel.class);
+//        update_forecast.connectToWeatherCurrent(latLng.toString());
+//        update_forecast.connectToWeatherMultiple(latLng.toString());
     }
 }

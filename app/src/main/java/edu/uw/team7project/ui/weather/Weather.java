@@ -54,7 +54,7 @@ public class Weather {
      * @param city
      */
     public Weather(String day, String condition, double temp, double minTemp, double maxTemp,
-                   double humidity, String icon, String city, double pressure, String tIcon, long timezone){
+                   double humidity, String icon /*, String city, double pressure, String tIcon, long timezone*/){
 
 
 
@@ -64,11 +64,11 @@ public class Weather {
         mMinTemp = minTemp;
         mMaxTemp = maxTemp;
         mHumidity = humidity;
-        mIcon  = icon;
-        mCity = city;
-        mPressure = pressure;
-        mIcon = tIcon;
-        mTimezone = timezone;
+//        mIcon  = icon;
+//        mCity = city;
+//        mPressure = pressure;
+//        mIcon = tIcon;
+//        mTimezone = timezone;
 
     }
 
